@@ -1,0 +1,2506 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#03050d"
+    >
+
+  <link
+    rel="manifest"
+    href="manifest.json"
+>
+
+    <meta
+        name="description"
+        content="MISAIRA Familien Hub – Test App 4.0.0"
+    >
+
+    <title>MISAIRA Familien Hub</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css?v=4.0.0"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     WELCOME
+========================================================= -->
+
+<section
+    id="welcomeScreen"
+    class="screen welcome-screen"
+>
+
+    <div class="welcome-image-container">
+
+        <img
+            id="welcomeImage"
+            class="welcome-image"
+src="https://tjxnkqanzodhijushntf.supabase.co/storage/v1/object/sign/photos/MISAIRA_Welcome-1.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kNmYxNDljYS0yOGZiLTRlM2QtYTczYi0wM2E1NTFmYjg4ZjgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwaG90b3MvTUlTQUlSQV9XZWxjb21lLTEuanBnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4NzMzNjk2NCwiZXhwIjoxODE4ODcyOTY0fQ.C6karCTonILtos_OSTHRp53uB-X7f5K59ssvQjtqFR4"
+            alt="MISAIRA Willkommen"
+        >
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     AUTH — MISAIRA LOGIN SYSTEM
+========================================================= -->
+
+<section
+    id="authScreen"
+    class="screen auth-screen hidden"
+>
+
+    <div class="auth-background">
+
+        <div class="auth-grid"></div>
+        <div class="auth-glow"></div>
+
+    </div>
+
+
+    <div class="auth-container">
+
+        <!-- =================================================
+             LOGO
+        ================================================== -->
+
+        <div class="auth-logo">
+
+            <img
+                src="https://tjxnkqanzodhijushntf.supabase.co/storage/v1/object/sign/photos/file_0000000023f4824686b923195fabafff.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kNmYxNDljYS0yOGZiLTRlM2QtYTczYi0wM2E1NTFmYjg4ZjgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwaG90b3MvZmlsZV8wMDAwMDAwMDIzZjQ4MjQ2ODZiOTIzMTk1ZmFiYWZmZi5wbmciLCJzY29wZSI6ImRvd25sb2FkIiwiaWF0IjoxNzg3MzQwMjYzLCJleHAiOjE4MTg4NzYyNjR9.QTV_yKhhT7_ycK8ixaaqUdlzhx72kA6o_a8yEC8N1Ko"
+                alt="MISAIRA Familien Hub"
+            >
+
+        </div>
+
+
+        <!-- =================================================
+             LOGIN PANEL
+        ================================================== -->
+
+        <div class="auth-panel">
+
+
+            <!-- TABS -->
+
+            <div class="auth-tabs">
+
+                <button
+                    id="loginTab"
+                    class="auth-tab active"
+                    type="button"
+                >
+                    LOGIN
+                </button>
+
+                <button
+                    id="registerTab"
+                    class="auth-tab"
+                    type="button"
+                >
+                    REGISTRIEREN
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 LOGIN
+            ================================================== -->
+
+            <form
+                id="loginForm"
+                class="auth-form active"
+            >
+
+                <div class="form-heading">
+
+                    <h2>
+                        Willkommen zurück
+                    </h2>
+
+                    <p>
+                        Melde dich an, um euren Familien Hub zu öffnen.
+                    </p>
+
+                </div>
+
+
+                <!-- E-MAIL -->
+
+                <div class="auth-input">
+
+                    <span class="auth-input-icon">
+                        ✉
+                    </span>
+
+                    <input
+                        id="loginEmail"
+                        type="email"
+                        placeholder="E-Mail oder Benutzername"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORT -->
+
+                <div class="auth-input">
+
+                    <span class="auth-input-icon">
+                        ♙
+                    </span>
+
+                    <input
+                        id="loginPassword"
+                        type="password"
+                        placeholder="Passwort"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        data-password-target="loginPassword"
+                        aria-label="Passwort anzeigen"
+                    >
+                        ◉
+                    </button>
+
+                </div>
+
+
+                <!-- OPTIONEN -->
+
+                <div class="auth-options">
+
+                    <label class="checkbox-label">
+
+                        <input
+                            id="rememberLogin"
+                            type="checkbox"
+                        >
+
+                        <span>
+                            Angemeldet bleiben
+                        </span>
+
+                    </label>
+
+
+                    <button
+                        id="forgotPassword"
+                        type="button"
+                        class="text-button"
+                    >
+                        Passwort vergessen?
+                    </button>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="auth-login-button"
+                >
+                    LOGIN
+                </button>
+
+
+                <!-- ODER -->
+
+                <div class="auth-divider">
+
+                    <span></span>
+
+                    <b>ODER</b>
+
+                    <span></span>
+
+                </div>
+
+
+                <!-- FAMILIEN CODE -->
+
+                <button
+                    id="familyCodeButton"
+                    type="button"
+                    class="family-code-button"
+                >
+
+                    <span class="family-code-icon">
+                        ♧
+                    </span>
+
+                    <span>
+                        MIT FAMILIEN-CODE ANMELDEN
+                    </span>
+
+                </button>
+
+
+                <!-- REGISTER -->
+
+                <div class="auth-register-link">
+
+                    Noch kein Konto?
+
+                    <button
+                        id="openRegister"
+                        type="button"
+                    >
+                        Registrieren
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="authMessage"
+                    class="form-message"
+                ></div>
+
+            </form>
+
+
+            <!-- =================================================
+                 REGISTRIEREN
+            ================================================== -->
+
+            <form
+                id="registerForm"
+                class="auth-form"
+            >
+
+                <div class="form-heading">
+
+                    <h2>
+                        MISAIRA Konto erstellen
+                    </h2>
+
+                    <p>
+                        Erstelle euren Familienzugang.
+                    </p>
+
+                </div>
+
+
+                <div class="auth-input">
+
+                    <span class="auth-input-icon">
+                        ♙
+                    </span>
+
+                    <input
+                        id="registerName"
+                        type="text"
+                        placeholder="Dein Name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="auth-input">
+
+                    <span class="auth-input-icon">
+                        ✉
+                    </span>
+
+                    <input
+                        id="registerEmail"
+                        type="email"
+                        placeholder="deine@email.de"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="auth-input">
+
+                    <span class="auth-input-icon">
+                        ♙
+                    </span>
+
+                    <input
+                        id="registerPassword"
+                        type="password"
+                        minlength="8"
+                        placeholder="Passwort"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        data-password-target="registerPassword"
+                    >
+                        ◉
+                    </button>
+
+                </div>
+
+
+                <div class="auth-input">
+
+                    <span class="auth-input-icon">
+                        ♙
+                    </span>
+
+                    <input
+                        id="registerPasswordConfirm"
+                        type="password"
+                        minlength="8"
+                        placeholder="Passwort bestätigen"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <label class="checkbox-label terms-label">
+
+                    <input
+                        id="registerTerms"
+                        type="checkbox"
+                        required
+                    >
+
+                    <span>
+                        Ich akzeptiere die Nutzungsbedingungen.
+                    </span>
+
+                </label>
+
+
+                <button
+                    type="submit"
+                    class="auth-login-button"
+                >
+                    REGISTRIEREN
+                </button>
+
+
+                <button
+                    id="backToLogin"
+                    type="button"
+                    class="family-code-button"
+                >
+                    ZURÜCK ZUM LOGIN
+                </button>
+
+
+                <div
+                    id="registerMessage"
+                    class="form-message"
+                ></div>
+
+            </form>
+
+
+            <!-- =================================================
+                 FAMILIEN-CODE
+            ================================================== -->
+
+            <form
+                id="familyCodeForm"
+                class="auth-form"
+            >
+
+                <div class="form-heading">
+
+                    <h2>
+                        Familien-Code
+                    </h2>
+
+                    <p>
+                        Melde dich mit dem Code eurer Familie an.
+                    </p>
+
+                </div>
+
+
+                <div class="auth-input">
+
+                    <span class="auth-input-icon">
+                        ♧
+                    </span>
+
+                    <input
+                        id="familyCode"
+                        type="text"
+                        placeholder="Familien-Code"
+                        autocomplete="off"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-login-button"
+                >
+                    MIT FAMILIEN-CODE ANMELDEN
+                </button>
+
+
+                <button
+                    id="backFromFamilyCode"
+                    type="button"
+                    class="family-code-button"
+                >
+                    ZURÜCK ZUM LOGIN
+                </button>
+
+
+                <div
+                    id="familyCodeMessage"
+                    class="form-message"
+                ></div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     LOADER
+========================================================= -->
+
+<section
+    id="loaderScreen"
+    class="screen loader-screen hidden"
+>
+
+    <div class="loader-background">
+
+        <div class="loader-space"></div>
+        <div class="loader-floor"></div>
+
+    </div>
+
+
+    <div class="loader-container">
+
+
+        <!-- MISAIRA CORE -->
+
+        <div class="loader-core-image">
+
+            <img
+                src="https://tjxnkqanzodhijushntf.supabase.co/storage/v1/object/sign/photos/file_00000000e758820ab662e6de88175e91.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kNmYxNDljYS0yOGZiLTRlM2QtYTczYi0wM2E1NTFmYjg4ZjgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwaG90b3MvZmlsZV8wMDAwMDAwMGU3NTg4MjBhYjY2MmU2ZGU4ODE3NWU5MS5wbmciLCJzY29wZSI6ImRvd25sb2FkIiwiaWF0IjoxNzg3MzM3NzI0LCJleHAiOjE4MTg4NzM3MjR9.cQp7s7bKfeTW1vC4rjsNc0dOElkOB79HWaKTHhFKEKA"
+                alt="MISAIRA Core"
+            >
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="loader-percent" id="loaderPercent">
+            0%
+        </div>
+
+        <div class="loader-title">
+            MISAIRA CORE WIRD GESTARTET
+        </div>
+
+
+        <!-- LADEBALKEN -->
+
+        <div class="loader-progress">
+
+            <div class="loader-progress-track">
+
+                <div
+                    id="progressBar"
+                    class="loader-progress-fill"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BOOT SYSTEM -->
+
+        <div class="boot-system">
+
+            <div class="boot-system-title">
+
+                <span></span>
+
+                BOOT-SYSTEM
+
+                <span></span>
+
+            </div>
+
+
+            <div class="boot-system-panel">
+
+
+                <div
+                    class="boot-item"
+                    data-load="20"
+                >
+
+                    <div class="boot-item-name">
+
+                        <span class="boot-icon">
+                            🛡
+                        </span>
+
+                        <span>
+                            System-Check
+                        </span>
+
+                    </div>
+
+                    <span class="boot-status">
+                        OFFLINE
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="boot-item"
+                    data-load="40"
+                >
+
+                    <div class="boot-item-name">
+
+                        <span class="boot-icon">
+                            ▤
+                        </span>
+
+                        <span>
+                            Datenverbindung
+                        </span>
+
+                    </div>
+
+                    <span class="boot-status">
+                        OFFLINE
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="boot-item"
+                    data-load="60"
+                >
+
+                    <div class="boot-item-name">
+
+                        <span class="boot-icon">
+                            ♡
+                        </span>
+
+                        <span>
+                            Familienmodule
+                        </span>
+
+                    </div>
+
+                    <span class="boot-status">
+                        OFFLINE
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="boot-item"
+                    data-load="80"
+                >
+
+                    <div class="boot-item-name">
+
+                        <span class="boot-icon">
+                            🔒
+                        </span>
+
+                        <span>
+                            Sicherheitsprotokolle
+                        </span>
+
+                    </div>
+
+                    <span class="boot-status">
+                        OFFLINE
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="boot-item"
+                    data-load="100"
+                >
+
+                    <div class="boot-item-name">
+
+                        <span class="boot-icon">
+                            ♛
+                        </span>
+
+                        <span>
+                            MISAIRA Core
+                        </span>
+
+                    </div>
+
+                    <span class="boot-status">
+                        OFFLINE
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- BOTTOM CORE -->
+
+        <div class="loader-bottom-core">
+
+            <div class="loader-bottom-glow"></div>
+
+            <div class="loader-bottom-line"></div>
+
+        </div>
+
+
+        <div class="loader-footer">
+            Deine Reise beginnt...
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     APP
+========================================================= -->
+
+<section
+    id="appScreen"
+    class="screen app-screen hidden"
+>
+
+
+    <!-- SIDEBAR -->
+
+    <aside
+        id="mainSidebar"
+        class="sidebar"
+    >
+
+        <div class="sidebar-header">
+
+            <div class="sidebar-logo">
+                M
+            </div>
+
+            <div>
+
+                <strong>
+                    MISAIRA
+                </strong>
+
+                <small>
+                    FAMILIEN HUB
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <button
+                class="nav-item active"
+                type="button"
+                data-page="home"
+            >
+                <span>⌂</span>
+                <b>Home</b>
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                data-page="calendar"
+            >
+                <span>▦</span>
+                <b>Kalender</b>
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                data-page="appointments"
+            >
+                <span>◷</span>
+                <b>Termine</b>
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                data-page="chat"
+            >
+                <span>◌</span>
+                <b>Familien Chat</b>
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                data-page="documents"
+            >
+                <span>▤</span>
+                <b>Dokumente</b>
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                data-page="shopping"
+            >
+                <span>🛒</span>
+                <b>Einkaufsliste</b>
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                data-page="finances"
+            >
+                <span>€</span>
+                <b>Finanz Zentrale</b>
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                data-page="photos"
+            >
+                <span>▧</span>
+                <b>Fotos</b>
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                data-page="family"
+            >
+                <span>♡</span>
+                <b>Familie</b>
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                data-page="settings"
+            >
+                <span>⚙</span>
+                <b>Einstellungen</b>
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                class="nav-item"
+                type="button"
+                data-page="help"
+            >
+                <span>?</span>
+                <b>Hilfe & FAQ</b>
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                data-page="support"
+            >
+                <span>🆘</span>
+                <b>Support</b>
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <div
+        id="sidebarOverlay"
+        class="sidebar-overlay"
+    ></div>
+
+
+
+    <!-- MAIN -->
+
+    <main class="app-main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="app-topbar">
+
+            <button
+                id="sidebarToggle"
+                class="menu-button"
+                type="button"
+                aria-label="Menü öffnen"
+                aria-expanded="false"
+            >
+                ☰
+            </button>
+
+
+            <div class="topbar-brand">
+
+                <strong>
+                    MISAIRA
+                </strong>
+
+                <small>
+                    FAMILIEN HUB
+                </small>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    id="notificationButton"
+                    class="topbar-button"
+                    type="button"
+                    aria-label="Benachrichtigungen"
+                >
+
+                    ♧
+
+                    <span
+                        id="notificationCount"
+                        class="notification-count"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <button
+                    id="profileButton"
+                    class="profile-button"
+                    type="button"
+                    data-page="settings"
+                >
+                    M
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             HOME
+        ====================================================== -->
+
+        <section
+            id="homePage"
+            class="page active"
+        >
+
+            <div class="page-container">
+
+                <div class="hero">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            MISAIRA FAMILIEN HUB
+                        </span>
+
+                        <h1>
+                            Willkommen zuhause,
+                            <span id="heroName">
+                                Familie
+                            </span>
+                            👋
+                        </h1>
+
+                        <p>
+                            Hier ist euer Familienüberblick.
+                        </p>
+
+                    </div>
+
+
+                    <div class="system-badge">
+                        <i></i>
+                        MISAIRA SYSTEM ONLINE
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-grid">
+
+
+                    <button
+                        class="dashboard-card cyan"
+                        type="button"
+                        data-page="calendar"
+                    >
+
+                        <span class="dashboard-icon">
+                            ▦
+                        </span>
+
+                        <strong>
+                            HEUTE
+                        </strong>
+
+                        <b id="todayDate">
+                            --
+                        </b>
+
+                        <small id="todayWeekday">
+                            --
+                        </small>
+
+                    </button>
+
+
+                    <button
+                        class="dashboard-card purple"
+                        type="button"
+                        data-page="appointments"
+                    >
+
+                        <span class="dashboard-icon">
+                            ◷
+                        </span>
+
+                        <strong>
+                            NÄCHSTER TERMIN
+                        </strong>
+
+                        <b id="nextAppointmentTime">
+                            --
+                        </b>
+
+                        <small id="nextAppointmentTitle">
+                            Keine Termine
+                        </small>
+
+                    </button>
+
+
+                    <button
+                        class="dashboard-card pink"
+                        type="button"
+                        data-page="shopping"
+                    >
+
+                        <span class="dashboard-icon">
+                            🛒
+                        </span>
+
+                        <strong>
+                            EINKAUFSLISTE
+                        </strong>
+
+                        <b id="shoppingCount">
+                            0
+                        </b>
+
+                        <small>
+                            offene Artikel
+                        </small>
+
+                    </button>
+
+
+                    <button
+                        class="dashboard-card cyan"
+                        type="button"
+                        data-page="chat"
+                    >
+
+                        <span class="dashboard-icon">
+                            ◌
+                        </span>
+
+                        <strong>
+                            CHAT
+                        </strong>
+
+                        <b id="chatMessageCount">
+                            0
+                        </b>
+
+                        <small>
+                            Nachrichten
+                        </small>
+
+                    </button>
+
+
+                    <button
+                        class="dashboard-card violet"
+                        type="button"
+                        data-page="appointments"
+                    >
+
+                        <span class="dashboard-icon">
+                            ✓
+                        </span>
+
+                        <strong>
+                            AUFGABEN
+                        </strong>
+
+                        <b id="taskCount">
+                            0
+                        </b>
+
+                        <small>
+                            offen
+                        </small>
+
+                    </button>
+
+
+                    <button
+                        class="dashboard-card purple"
+                        type="button"
+                        data-page="family"
+                    >
+
+                        <span class="dashboard-icon">
+                            ♡
+                        </span>
+
+                        <strong>
+                            FAMILIE
+                        </strong>
+
+                        <b id="familyMemberCount">
+                            0
+                        </b>
+
+                        <small>
+                            Mitglieder
+                        </small>
+
+                    </button>
+
+
+                    <button
+                        class="dashboard-card green"
+                        type="button"
+                        data-page="finances"
+                    >
+
+                        <span class="dashboard-icon">
+                            €
+                        </span>
+
+                        <strong>
+                            FINANZEN
+                        </strong>
+
+                        <b id="financeBalance">
+                            0,00 €
+                        </b>
+
+                        <small>
+                            aktueller Saldo
+                        </small>
+
+                    </button>
+
+                </div>
+
+
+                <div class="home-columns">
+
+
+                    <div class="glass-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span>
+                                    NÄCHSTE TERMINE
+                                </span>
+
+                                <h2>
+                                    Termine
+                                </h2>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                data-page="appointments"
+                            >
+                                Alle →
+                            </button>
+
+                        </div>
+
+
+                        <div id="homeAppointmentList">
+                        </div>
+
+                    </div>
+
+
+                    <div class="glass-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span>
+                                    FAMILIE
+                                </span>
+
+                                <h2>
+                                    Schöne Momente
+                                </h2>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                data-page="photos"
+                            >
+                                Alle →
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="familyPhotoGrid"
+                            class="photo-preview-grid"
+                        >
+                        </div>
+
+                    </div>
+
+
+                    <div class="glass-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span>
+                                    AUFGABEN
+                                </span>
+
+                                <h2>
+                                    Offene Aufgaben
+                                </h2>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                data-page="appointments"
+                            >
+                                Alle →
+                            </button>
+
+                        </div>
+
+
+                        <div id="homeTodoList">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="anniversaryButton"
+                    class="anniversary-card"
+                    type="button"
+                    data-page="anniversary"
+                >
+
+                    <span>
+                        FAMILIEN MOMENT
+                    </span>
+
+                    <strong>
+                        Euer besonderer Tag ❤️
+                    </strong>
+
+                    <small id="anniversaryCountdown">
+                        Noch kein Datum festgelegt
+                    </small>
+
+                    <em id="anniversaryDateDisplay">
+                        Jetzt festlegen →
+                    </em>
+
+                </button>
+
+            </div>
+
+
+            <nav class="mobile-nav">
+
+                <button
+                    class="active"
+                    type="button"
+                    data-page="home"
+                >
+                    <span>⌂</span>
+                    Home
+                </button>
+
+                <button
+                    type="button"
+                    data-page="calendar"
+                >
+                    <span>▦</span>
+                    Kalender
+                </button>
+
+                <button
+                    id="mobileCore"
+                    type="button"
+                    class="mobile-core"
+                    data-page="home"
+                >
+                    M
+                </button>
+
+                <button
+                    type="button"
+                    data-page="family"
+                >
+                    <span>♡</span>
+                    Familie
+                </button>
+
+                <button
+                    type="button"
+                    data-page="settings"
+                >
+                    <span>⚙</span>
+                    Mehr
+                </button>
+
+            </nav>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             GENERIC MODULE PAGES
+        ====================================================== -->
+
+        <section
+            id="calendarPage"
+            class="page"
+        >
+
+            <div class="page-container">
+
+                <div class="hero">
+                    <div>
+                        <span class="eyebrow">ORGANISATION</span>
+                        <h1>Kalender</h1>
+                        <p>Euer gemeinsamer Familienkalender.</p>
+                    </div>
+
+                    <div class="system-badge">
+                        <i></i>
+                        KALENDER ONLINE
+                    </div>
+                </div>
+
+                <div
+                    id="calendarContent"
+                    class="module-content"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+
+        <section
+            id="appointmentsPage"
+            class="page"
+        >
+
+            <div class="page-container">
+
+                <div class="hero">
+                    <div>
+                        <span class="eyebrow">ORGANISATION</span>
+                        <h1>Termine & Aufgaben</h1>
+                        <p>Termine und Aufgaben für eure Familie.</p>
+                    </div>
+
+                    <div class="system-badge">
+                        <i></i>
+                        ORGANISATION ONLINE
+                    </div>
+                </div>
+
+                <div
+                    id="appointmentsContent"
+                    class="module-content"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+
+        <section
+            id="chatPage"
+            class="page"
+        >
+
+            <div class="page-container">
+
+                <div class="hero">
+                    <div>
+                        <span class="eyebrow">KOMMUNIKATION</span>
+                        <h1>Familien Chat</h1>
+                        <p>Euer privater Familienchat.</p>
+                    </div>
+
+                    <div class="system-badge">
+                        <i></i>
+                        CHAT ONLINE
+                    </div>
+                </div>
+
+                <div
+                    id="chatContent"
+                    class="module-content"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+
+        <section
+            id="documentsPage"
+            class="page"
+        >
+
+            <div class="page-container">
+
+                <div class="hero">
+                    <div>
+                        <span class="eyebrow">DOKUMENTE</span>
+                        <h1>Dokumente</h1>
+                        <p>Wichtige Familienunterlagen verwalten.</p>
+                    </div>
+
+                    <div class="system-badge">
+                        <i></i>
+                        DOKUMENTE ONLINE
+                    </div>
+                </div>
+
+                <div
+                    id="documentsContent"
+                    class="module-content"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+
+        <section
+            id="shoppingPage"
+            class="page"
+        >
+
+            <div class="page-container">
+
+                <div class="hero">
+                    <div>
+                        <span class="eyebrow">ORGANISATION</span>
+                        <h1>Einkaufsliste</h1>
+                        <p>Gemeinsam einkaufen und organisieren.</p>
+                    </div>
+
+                    <div class="system-badge">
+                        <i></i>
+                        EINKAUF ONLINE
+                    </div>
+                </div>
+
+                <div
+                    id="shoppingContent"
+                    class="module-content"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+
+        <section
+            id="financesPage"
+            class="page"
+        >
+
+            <div class="page-container">
+
+                <div class="hero">
+                    <div>
+                        <span class="eyebrow">FINANZEN</span>
+                        <h1>Finanz Zentrale</h1>
+                        <p>
+                            Einnahmen, Ausgaben, Kontostand und
+                            finanzielle Übersicht an einem Ort.
+                        </p>
+                    </div>
+
+                    <div class="system-badge">
+                        <i></i>
+                        FINANZ SYSTEM ONLINE
+                    </div>
+                </div>
+
+                <div
+                    id="financesContent"
+                    class="module-content"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+
+        <section
+            id="photosPage"
+            class="page"
+        >
+
+            <div class="page-container">
+
+                <div class="hero">
+                    <div>
+                        <span class="eyebrow">FAMILIE</span>
+                        <h1>Fotos</h1>
+                        <p>Eure schönsten Familienmomente.</p>
+                    </div>
+
+                    <div class="system-badge">
+                        <i></i>
+                        FOTOS ONLINE
+                    </div>
+                </div>
+
+                <div
+                    id="photosContent"
+                    class="module-content"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+
+        <section
+            id="familyPage"
+            class="page"
+        >
+
+            <div class="page-container">
+
+                <div class="hero">
+                    <div>
+                        <span class="eyebrow">FAMILIE</span>
+                        <h1>Familie</h1>
+                        <p>
+                            Familienmitglieder und Berechtigungen.
+                        </p>
+                    </div>
+
+                    <div class="system-badge">
+                        <i></i>
+                        FAMILY SYSTEM ONLINE
+                    </div>
+                </div>
+
+                <div
+                    id="familyContent"
+                    class="module-content"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             SETTINGS
+        ====================================================== -->
+
+        <section
+            id="settingsPage"
+            class="page"
+        >
+
+            <div class="page-container">
+
+                <div class="hero">
+
+                    <div>
+                        <span class="eyebrow">
+                            SYSTEM
+                        </span>
+
+                        <h1>
+                            Einstellungen
+                        </h1>
+
+                        <p>
+                            MISAIRA Familien Hub konfigurieren.
+                        </p>
+                    </div>
+
+                    <div class="system-badge">
+                        <i></i>
+                        SYSTEM EINSTELLUNGEN
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="settingsMain"
+                    class="settings-grid"
+                >
+
+                    <button
+                        class="settings-card"
+                        type="button"
+                        data-settings-page="profile"
+                    >
+                        <span>👤</span>
+                        <div>
+                            <strong>Profil</strong>
+                            <small>Name und E-Mail verwalten</small>
+                        </div>
+                        <b>›</b>
+                    </button>
+
+
+                    <button
+                        class="settings-card"
+                        type="button"
+                        data-settings-page="notifications"
+                    >
+                        <span>🔔</span>
+                        <div>
+                            <strong>Benachrichtigungen</strong>
+                            <small>Hinweise und Erinnerungen</small>
+                        </div>
+                        <b>›</b>
+                    </button>
+
+
+                    <button
+                        class="settings-card"
+                        type="button"
+                        data-settings-page="sound"
+                    >
+                        <span>🔊</span>
+                        <div>
+                            <strong>Töne</strong>
+                            <small>System- und Benachrichtigungstöne</small>
+                        </div>
+                        <b>›</b>
+                    </button>
+
+
+                    <button
+                        class="settings-card"
+                        type="button"
+                        data-settings-page="voice"
+                    >
+                        <span>🎙️</span>
+                        <div>
+                            <strong>Sprachsteuerung</strong>
+                            <small>MISAIRA Sprachsteuerung</small>
+                        </div>
+                        <b>›</b>
+                    </button>
+
+
+                    <button
+                        class="settings-card"
+                        type="button"
+                        data-settings-page="appearance"
+                    >
+                        <span>✨</span>
+                        <div>
+                            <strong>Darstellung</strong>
+                            <small>Glow und Animationen</small>
+                        </div>
+                        <b>›</b>
+                    </button>
+
+
+                    <button
+                        class="settings-card"
+                        type="button"
+                        data-settings-page="sync"
+                    >
+                        <span>🔄</span>
+                        <div>
+                            <strong>Synchronisierung</strong>
+                            <small>Daten synchronisieren</small>
+                        </div>
+                        <b>›</b>
+                    </button>
+
+
+                    <button
+                        class="settings-card"
+                        type="button"
+                        data-settings-page="security"
+                    >
+                        <span>🔐</span>
+                        <div>
+                            <strong>Sicherheit</strong>
+                            <small>Sicherheitsoptionen</small>
+                        </div>
+                        <b>›</b>
+                    </button>
+
+
+                    <button
+                        class="settings-card"
+                        type="button"
+                        data-settings-page="privacy"
+                    >
+                        <span>🛡️</span>
+                        <div>
+                            <strong>Datenschutz</strong>
+                            <small>Privatsphäre und Daten</small>
+                        </div>
+                        <b>›</b>
+                    </button>
+
+
+                    <button
+                        class="settings-card"
+                        type="button"
+                        data-settings-page="password"
+                    >
+                        <span>🔑</span>
+                        <div>
+                            <strong>Passwort</strong>
+                            <small>Passwort ändern</small>
+                        </div>
+                        <b>›</b>
+                    </button>
+
+
+                    <button
+                        class="settings-card"
+                        type="button"
+                        data-settings-page="permissions"
+                    >
+                        <span>👨‍👩‍👧</span>
+                        <div>
+                            <strong>Familie & Berechtigungen</strong>
+                            <small>Familienmitglieder und Zugriffe</small>
+                        </div>
+                        <b>›</b>
+                    </button>
+
+
+                    <button
+                        class="settings-card"
+                        type="button"
+                        data-settings-page="help"
+                    >
+                        <span>❓</span>
+                        <div>
+                            <strong>Hilfe & FAQ</strong>
+                            <small>Antworten auf häufige Fragen</small>
+                        </div>
+                        <b>›</b>
+                    </button>
+
+
+                    <button
+                        class="settings-card"
+                        type="button"
+                        data-settings-page="support"
+                    >
+                        <span>🆘</span>
+                        <div>
+                            <strong>Support</strong>
+                            <small>Hilfe und Kontakt</small>
+                        </div>
+                        <b>›</b>
+                    </button>
+
+
+                    <button
+                        class="settings-card"
+                        type="button"
+                        data-settings-page="about"
+                    >
+                        <span>ℹ️</span>
+                        <div>
+                            <strong>Über MISAIRA</strong>
+                            <small>Informationen über MISAIRA</small>
+                        </div>
+                        <b>›</b>
+                    </button>
+
+
+                    <button
+                        class="settings-card"
+                        type="button"
+                        data-settings-page="data"
+                    >
+                        <span>🗑️</span>
+                        <div>
+                            <strong>Datenverwaltung</strong>
+                            <small>Lokale App-Daten verwalten</small>
+                        </div>
+                        <b>›</b>
+                    </button>
+
+
+                    <button
+                        class="settings-card"
+                        type="button"
+                        data-settings-page="language"
+                    >
+                        <span>文</span>
+                        <div>
+                            <strong>Sprache</strong>
+                            <small>Sprache der App</small>
+                        </div>
+                        <b>›</b>
+                    </button>
+
+
+                    <button
+                        class="settings-card"
+                        type="button"
+                        data-settings-page="appInfo"
+                    >
+                        <span>ⓘ</span>
+                        <div>
+                            <strong>App-Informationen</strong>
+                            <small>Version und Systeminformationen</small>
+                        </div>
+                        <b>›</b>
+                    </button>
+
+
+                    <div class="settings-logout">
+
+                        <button
+                            id="logoutButton"
+                            type="button"
+                            class="danger-button"
+                        >
+                            ↩️ ABMELDEN
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="settingsSubPage"
+                    class="settings-subpage hidden"
+                >
+
+                    <button
+                        id="settingsBackButton"
+                        type="button"
+                        class="back-button"
+                    >
+                        ← Einstellungen
+                    </button>
+
+
+                    <div
+                        id="settingsDetailContent"
+                        class="settings-detail-content"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- HELP -->
+
+        <section
+            id="helpPage"
+            class="page"
+        >
+
+            <div class="page-container">
+
+                <div class="hero">
+                    <div>
+                        <span class="eyebrow">HILFE</span>
+                        <h1>Hilfe & FAQ</h1>
+                        <p>
+                            Antworten auf die wichtigsten Fragen.
+                        </p>
+                    </div>
+
+                    <div class="system-badge">
+                        <i></i>
+                        MISAIRA HELP
+                    </div>
+                </div>
+
+
+                <div class="glass-card">
+
+                    <input
+                        id="helpSearch"
+                        class="search-input"
+                        type="search"
+                        placeholder="Frage oder Begriff suchen..."
+                    >
+
+                </div>
+
+
+                <div
+                    id="faqList"
+                    class="faq-list"
+                ></div>
+
+
+                <div class="glass-card help-contact-card">
+
+                    <span class="eyebrow">
+                        WEITERE HILFE
+                    </span>
+
+                    <h2>
+                        Noch Fragen?
+                    </h2>
+
+                    <p>
+                        Wenn deine Frage nicht beantwortet wurde,
+                        kannst du direkt den Support öffnen.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="primary-button small"
+                        data-page="support"
+                    >
+                        SUPPORT ÖFFNEN
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- SUPPORT -->
+
+        <section
+            id="supportPage"
+            class="page"
+        >
+
+            <div class="page-container">
+
+                <div class="hero">
+                    <div>
+                        <span class="eyebrow">SUPPORT</span>
+                        <h1>MISAIRA Support</h1>
+                        <p>
+                            Hilfe und Kontakt für euren Familien Hub.
+                        </p>
+                    </div>
+
+                    <div class="system-badge">
+                        <i></i>
+                        SUPPORT ONLINE
+                    </div>
+                </div>
+
+
+                <div class="support-grid">
+
+                    <div class="glass-card">
+
+                        <span class="eyebrow">
+                            KONTAKT
+                        </span>
+
+                        <h2>
+                            Support kontaktieren
+                        </h2>
+
+                        <p>
+                            Beschreibe dein Problem. Die Nachricht
+                            wird für den späteren Datenbankversand vorbereitet.
+                        </p>
+
+
+                        <form id="supportForm">
+
+                            <div class="input-group">
+
+                                <label for="supportSubject">
+                                    BETREFF
+                                </label>
+
+                                <input
+                                    id="supportSubject"
+                                    type="text"
+                                    placeholder="Worum geht es?"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="input-group">
+
+                                <label for="supportMessage">
+                                    NACHRICHT
+                                </label>
+
+                                <textarea
+                                    id="supportMessage"
+                                    rows="6"
+                                    placeholder="Beschreibe dein Anliegen..."
+                                    required
+                                ></textarea>
+
+                            </div>
+
+
+                            <button
+                                type="submit"
+                                class="primary-button"
+                            >
+                                SUPPORT ANFRAGE SENDEN
+                            </button>
+
+
+                            <div
+                                id="supportFormMessage"
+                                class="form-message"
+                            ></div>
+
+                        </form>
+
+                    </div>
+
+
+                    <div class="glass-card">
+
+                        <span class="eyebrow">
+                            STATUS
+                        </span>
+
+                        <h2>
+                            MISAIRA System
+                        </h2>
+
+                        <div class="status-list">
+
+                            <div>
+                                <span class="status-dot"></span>
+                                App System
+                                <b>ONLINE</b>
+                            </div>
+
+                            <div>
+                                <span class="status-dot"></span>
+                                Lokale Daten
+                                <b>AKTIV</b>
+                            </div>
+
+                            <div>
+                                <span class="status-dot"></span>
+                                Datenbank
+                                <b>VORBEREITET</b>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ANNIVERSARY -->
+
+        <section
+            id="anniversaryPage"
+            class="page"
+        >
+
+            <div class="page-container">
+
+                <div class="hero">
+                    <div>
+                        <span class="eyebrow">FAMILIEN MOMENT</span>
+                        <h1>Euer besonderer Tag ❤️</h1>
+                        <p>
+                            Haltet euren besonderen Tag fest.
+                        </p>
+                    </div>
+
+                    <div class="system-badge">
+                        <i></i>
+                        FAMILY MOMENT
+                    </div>
+                </div>
+
+
+                <div class="glass-card">
+
+                    <form id="anniversaryForm">
+
+                        <div class="input-group">
+
+                            <label for="anniversaryDate">
+                                DATUM
+                            </label>
+
+                            <input
+                                id="anniversaryDate"
+                                type="date"
+                                required
+                            >
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="primary-button"
+                        >
+                            DATUM SPEICHERN
+                        </button>
+
+
+                        <div
+                            id="anniversaryMessage"
+                            class="form-message"
+                        ></div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+<!-- =========================================================
+     MISAIRA TEST APP 4.0.0 — ZUSÄTZLICHE FUNKTIONSELEMENTE
+     NUR ERWEITERUNG — BESTEHENDE STRUKTUR BLEIBT ERHALTEN
+========================================================= -->
+
+<div
+    id="misairaNotificationPanel"
+    class="misaira-notification-panel"
+    aria-hidden="true"
+>
+
+    <div class="misaira-panel-header">
+
+        <div>
+            <small>MISAIRA SYSTEM</small>
+            <h3>Benachrichtigungen</h3>
+        </div>
+
+        <button
+            id="closeNotificationPanel"
+            type="button"
+            aria-label="Benachrichtigungen schließen"
+        >
+            ×
+        </button>
+
+    </div>
+
+    <div
+        id="misairaNotificationList"
+        class="misaira-notification-list"
+    ></div>
+
+</div>
+
+
+<!-- =========================================================
+     MISAIRA FINANZ-ZENTRALE — DYNAMISCHER BEREICH
+========================================================= -->
+
+<div
+    id="misairaFinanceModal"
+    class="misaira-modal"
+    aria-hidden="true"
+>
+
+    <div class="misaira-modal-card">
+
+        <button
+            id="closeFinanceModal"
+            class="misaira-modal-close"
+            type="button"
+        >
+            ×
+        </button>
+
+        <small>FINANZ ZENTRALE</small>
+
+        <h2>Neue Finanzbuchung</h2>
+
+        <form id="misairaFinanceForm">
+
+            <div class="input-group">
+
+                <label for="financeType">
+                    ART
+                </label>
+
+                <div class="input-wrap">
+
+                    <select id="financeType" required>
+
+                        <option value="income">
+                            Einnahme
+                        </option>
+
+                        <option value="expense">
+                            Ausgabe
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="financeTitle">
+                    BEZEICHNUNG
+                </label>
+
+                <div class="input-wrap">
+
+                    <input
+                        id="financeTitle"
+                        type="text"
+                        placeholder="z. B. Einkauf"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="financeAmount">
+                    BETRAG
+                </label>
+
+                <div class="input-wrap">
+
+                    <input
+                        id="financeAmount"
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        placeholder="0,00"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="financeCategory">
+                    KATEGORIE
+                </label>
+
+                <div class="input-wrap">
+
+                    <select id="financeCategory">
+
+                        <option value="haushalt">
+                            Haushalt
+                        </option>
+
+                        <option value="einkauf">
+                            Einkauf
+                        </option>
+
+                        <option value="auto">
+                            Auto
+                        </option>
+
+                        <option value="wohnen">
+                            Wohnen
+                        </option>
+
+                        <option value="freizeit">
+                            Freizeit
+                        </option>
+
+                        <option value="einnahmen">
+                            Einnahmen
+                        </option>
+
+                        <option value="sonstiges">
+                            Sonstiges
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="financeDate">
+                    DATUM
+                </label>
+
+                <div class="input-wrap">
+
+                    <input
+                        id="financeDate"
+                        type="date"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="auth-submit"
+            >
+                BUCHUNG SPEICHERN
+            </button>
+
+
+            <div
+                id="financeMessage"
+                class="auth-message"
+            ></div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     MISAIRA BESTÄTIGUNG
+========================================================= -->
+
+<div
+    id="misairaConfirmModal"
+    class="misaira-modal"
+    aria-hidden="true"
+>
+
+    <div class="misaira-modal-card">
+
+        <small>MISAIRA SYSTEM</small>
+
+        <h2 id="misairaConfirmTitle">
+            Bestätigung
+        </h2>
+
+        <p id="misairaConfirmText">
+            Möchtest du diese Aktion wirklich durchführen?
+        </p>
+
+        <div class="misaira-confirm-actions">
+
+            <button
+                id="misairaConfirmCancel"
+                type="button"
+                class="auth-secondary"
+            >
+                ABBRECHEN
+            </button>
+
+            <button
+                id="misairaConfirmOk"
+                type="button"
+                class="auth-submit"
+            >
+                BESTÄTIGEN
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     MISAIRA TOAST
+========================================================= -->
+
+<div
+    id="misairaToast"
+    class="misaira-toast"
+    aria-live="polite"
+></div>
+      
+    </main>
+
+</section>
+
+
+
+<!-- =========================================================
+     SCRIPT
+========================================================= -->
+
+  
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+</script>
+
+<script
+    src="script.js">
+</script>
+
+
+</body>
+
+</html>
