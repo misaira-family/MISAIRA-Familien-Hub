@@ -3491,6 +3491,11 @@ function renderPage(pageName) {
 
             break;
 
+          case "mealplan":
+
+    renderMisairaMealPlan();
+
+    break;
 
         case "finances":
 
