@@ -16083,3 +16083,49 @@ if ("serviceWorker" in navigator) {
 
 
 })();
+
+/* =========================================================
+   MISAIRA PUNKT 1
+   ESSENSPLAN – SIDEBAR VERBINDUNG
+========================================================= */
+
+(function () {
+
+    "use strict";
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            const button =
+                event.target.closest(
+                    '[data-page="mealplan"]'
+                );
+
+            if (!button) {
+                return;
+            }
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (
+                typeof window.renderMisairaMealPlan !==
+                "function"
+            ) {
+
+                console.error(
+                    "MISAIRA: renderMisairaMealPlan nicht gefunden."
+                );
+
+                return;
+
+            }
+
+            window.renderMisairaMealPlan();
+
+        },
+        true
+    );
+
+})();
