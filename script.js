@@ -8168,3 +8168,1490 @@ if ("serviceWorker" in navigator) {
     });
 }
 
+/* =========================================================
+   MISAIRA PUNKT 11
+   ÜBER MISAIRA – TEIL 1
+   STRUKTUR + STYLE
+   ========================================================= */
+
+(function () {
+
+    "use strict";
+
+    const STYLE_ID =
+        "misaira-about-point11-style";
+
+
+    function addAboutPoint11Style() {
+
+        if (
+            document.getElementById(
+                STYLE_ID
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        const style =
+            document.createElement(
+                "style"
+            );
+
+
+        style.id =
+            STYLE_ID;
+
+
+        style.textContent = `
+
+/* =========================================================
+   MISAIRA ÜBER-SEITE
+========================================================= */
+
+.misaira-about-point11 {
+
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+
+    color: #eaf1ff;
+
+}
+
+
+.misaira-about-point11 * {
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.misaira-about-head {
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.misaira-about-info {
+
+    width: 50px;
+    height: 50px;
+
+    flex: 0 0 50px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    border:
+        1px solid
+        rgba(160,70,255,.65);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(112,25,210,.30),
+            rgba(0,190,255,.10)
+        );
+
+    color: #dba6ff;
+
+    font-size: 25px;
+
+    box-shadow:
+        0 0 25px
+        rgba(145,50,255,.25);
+
+}
+
+
+.misaira-about-head h2 {
+
+    margin: 0;
+
+    color: #f4f7ff;
+
+    font-size: 27px;
+
+}
+
+
+.misaira-about-head p {
+
+    margin: 5px 0 0;
+
+    color: #9caac0;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   KARTEN
+========================================================= */
+
+.misaira-about-card {
+
+    position: relative;
+
+    margin-top: 15px;
+
+    padding: 16px;
+
+    border-radius: 16px;
+
+    border:
+        1px solid
+        rgba(0,190,255,.15);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(5,22,45,.82),
+            rgba(3,8,24,.88)
+        );
+
+    box-shadow:
+        inset 0 0 30px
+        rgba(0,150,255,.025);
+
+}
+
+
+/* =========================================================
+   TITEL
+========================================================= */
+
+.misaira-about-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 11px;
+
+    color: #55eaff;
+
+    font-size: 14px;
+
+}
+
+
+.misaira-about-title-icon {
+
+    font-size: 19px;
+
+}
+
+
+/* =========================================================
+   APP INFORMATION
+========================================================= */
+
+.misaira-about-rows {
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(100,150,230,.12);
+
+    border-radius: 12px;
+
+    background:
+        rgba(0,0,0,.13);
+
+}
+
+
+.misaira-about-row {
+
+    min-height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 9px 12px;
+
+    border-bottom:
+        1px solid
+        rgba(100,150,230,.08);
+
+}
+
+
+.misaira-about-row:last-child {
+
+    border-bottom: 0;
+
+}
+
+
+.misaira-about-row-icon {
+
+    width: 23px;
+
+    flex: 0 0 23px;
+
+    text-align: center;
+
+    color: #dce6f8;
+
+}
+
+
+.misaira-about-row-name {
+
+    flex: 1;
+
+    color: #d8e2f4;
+
+    font-size: 11px;
+
+}
+
+
+.misaira-about-row-value {
+
+    max-width: 52%;
+
+    color: #f3f6ff;
+
+    font-size: 10px;
+
+    text-align: right;
+
+}
+
+
+.misaira-about-online {
+
+    color: #00f5a0;
+
+}
+
+
+/* =========================================================
+   ÜBER MISAIRA HAUPTKARTE
+========================================================= */
+
+.misaira-about-main {
+
+    position: relative;
+
+    overflow: hidden;
+
+    min-height: 260px;
+
+}
+
+
+.misaira-about-main::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    right: -45px;
+    top: 10px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(184,60,255,.18),
+            rgba(0,234,255,.05) 48%,
+            transparent 72%
+        );
+
+    pointer-events: none;
+
+}
+
+
+.misaira-about-copy {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 58%;
+
+}
+
+
+.misaira-about-copy h3 {
+
+    margin: 0 0 11px;
+
+    color: #c45cff;
+
+    font-size: 17px;
+
+}
+
+
+.misaira-about-copy p {
+
+    margin: 0;
+
+    color: #d6deee;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+}
+
+
+/* =========================================================
+   FAMILIEN-GRAFIK
+========================================================= */
+
+.misaira-about-family-art {
+
+    position: absolute;
+
+    right: 20px;
+    top: 20px;
+
+    width: 230px;
+    height: 175px;
+
+    pointer-events: none;
+
+}
+
+
+.misaira-about-heart {
+
+    position: absolute;
+
+    top: 0;
+    right: 55px;
+
+    color: #c45cff;
+
+    font-size: 60px;
+
+    line-height: 1;
+
+    text-shadow:
+        0 0 15px #c45cff,
+        0 0 35px
+        rgba(0,234,255,.45);
+
+}
+
+
+.misaira-about-family-ground {
+
+    position: absolute;
+
+    right: 20px;
+    bottom: 8px;
+
+    width: 180px;
+    height: 85px;
+
+    border-radius:
+        50% 50% 0 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(115,50,255,.30),
+            rgba(0,205,255,.12)
+        );
+
+    border-top:
+        1px solid
+        rgba(0,234,255,.5);
+
+    box-shadow:
+        0 -8px 30px
+        rgba(80,80,255,.14);
+
+}
+
+
+.misaira-about-person {
+
+    position: absolute;
+
+    bottom: 18px;
+
+    width: 18px;
+
+    border-radius:
+        10px 10px 4px 4px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8d4fff,
+            #2bdcff
+        );
+
+    box-shadow:
+        0 0 12px
+        rgba(100,120,255,.45);
+
+}
+
+
+.misaira-about-person::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 20px;
+    height: 20px;
+
+    left: -1px;
+    top: -17px;
+
+    border-radius: 50%;
+
+    background: #9a5cff;
+
+    box-shadow:
+        0 0 12px
+        rgba(0,234,255,.35);
+
+}
+
+
+.misaira-about-p1 {
+
+    left: 25px;
+    height: 66px;
+
+}
+
+
+.misaira-about-p2 {
+
+    left: 68px;
+    height: 76px;
+
+}
+
+
+.misaira-about-p3 {
+
+    left: 111px;
+    height: 59px;
+
+}
+
+
+.misaira-about-p4 {
+
+    left: 143px;
+    height: 70px;
+
+}
+
+
+/* =========================================================
+   VIER KACHELN
+========================================================= */
+
+.misaira-about-values {
+
+    position: relative;
+
+    z-index: 3;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 8px;
+
+    margin-top: 22px;
+
+}
+
+
+.misaira-about-value {
+
+    min-height: 95px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 6px;
+
+    border:
+        1px solid
+        rgba(0,190,255,.14);
+
+    border-radius: 12px;
+
+    background:
+        rgba(2,13,31,.72);
+
+    text-align: center;
+
+}
+
+
+.misaira-about-value-icon {
+
+    margin-bottom: 7px;
+
+    color: #18e7ff;
+
+    font-size: 22px;
+
+    text-shadow:
+        0 0 12px
+        rgba(0,234,255,.5);
+
+}
+
+
+.misaira-about-value:nth-child(2)
+.misaira-about-value-icon,
+
+.misaira-about-value:nth-child(4)
+.misaira-about-value-icon {
+
+    color: #c35cff;
+
+}
+
+
+.misaira-about-value strong {
+
+    color: #e8efff;
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+}
+
+
+.misaira-about-value small {
+
+    margin-top: 3px;
+
+    color: #7e8da7;
+
+    font-size: 8px;
+
+}
+
+
+/* =========================================================
+   WEITERE INFORMATIONEN
+========================================================= */
+
+.misaira-about-more {
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(0,190,255,.12);
+
+    border-radius: 12px;
+
+    background:
+        rgba(0,0,0,.12);
+
+}
+
+
+.misaira-about-link {
+
+    width: 100%;
+
+    min-height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 8px 12px;
+
+    border-bottom:
+        1px solid
+        rgba(100,150,230,.08);
+
+    color: #d8e2f4;
+
+    background: transparent;
+
+    font: inherit;
+
+    text-align: left;
+
+}
+
+
+.misaira-about-link:last-child {
+
+    border-bottom: 0;
+
+}
+
+
+.misaira-about-link-icon {
+
+    width: 22px;
+
+    flex: 0 0 22px;
+
+    text-align: center;
+
+}
+
+
+.misaira-about-link-arrow {
+
+    margin-left: auto;
+
+    color: #8090ab;
+
+    font-size: 20px;
+
+}
+
+
+/* =========================================================
+   HANDY / TABLET
+========================================================= */
+
+@media (max-width: 560px) {
+
+    .misaira-about-head h2 {
+
+        font-size: 24px;
+
+    }
+
+
+    .misaira-about-copy {
+
+        max-width: 100%;
+
+    }
+
+
+    .misaira-about-family-art {
+
+        position: relative;
+
+        right: auto;
+        top: auto;
+
+        width: 100%;
+        height: 145px;
+
+        margin-top: 10px;
+
+    }
+
+
+    .misaira-about-heart {
+
+        right:
+            calc(50% - 30px);
+
+    }
+
+
+    .misaira-about-family-ground {
+
+        right: 50%;
+
+        transform:
+            translateX(50%);
+
+    }
+
+
+    .misaira-about-values {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .misaira-about-row-value {
+
+        max-width: 45%;
+
+    }
+
+}
+
+`;
+
+        document.head.appendChild(
+            style
+        );
+
+    }
+
+
+    addAboutPoint11Style();
+
+})();
+
+/* =========================================================
+   MISAIRA PUNKT 11
+   ÜBER MISAIRA – TEIL 2
+   ANSICHT + FUNKTION
+   ========================================================= */
+
+(function () {
+
+    "use strict";
+
+
+    function renderMisairaAbout() {
+
+        const content =
+            document.getElementById(
+                "settingsDetailContent"
+            );
+
+        const main =
+            document.getElementById(
+                "settingsMain"
+            );
+
+        const sub =
+            document.getElementById(
+                "settingsSubPage"
+            );
+
+
+        if (
+            !content ||
+            !main ||
+            !sub
+        ) {
+
+            console.error(
+                "MISAIRA: Settings-Container nicht gefunden."
+            );
+
+            return;
+
+        }
+
+
+        /* Neue Ansicht anzeigen */
+
+        main.classList.add(
+            "hidden"
+        );
+
+        sub.classList.remove(
+            "hidden"
+        );
+
+
+        const version =
+            typeof MISAIRA_CONFIG !==
+            "undefined"
+                ? MISAIRA_CONFIG.version
+                : "5.0.0";
+
+
+        content.innerHTML = `
+
+<div class="misaira-about-point11">
+
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <div class="misaira-about-head">
+
+        <div class="misaira-about-info">
+            ⓘ
+        </div>
+
+        <div>
+
+            <h2>
+                Über MISAIRA
+            </h2>
+
+            <p>
+                Hier findest du alle wichtigen Informationen
+                zu MISAIRA, der App und ihrer Entwicklung.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         APP-INFORMATIONEN
+    ========================================== -->
+
+    <section class="misaira-about-card">
+
+
+        <div class="misaira-about-title">
+
+            <span
+                class="misaira-about-title-icon"
+            >
+                ▣
+            </span>
+
+            <span>
+                App-Informationen
+            </span>
+
+        </div>
+
+
+        <div class="misaira-about-rows">
+
+
+            <div class="misaira-about-row">
+
+                <span
+                    class="misaira-about-row-icon"
+                >
+                    ⌁
+                </span>
+
+                <span
+                    class="misaira-about-row-name"
+                >
+                    App-Version
+                </span>
+
+                <span
+                    class="misaira-about-row-value"
+                >
+                    ${version}
+                </span>
+
+                <span>
+                    ›
+                </span>
+
+            </div>
+
+
+            <div class="misaira-about-row">
+
+                <span
+                    class="misaira-about-row-icon"
+                >
+                    ▤
+                </span>
+
+                <span
+                    class="misaira-about-row-name"
+                >
+                    Build-Nummer
+                </span>
+
+                <span
+                    class="misaira-about-row-value"
+                >
+                    5000
+                </span>
+
+                <span>
+                    ›
+                </span>
+
+            </div>
+
+
+            <div class="misaira-about-row">
+
+                <span
+                    class="misaira-about-row-icon"
+                >
+                    ◎
+                </span>
+
+                <span
+                    class="misaira-about-row-name"
+                >
+                    System
+                </span>
+
+                <span
+                    class="misaira-about-row-value"
+                >
+                    Web App / PWA
+                </span>
+
+                <span>
+                    ›
+                </span>
+
+            </div>
+
+
+            <div class="misaira-about-row">
+
+                <span
+                    class="misaira-about-row-icon"
+                >
+                    ◇
+                </span>
+
+                <span
+                    class="misaira-about-row-name"
+                >
+                    Entwickelt mit
+                </span>
+
+                <span
+                    class="misaira-about-row-value"
+                >
+                    HTML, CSS, JS
+                </span>
+
+                <span>
+                    ›
+                </span>
+
+            </div>
+
+
+            <div class="misaira-about-row">
+
+                <span
+                    class="misaira-about-row-icon"
+                >
+                    ♧
+                </span>
+
+                <span
+                    class="misaira-about-row-name"
+                >
+                    Server-Status
+                </span>
+
+                <span
+                    class="
+                        misaira-about-row-value
+                        misaira-about-online
+                    "
+                >
+                    Online
+                </span>
+
+                <span>
+                    ›
+                </span>
+
+            </div>
+
+
+            <div class="misaira-about-row">
+
+                <span
+                    class="misaira-about-row-icon"
+                >
+                    ♙
+                </span>
+
+                <span
+                    class="misaira-about-row-name"
+                >
+                    Datenschutz
+                </span>
+
+                <span
+                    class="misaira-about-row-value
+                    "
+                >
+                    Supabase / Familienzugriff
+                </span>
+
+                <span>
+                    ›
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         ÜBER MISAIRA
+    ========================================== -->
+
+    <section
+        class="
+            misaira-about-card
+            misaira-about-main
+        "
+    >
+
+
+        <div class="misaira-about-copy">
+
+            <h3>
+                ♡ Über MISAIRA
+            </h3>
+
+            <p>
+                MISAIRA ist dein zentraler Familien-Hub.<br>
+                Alle wichtigen Tools für deine Familie –<br>
+                an einem Ort. Sicher, privat und<br>
+                mit Liebe entwickelt.
+            </p>
+
+        </div>
+
+
+        <!-- Familien-Grafik -->
+
+        <div
+            class="misaira-about-family-art"
+            aria-hidden="true"
+        >
+
+            <div
+                class="misaira-about-heart"
+            >
+                ♡
+            </div>
+
+
+            <div
+                class="misaira-about-family-ground"
+            >
+
+                <div
+                    class="
+                        misaira-about-person
+                        misaira-about-p1
+                    "
+                ></div>
+
+
+                <div
+                    class="
+                        misaira-about-person
+                        misaira-about-p2
+                    "
+                ></div>
+
+
+                <div
+                    class="
+                        misaira-about-person
+                        misaira-about-p3
+                    "
+                ></div>
+
+
+                <div
+                    class="
+                        misaira-about-person
+                        misaira-about-p4
+                    "
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             VIER WERTE
+        ====================================== -->
+
+        <div
+            class="misaira-about-values"
+        >
+
+
+            <div
+                class="misaira-about-value"
+            >
+
+                <div
+                    class="
+                        misaira-about-value-icon
+                    "
+                >
+                    ♧
+                </div>
+
+                <strong>
+                    Familie
+                </strong>
+
+                <small>
+                    im Mittelpunkt
+                </small>
+
+            </div>
+
+
+            <div
+                class="misaira-about-value"
+            >
+
+                <div
+                    class="
+                        misaira-about-value-icon
+                    "
+                >
+                    ♢
+                </div>
+
+                <strong>
+                    Sicherheit
+                </strong>
+
+                <small>
+                    an erster Stelle
+                </small>
+
+            </div>
+
+
+            <div
+                class="misaira-about-value"
+            >
+
+                <div
+                    class="
+                        misaira-about-value-icon
+                    "
+                >
+                    🚀
+                </div>
+
+                <strong>
+                    Entwicklung
+                </strong>
+
+                <small>
+                    mit Leidenschaft
+                </small>
+
+            </div>
+
+
+            <div
+                class="misaira-about-value"
+            >
+
+                <div
+                    class="
+                        misaira-about-value-icon
+                    "
+                >
+                    ♙
+                </div>
+
+                <strong>
+                    Privatsphäre
+                </strong>
+
+                <small>
+                    geschützt
+                </small>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         WEITERE INFORMATIONEN
+    ========================================== -->
+
+    <section
+        class="misaira-about-card"
+    >
+
+
+        <div
+            class="misaira-about-title"
+        >
+
+            <span
+                class="
+                    misaira-about-title-icon
+                "
+            >
+                ⌘
+            </span>
+
+            <span>
+                Weitere Informationen
+            </span>
+
+        </div>
+
+
+        <div
+            class="misaira-about-more"
+        >
+
+
+            <div
+                class="misaira-about-link"
+            >
+
+                <span
+                    class="
+                        misaira-about-link-icon
+                    "
+                >
+                    ▤
+                </span>
+
+                <span>
+                    Nutzungsbedingungen
+                </span>
+
+                <span
+                    class="
+                        misaira-about-link-arrow
+                    "
+                >
+                    ›
+                </span>
+
+            </div>
+
+
+            <div
+                class="misaira-about-link"
+            >
+
+                <span
+                    class="
+                        misaira-about-link-icon
+                    "
+                >
+                    ♢
+                </span>
+
+                <span>
+                    Datenschutzerklärung
+                </span>
+
+                <span
+                    class="
+                        misaira-about-link-arrow
+                    "
+                >
+                    ›
+                </span>
+
+            </div>
+
+
+            <div
+                class="misaira-about-link"
+            >
+
+                <span
+                    class="
+                        misaira-about-link-icon
+                    "
+                >
+                    &lt;/&gt;
+                </span>
+
+                <span>
+                    Open Source Lizenzen
+                </span>
+
+                <span
+                    class="
+                        misaira-about-link-arrow
+                    "
+                >
+                    ›
+                </span>
+
+            </div>
+
+
+            <div
+                class="misaira-about-link"
+            >
+
+                <span
+                    class="
+                        misaira-about-link-icon
+                    "
+                >
+                    ♧
+                </span>
+
+                <span>
+                    Mitwirkende
+                </span>
+
+                <span
+                    class="
+                        misaira-about-link-arrow
+                    "
+                >
+                    ›
+                </span>
+
+            </div>
+
+
+            <div
+                class="misaira-about-link"
+            >
+
+                <span
+                    class="
+                        misaira-about-link-icon
+                    "
+                >
+                    ✉
+                </span>
+
+                <span>
+                    Kontakt / Support
+                </span>
+
+                <span
+                    class="
+                        misaira-about-link-arrow
+                    "
+                >
+                    ›
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</div>
+
+`;
+
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    }
+
+
+    /* =====================================================
+       KLICK AUF „ÜBER MISAIRA“ ABFANGEN
+    ===================================================== */
+
+    document.addEventListener(
+
+        "click",
+
+        function (event) {
+
+
+            const button =
+                event.target.closest(
+                    "[data-settings-page]"
+                );
+
+
+            if (!button) {
+
+                return;
+
+            }
+
+
+            if (
+                button.dataset.settingsPage !==
+                "about"
+            ) {
+
+                return;
+
+            }
+
+
+            event.preventDefault();
+
+            event.stopImmediatePropagation();
+
+
+            renderMisairaAbout();
+
+        },
+
+        true
+
+    );
+
+
+})();
