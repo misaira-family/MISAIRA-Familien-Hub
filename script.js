@@ -13435,3 +13435,2653 @@ if ("serviceWorker" in navigator) {
 
 })();
 
+/* =========================================================
+   MISAIRA PUNKT 1
+   ESSENSPLAN – TEIL 1
+   STYLE
+========================================================= */
+
+(function () {
+
+    "use strict";
+
+    if (
+        document.getElementById(
+            "misaira-mealplan-style"
+        )
+    ) {
+        return;
+    }
+
+
+    const style =
+        document.createElement("style");
+
+
+    style.id =
+        "misaira-mealplan-style";
+
+
+    style.textContent = `
+
+/* =========================================================
+   ESSENSPLAN
+========================================================= */
+
+.misaira-mealplan {
+
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+
+    color: #edf4ff;
+
+}
+
+
+/* HEADER */
+
+.misaira-mealplan-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.misaira-mealplan-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.misaira-mealplan-icon {
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    color: #00eaff;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,234,255,.18),
+            rgba(130,40,255,.25)
+        );
+
+    border:
+        1px solid
+        rgba(0,234,255,.45);
+
+    box-shadow:
+        0 0 25px
+        rgba(0,234,255,.16);
+
+    font-size: 24px;
+
+}
+
+
+.misaira-mealplan-heading h2 {
+
+    margin: 0;
+
+    color: #f5f8ff;
+
+    font-size: 24px;
+
+}
+
+
+.misaira-mealplan-heading p {
+
+    margin: 4px 0 0;
+
+    color: #91a0b7;
+
+    font-size: 10px;
+
+}
+
+
+/* ADD BUTTON */
+
+.misaira-mealplan-add {
+
+    min-height: 42px;
+
+    padding:
+        0 15px;
+
+    border:
+        1px solid
+        rgba(170,70,255,.6);
+
+    border-radius: 10px;
+
+    color: #fff;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(70,35,180,.8),
+            rgba(170,40,235,.78)
+        );
+
+    box-shadow:
+        0 0 20px
+        rgba(150,40,255,.18);
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+}
+
+
+/* WEEK NAVIGATION */
+
+.misaira-mealplan-week {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.misaira-mealplan-week-button {
+
+    width: 40px;
+    height: 40px;
+
+    flex: 0 0 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(0,220,255,.18);
+
+    border-radius: 10px;
+
+    color: #00eaff;
+
+    background:
+        rgba(0,160,220,.06);
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+}
+
+
+.misaira-mealplan-week-title {
+
+    flex: 1;
+
+    text-align: center;
+
+}
+
+
+.misaira-mealplan-week-title strong {
+
+    display: block;
+
+    color: #fff;
+
+    font-size: 14px;
+
+}
+
+
+.misaira-mealplan-week-title span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #8391a8;
+
+    font-size: 9px;
+
+}
+
+
+/* DAY SELECTOR */
+
+.misaira-mealplan-days {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, 1fr);
+
+    gap: 5px;
+
+    margin-bottom: 14px;
+
+}
+
+
+.misaira-mealplan-day {
+
+    min-height: 58px;
+
+    padding: 7px 3px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(100,150,210,.13);
+
+    border-radius: 10px;
+
+    color: #8d9ab0;
+
+    background:
+        rgba(7,18,38,.62);
+
+    cursor: pointer;
+
+}
+
+
+.misaira-mealplan-day-name {
+
+    font-size: 8px;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.misaira-mealplan-day-number {
+
+    margin-top: 5px;
+
+    color: #e7edf7;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+}
+
+
+.misaira-mealplan-day.active {
+
+    border-color:
+        rgba(0,234,255,.7);
+
+    color: #00eaff;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,180,220,.18),
+            rgba(110,35,230,.18)
+        );
+
+    box-shadow:
+        0 0 18px
+        rgba(0,210,255,.12);
+
+}
+
+
+.misaira-mealplan-day.active
+.misaira-mealplan-day-number {
+
+    color: #fff;
+
+    text-shadow:
+        0 0 12px
+        rgba(0,234,255,.6);
+
+}
+
+
+/* MEAL AREA */
+
+.misaira-mealplan-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+}
+
+
+/* MEAL CARD */
+
+.misaira-meal-card {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    min-height: 92px;
+
+    padding: 12px 14px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(90,150,210,.14);
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(5,22,43,.9),
+            rgba(3,10,27,.96)
+        );
+
+}
+
+
+.misaira-meal-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+
+    width: 3px;
+
+    border-radius:
+        0 4px 4px 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #00eaff,
+            #9b35ff
+        );
+
+    box-shadow:
+        0 0 13px
+        rgba(0,234,255,.5);
+
+}
+
+
+/* FOOD ICON */
+
+.misaira-meal-icon {
+
+    width: 56px;
+    height: 56px;
+
+    flex: 0 0 56px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,210,255,.12),
+            rgba(140,40,255,.16)
+        );
+
+    border:
+        1px solid
+        rgba(0,220,255,.16);
+
+    font-size: 27px;
+
+}
+
+
+/* MEAL INFORMATION */
+
+.misaira-meal-info {
+
+    flex: 1;
+
+    min-width: 0;
+
+}
+
+
+.misaira-meal-name {
+
+    color: #f5f8ff;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+}
+
+
+.misaira-meal-note {
+
+    margin-top: 5px;
+
+    color: #8e9bb0;
+
+    font-size: 9px;
+
+    line-height: 1.45;
+
+}
+
+
+.misaira-meal-family {
+
+    display: inline-block;
+
+    margin-top: 7px;
+
+    padding:
+        3px 7px;
+
+    border-radius: 5px;
+
+    color: #00eaff;
+
+    background:
+        rgba(0,234,255,.08);
+
+    font-size: 8px;
+
+}
+
+
+/* ACTIONS */
+
+.misaira-meal-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+}
+
+
+.misaira-meal-action {
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(130,170,220,.14);
+
+    border-radius: 50%;
+
+    color: #aebbd0;
+
+    background:
+        rgba(255,255,255,.025);
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+}
+
+
+.misaira-meal-action:hover {
+
+    color: #00eaff;
+
+    border-color:
+        rgba(0,234,255,.45);
+
+}
+
+
+/* EMPTY STATE */
+
+.misaira-mealplan-empty {
+
+    min-height: 190px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    border:
+        1px dashed
+        rgba(0,210,255,.18);
+
+    border-radius: 14px;
+
+    color: #8c9ab0;
+
+    background:
+        rgba(4,14,30,.55);
+
+    text-align: center;
+
+}
+
+
+.misaira-mealplan-empty-icon {
+
+    margin-bottom: 10px;
+
+    color: #00eaff;
+
+    font-size: 38px;
+
+    text-shadow:
+        0 0 20px
+        rgba(0,234,255,.45);
+
+}
+
+
+.misaira-mealplan-empty strong {
+
+    color: #e8eef8;
+
+    font-size: 13px;
+
+}
+
+
+.misaira-mealplan-empty span {
+
+    max-width: 300px;
+
+    margin-top: 6px;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .misaira-mealplan-header {
+
+        align-items:
+            flex-start;
+
+    }
+
+
+    .misaira-mealplan-heading h2 {
+
+        font-size: 20px;
+
+    }
+
+
+    .misaira-mealplan-add {
+
+        padding:
+            0 10px;
+
+        font-size: 9px;
+
+    }
+
+
+    .misaira-mealplan-days {
+
+        gap: 3px;
+
+    }
+
+
+    .misaira-mealplan-day {
+
+        min-height: 52px;
+
+    }
+
+
+    .misaira-meal-card {
+
+        min-height: 82px;
+
+        gap: 10px;
+
+        padding:
+            10px;
+
+    }
+
+
+    .misaira-meal-icon {
+
+        width: 48px;
+        height: 48px;
+
+        flex-basis: 48px;
+
+        font-size: 22px;
+
+    }
+
+
+    .misaira-meal-name {
+
+        font-size: 13px;
+
+    }
+
+
+    .misaira-meal-note {
+
+        font-size: 8px;
+
+    }
+
+
+    .misaira-meal-action {
+
+        width: 34px;
+        height: 34px;
+
+    }
+
+}
+
+`;
+
+    document.head.appendChild(
+        style
+    );
+
+})();
+
+/* =========================================================
+   MISAIRA PUNKT 1
+   ESSENSPLAN – TEIL 2
+   STRUKTUR + SIDEBAR
+========================================================= */
+
+(function () {
+
+    "use strict";
+
+
+    function renderMisairaMealPlan() {
+
+        const content =
+            document.getElementById(
+                "settingsDetailContent"
+            );
+
+        const main =
+            document.getElementById(
+                "settingsMain"
+            );
+
+        const sub =
+            document.getElementById(
+                "settingsSubPage"
+            );
+
+
+        if (!content || !main || !sub) {
+
+            console.error(
+                "MISAIRA: Essensplan-Container nicht gefunden."
+            );
+
+            return;
+
+        }
+
+
+        main.classList.add("hidden");
+        sub.classList.remove("hidden");
+
+
+        content.innerHTML = `
+
+            <div class="misaira-mealplan">
+
+
+                <div
+                    class="misaira-mealplan-header"
+                >
+
+                    <div
+                        class="misaira-mealplan-heading"
+                    >
+
+                        <div
+                            class="misaira-mealplan-icon"
+                        >
+                            🍽️
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Essensplan
+                            </h2>
+
+                            <p>
+                                Euer Familienplan für die Woche
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="misaira-mealplan-add"
+                        data-meal-add
+                    >
+                        ＋ Essen hinzufügen
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="misaira-mealplan-week"
+                >
+
+                    <button
+                        type="button"
+                        class="misaira-mealplan-week-button"
+                        data-meal-prev
+                    >
+                        ‹
+                    </button>
+
+
+                    <div
+                        class="misaira-mealplan-week-title"
+                    >
+
+                        <strong
+                            data-meal-week-title
+                        >
+                            Diese Woche
+                        </strong>
+
+                        <span
+                            data-meal-date-title
+                        >
+                            Familien-Essensplan
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="misaira-mealplan-week-button"
+                        data-meal-next
+                    >
+                        ›
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="misaira-mealplan-days"
+                    data-meal-days
+                ></div>
+
+
+                <div
+                    class="misaira-mealplan-content"
+                    data-meal-content
+                ></div>
+
+
+            </div>
+
+        `;
+
+
+        renderMealDays();
+
+    }
+
+
+    /* =====================================================
+       TAGE
+    ===================================================== */
+
+    function renderMealDays() {
+
+        const container =
+            document.querySelector(
+                "[data-meal-days]"
+            );
+
+
+        if (!container) {
+
+            return;
+
+        }
+
+
+        const days = [
+
+            ["Mo", "Montag"],
+            ["Di", "Dienstag"],
+            ["Mi", "Mittwoch"],
+            ["Do", "Donnerstag"],
+            ["Fr", "Freitag"],
+            ["Sa", "Samstag"],
+            ["So", "Sonntag"]
+
+        ];
+
+
+        const today =
+            new Date()
+                .getDay();
+
+
+        const currentDay =
+            today === 0
+                ? 6
+                : today - 1;
+
+
+        let html = "";
+
+
+        days.forEach(
+            function (day, index) {
+
+                html += `
+
+                    <button
+                        type="button"
+                        class="
+                            misaira-mealplan-day
+                            ${
+                                index === currentDay
+                                    ? "active"
+                                    : ""
+                            }
+                        "
+                        data-meal-day="${index}"
+                    >
+
+                        <span
+                            class="
+                                misaira-mealplan-day-name
+                            "
+                        >
+                            ${day[0]}
+                        </span>
+
+                        <span
+                            class="
+                                misaira-mealplan-day-number
+                            "
+                        >
+                            ${day[1].charAt(0)}
+                        </span>
+
+                    </button>
+
+                `;
+
+            }
+        );
+
+
+        container.innerHTML =
+            html;
+
+
+        container
+            .querySelectorAll(
+                "[data-meal-day]"
+            )
+            .forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            container
+                                .querySelectorAll(
+                                    ".misaira-mealplan-day"
+                                )
+                                .forEach(
+                                    function (item) {
+
+                                        item.classList.remove(
+                                            "active"
+                                        );
+
+                                    }
+                                );
+
+
+                            button.classList.add(
+                                "active"
+                            );
+
+
+                            renderSelectedMealDay(
+                                Number(
+                                    button.dataset
+                                        .mealDay
+                                )
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+        renderSelectedMealDay(
+            currentDay
+        );
+
+    }
+
+
+    /* =====================================================
+       AUSGEWÄHLTEN TAG
+    ===================================================== */
+
+    function renderSelectedMealDay(
+        dayIndex
+    ) {
+
+        const content =
+            document.querySelector(
+                "[data-meal-content]"
+            );
+
+
+        if (!content) {
+
+            return;
+
+        }
+
+
+        const dayNames = [
+
+            "Montag",
+            "Dienstag",
+            "Mittwoch",
+            "Donnerstag",
+            "Freitag",
+            "Samstag",
+            "Sonntag"
+
+        ];
+
+
+        const dayName =
+            dayNames[dayIndex] ||
+            "Heute";
+
+
+        const meals = {
+
+            0: [
+                {
+                    icon: "🍝",
+                    name: "Spaghetti Bolognese",
+                    note:
+                        "Tomatensoße, Hackfleisch und Parmesan"
+                }
+            ],
+
+            1: [
+                {
+                    icon: "🍗",
+                    name: "Hähnchen mit Reis",
+                    note:
+                        "Gemüse und Kräuter"
+                }
+            ],
+
+            2: [
+                {
+                    icon: "🥘",
+                    name: "Familien-Gemüsepfanne",
+                    note:
+                        "Buntes Gemüse mit Kartoffeln"
+                }
+            ],
+
+            3: [
+                {
+                    icon: "🍕",
+                    name: "Pizza",
+                    note:
+                        "Familien-Pizza nach Wunsch"
+                }
+            ],
+
+            4: [
+                {
+                    icon: "🌮",
+                    name: "Tacos",
+                    note:
+                        "Salat, Gemüse und Käse"
+                }
+            ],
+
+            5: [
+                {
+                    icon: "🍔",
+                    name: "Burger",
+                    note:
+                        "Burger mit Ofenkartoffeln"
+                }
+            ],
+
+            6: [
+                {
+                    icon: "🥞",
+                    name: "Pfannkuchen",
+                    note:
+                        "Mit Obst oder Apfelmus"
+                }
+            ]
+
+        };
+
+
+        const selected =
+            meals[dayIndex] || [];
+
+
+        if (!selected.length) {
+
+            content.innerHTML = `
+
+                <div
+                    class="misaira-mealplan-empty"
+                >
+
+                    <div
+                        class="
+                            misaira-mealplan-empty-icon
+                        "
+                    >
+                        🍽️
+                    </div>
+
+                    <strong>
+                        Für ${dayName} ist noch
+                        kein Essen geplant.
+                    </strong>
+
+                    <span>
+                        Füge ein Gericht hinzu,
+                        damit die ganze Familie
+                        den Plan sehen kann.
+                    </span>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        let html = "";
+
+
+        selected.forEach(
+            function (meal, index) {
+
+                html += `
+
+                    <article
+                        class="misaira-meal-card"
+                    >
+
+                        <div
+                            class="misaira-meal-icon"
+                        >
+                            ${meal.icon}
+                        </div>
+
+
+                        <div
+                            class="misaira-meal-info"
+                        >
+
+                            <div
+                                class="misaira-meal-name"
+                            >
+                                ${meal.name}
+                            </div>
+
+                            <div
+                                class="misaira-meal-note"
+                            >
+                                ${meal.note}
+                            </div>
+
+                            <span
+                                class="misaira-meal-family"
+                            >
+                                👨‍👩‍👧‍👦 Familie
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="misaira-meal-actions"
+                        >
+
+                            <button
+                                type="button"
+                                class="misaira-meal-action"
+                                title="Bearbeiten"
+                                data-meal-edit="${index}"
+                            >
+                                ✎
+                            </button>
+
+                            <button
+                                type="button"
+                                class="misaira-meal-action"
+                                title="Löschen"
+                                data-meal-delete="${index}"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                `;
+
+            }
+        );
+
+
+        content.innerHTML =
+            html;
+
+    }
+
+
+    /* =====================================================
+       ESSENSPLAN ÖFFNEN
+    ===================================================== */
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            const button =
+                event.target.closest(
+                    "[data-settings-page]"
+                );
+
+
+            if (!button) {
+
+                return;
+
+            }
+
+
+            if (
+                button.dataset.settingsPage !==
+                "mealplan"
+            ) {
+
+                return;
+
+            }
+
+
+            event.preventDefault();
+
+            event.stopImmediatePropagation();
+
+
+            renderMisairaMealPlan();
+
+        },
+        true
+    );
+
+
+    /*
+     * Für den Sidebar-Reiter verfügbar machen.
+     */
+
+    window.renderMisairaMealPlan =
+        renderMisairaMealPlan;
+
+
+})();
+
+/* =========================================================
+   MISAIRA PUNKT 1
+   ESSENSPLAN – TEIL 3
+   HINZUFÜGEN + BEARBEITEN + LÖSCHEN + SPEICHERN
+========================================================= */
+
+(function () {
+
+    "use strict";
+
+    let selectedMealDate =
+        new Date();
+
+    let currentMeals = [];
+
+
+    function getFamilyId() {
+
+        return (
+            typeof state !== "undefined" &&
+            state.user &&
+            state.user.family_id
+        ) || "";
+
+    }
+
+
+    function dateString(date) {
+
+        const year =
+            date.getFullYear();
+
+        const month =
+            String(
+                date.getMonth() + 1
+            ).padStart(2, "0");
+
+        const day =
+            String(
+                date.getDate()
+            ).padStart(2, "0");
+
+        return (
+            year +
+            "-" +
+            month +
+            "-" +
+            day
+        );
+
+    }
+
+
+    function escapeMeal(value) {
+
+        return String(
+            value || ""
+        )
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+    }
+
+
+    /* =====================================================
+       TAGE AUSWÄHLEN
+    ===================================================== */
+
+    function getMonday(date) {
+
+        const result =
+            new Date(date);
+
+        const day =
+            result.getDay();
+
+        const difference =
+            day === 0
+                ? -6
+                : 1 - day;
+
+        result.setDate(
+            result.getDate() +
+            difference
+        );
+
+        result.setHours(
+            0, 0, 0, 0
+        );
+
+        return result;
+
+    }
+
+
+    function renderWeekDays() {
+
+        const container =
+            document.querySelector(
+                "[data-meal-days]"
+            );
+
+        if (!container) {
+            return;
+        }
+
+
+        const monday =
+            getMonday(
+                selectedMealDate
+            );
+
+
+        const names = [
+            "Mo",
+            "Di",
+            "Mi",
+            "Do",
+            "Fr",
+            "Sa",
+            "So"
+        ];
+
+
+        let html = "";
+
+
+        for (
+            let i = 0;
+            i < 7;
+            i++
+        ) {
+
+            const date =
+                new Date(monday);
+
+            date.setDate(
+                monday.getDate() +
+                i
+            );
+
+
+            const active =
+                dateString(date) ===
+                dateString(
+                    selectedMealDate
+                );
+
+
+            html += `
+
+                <button
+                    type="button"
+                    class="
+                        misaira-mealplan-day
+                        ${active ? "active" : ""}
+                    "
+                    data-meal-real-date="${dateString(date)}"
+                >
+
+                    <span
+                        class="
+                            misaira-mealplan-day-name
+                        "
+                    >
+                        ${names[i]}
+                    </span>
+
+                    <span
+                        class="
+                            misaira-mealplan-day-number
+                        "
+                    >
+                        ${date.getDate()}
+                    </span>
+
+                </button>
+
+            `;
+
+        }
+
+
+        container.innerHTML =
+            html;
+
+
+        container
+            .querySelectorAll(
+                "[data-meal-real-date]"
+            )
+            .forEach(
+                function (button) {
+
+                    button.onclick =
+                        function () {
+
+                            selectedMealDate =
+                                new Date(
+                                    button.dataset
+                                        .mealRealDate +
+                                    "T00:00:00"
+                                );
+
+                            renderWeekDays();
+
+                            loadMeals();
+
+                        };
+
+                }
+            );
+
+    }
+
+
+    /* =====================================================
+       WOCHENTITEL
+    ===================================================== */
+
+    function updateWeekTitle() {
+
+        const title =
+            document.querySelector(
+                "[data-meal-week-title]"
+            );
+
+        const dateTitle =
+            document.querySelector(
+                "[data-meal-date-title]"
+            );
+
+
+        if (title) {
+
+            title.textContent =
+                "Familien-Essensplan";
+
+        }
+
+
+        if (dateTitle) {
+
+            dateTitle.textContent =
+                selectedMealDate.toLocaleDateString(
+                    "de-DE",
+                    {
+                        weekday: "long",
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric"
+                    }
+                );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       ESSEN LADEN
+    ===================================================== */
+
+    async function loadMeals() {
+
+        const content =
+            document.querySelector(
+                "[data-meal-content]"
+            );
+
+
+        if (!content) {
+            return;
+        }
+
+
+        const familyId =
+            getFamilyId();
+
+
+        if (!familyId) {
+
+            content.innerHTML = `
+
+                <div
+                    class="misaira-mealplan-empty"
+                >
+
+                    <div
+                        class="
+                            misaira-mealplan-empty-icon
+                        "
+                    >
+                        🍽️
+                    </div>
+
+                    <strong>
+                        Noch keine Familie verbunden
+                    </strong>
+
+                    <span>
+                        Verbinde zuerst dein Familienkonto,
+                        damit der Essensplan gespeichert
+                        werden kann.
+                    </span>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from(
+                    "family_meals"
+                )
+                .select("*")
+                .eq(
+                    "family_id",
+                    familyId
+                )
+                .eq(
+                    "meal_date",
+                    dateString(
+                        selectedMealDate
+                    )
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: true
+                    }
+                );
+
+
+        if (error) {
+
+            console.error(
+                "MISAIRA Essensplan laden:",
+                error
+            );
+
+            content.innerHTML = `
+
+                <div
+                    class="misaira-mealplan-empty"
+                >
+
+                    <div
+                        class="
+                            misaira-mealplan-empty-icon
+                        "
+                    >
+                        ⚠️
+                    </div>
+
+                    <strong>
+                        Essensplan konnte nicht geladen werden.
+                    </strong>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        currentMeals =
+            data || [];
+
+
+        renderMeals();
+
+    }
+
+
+    /* =====================================================
+       ESSEN ANZEIGEN
+    ===================================================== */
+
+    function renderMeals() {
+
+        const content =
+            document.querySelector(
+                "[data-meal-content]"
+            );
+
+
+        if (!content) {
+            return;
+        }
+
+
+        if (!currentMeals.length) {
+
+            content.innerHTML = `
+
+                <div
+                    class="misaira-mealplan-empty"
+                >
+
+                    <div
+                        class="
+                            misaira-mealplan-empty-icon
+                        "
+                    >
+                        🍽️
+                    </div>
+
+                    <strong>
+                        Noch kein Essen geplant
+                    </strong>
+
+                    <span>
+                        Füge für diesen Tag
+                        ein Gericht hinzu.
+                    </span>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        let html = "";
+
+
+        currentMeals.forEach(
+            function (meal) {
+
+                html += `
+
+                    <article
+                        class="misaira-meal-card"
+                    >
+
+                        <div
+                            class="misaira-meal-icon"
+                        >
+                            ${escapeMeal(
+                                meal.icon
+                            )}
+                        </div>
+
+
+                        <div
+                            class="misaira-meal-info"
+                        >
+
+                            <div
+                                class="misaira-meal-name"
+                            >
+                                ${escapeMeal(
+                                    meal.title
+                                )}
+                            </div>
+
+                            ${
+                                meal.note
+                                    ? `
+                                        <div
+                                            class="misaira-meal-note"
+                                        >
+                                            ${escapeMeal(
+                                                meal.note
+                                            )}
+                                        </div>
+                                      `
+                                    : ""
+                            }
+
+                            <span
+                                class="misaira-meal-family"
+                            >
+                                👨‍👩‍👧‍👦 Familie
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="misaira-meal-actions"
+                        >
+
+                            <button
+                                type="button"
+                                class="misaira-meal-action"
+                                data-edit-meal="${meal.id}"
+                                title="Bearbeiten"
+                            >
+                                ✎
+                            </button>
+
+                            <button
+                                type="button"
+                                class="misaira-meal-action"
+                                data-delete-meal="${meal.id}"
+                                title="Löschen"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                `;
+
+            }
+        );
+
+
+        content.innerHTML =
+            html;
+
+
+        bindMealActions();
+
+    }
+
+
+    /* =====================================================
+       HINZUFÜGEN / BEARBEITEN
+    ===================================================== */
+
+    function openMealEditor(
+        meal = null
+    ) {
+
+        const old =
+            document.getElementById(
+                "misaira-meal-editor"
+            );
+
+
+        if (old) {
+            old.remove();
+        }
+
+
+        const overlay =
+            document.createElement(
+                "div"
+            );
+
+
+        overlay.id =
+            "misaira-meal-editor";
+
+
+        overlay.innerHTML = `
+
+            <div
+                class="mme-backdrop"
+                data-mme-close
+            ></div>
+
+
+            <div
+                class="mme-dialog"
+            >
+
+                <div
+                    class="mme-header"
+                >
+
+                    <div>
+
+                        <small>
+                            FAMILIEN-ESSENSPLAN
+                        </small>
+
+                        <h2>
+                            ${
+                                meal
+                                    ? "Essen bearbeiten"
+                                    : "Essen hinzufügen"
+                            }
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="mme-close"
+                        data-mme-close
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+                <label
+                    class="mme-field"
+                >
+
+                    <span>
+                        Gericht
+                    </span>
+
+                    <input
+                        id="mmeTitle"
+                        type="text"
+                        value="${escapeMeal(
+                            meal
+                                ? meal.title
+                                : ""
+                        )}"
+                        placeholder="z. B. Spaghetti Bolognese"
+                    >
+
+                </label>
+
+
+                <label
+                    class="mme-field"
+                >
+
+                    <span>
+                        Notiz
+                    </span>
+
+                    <textarea
+                        id="mmeNote"
+                        placeholder="Zutaten oder kurze Notiz"
+                    >${escapeMeal(
+                        meal
+                            ? meal.note
+                            : ""
+                    )}</textarea>
+
+                </label>
+
+
+                <label
+                    class="mme-field"
+                >
+
+                    <span>
+                        Symbol
+                    </span>
+
+                    <select
+                        id="mmeIcon"
+                    >
+
+                        <option value="🍽️">🍽️ Essen</option>
+                        <option value="🍝">🍝 Pasta</option>
+                        <option value="🍕">🍕 Pizza</option>
+                        <option value="🍔">🍔 Burger</option>
+                        <option value="🍗">🍗 Fleisch</option>
+                        <option value="🥗">🥗 Salat</option>
+                        <option value="🥘">🥘 Pfanne</option>
+                        <option value="🌮">🌮 Tacos</option>
+                        <option value="🥞">🥞 Pfannkuchen</option>
+                        <option value="🍲">🍲 Suppe</option>
+                        <option value="🥪">🥪 Sandwich</option>
+
+                    </select>
+
+                </label>
+
+
+                <div
+                    class="mme-actions"
+                >
+
+                    <button
+                        type="button"
+                        class="mme-cancel"
+                        data-mme-close
+                    >
+                        Abbrechen
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="mme-save"
+                        id="mmeSave"
+                    >
+                        SPEICHERN
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        document.body.appendChild(
+            overlay
+        );
+
+
+        const icon =
+            overlay.querySelector(
+                "#mmeIcon"
+            );
+
+
+        if (meal && meal.icon) {
+
+            icon.value =
+                meal.icon;
+
+        }
+
+
+        overlay
+            .querySelectorAll(
+                "[data-mme-close]"
+            )
+            .forEach(
+                function (button) {
+
+                    button.onclick =
+                        function () {
+
+                            overlay.remove();
+
+                        };
+
+                }
+            );
+
+
+        overlay
+            .querySelector(
+                "#mmeSave"
+            )
+            .onclick =
+            async function () {
+
+                const title =
+                    overlay
+                        .querySelector(
+                            "#mmeTitle"
+                        )
+                        .value
+                        .trim();
+
+
+                const note =
+                    overlay
+                        .querySelector(
+                            "#mmeNote"
+                        )
+                        .value
+                        .trim();
+
+
+                const selectedIcon =
+                    overlay
+                        .querySelector(
+                            "#mmeIcon"
+                        )
+                        .value;
+
+
+                if (!title) {
+
+                    alert(
+                        "Bitte ein Gericht eingeben."
+                    );
+
+                    return;
+
+                }
+
+
+                const save =
+                    overlay
+                        .querySelector(
+                            "#mmeSave"
+                        );
+
+
+                save.disabled =
+                    true;
+
+                save.textContent =
+                    "SPEICHERE...";
+
+
+                try {
+
+                    const familyId =
+                        getFamilyId();
+
+
+                    if (!familyId) {
+
+                        throw new Error(
+                            "Keine Familie verbunden."
+                        );
+
+                    }
+
+
+                    const payload = {
+
+                        family_id:
+                            familyId,
+
+                        meal_date:
+                            dateString(
+                                selectedMealDate
+                            ),
+
+                        title:
+                            title,
+
+                        note:
+                            note ||
+                            null,
+
+                        icon:
+                            selectedIcon,
+
+                        created_by:
+                            state &&
+                            state.user
+                                ? state.user.id
+                                : null,
+
+                        updated_at:
+                            new Date()
+                                .toISOString()
+
+                    };
+
+
+                    if (meal) {
+
+                        const {
+                            error
+                        } =
+                            await supabaseClient
+                                .from(
+                                    "family_meals"
+                                )
+                                .update(
+                                    payload
+                                )
+                                .eq(
+                                    "id",
+                                    meal.id
+                                );
+
+
+                        if (error) {
+                            throw error;
+                        }
+
+                    }
+                    else {
+
+                        const {
+                            error
+                        } =
+                            await supabaseClient
+                                .from(
+                                    "family_meals"
+                                )
+                                .insert(
+                                    payload
+                                );
+
+
+                        if (error) {
+                            throw error;
+                        }
+
+                    }
+
+
+                    overlay.remove();
+
+                    await loadMeals();
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "MISAIRA Essen speichern:",
+                        error
+                    );
+
+
+                    alert(
+                        "Das Essen konnte nicht gespeichert werden."
+                    );
+
+
+                    save.disabled =
+                        false;
+
+                    save.textContent =
+                        "SPEICHERN";
+
+                }
+
+            };
+
+    }
+
+
+    /* =====================================================
+       LÖSCHEN
+    ===================================================== */
+
+    async function deleteMeal(
+        id
+    ) {
+
+        if (
+            !confirm(
+                "Möchtest du dieses Essen wirklich löschen?"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from(
+                    "family_meals"
+                )
+                .delete()
+                .eq(
+                    "id",
+                    id
+                );
+
+
+        if (error) {
+
+            console.error(
+                "MISAIRA Essen löschen:",
+                error
+            );
+
+            alert(
+                "Das Essen konnte nicht gelöscht werden."
+            );
+
+            return;
+
+        }
+
+
+        await loadMeals();
+
+    }
+
+
+    /* =====================================================
+       AKTIONEN
+    ===================================================== */
+
+    function bindMealActions() {
+
+        document
+            .querySelectorAll(
+                "[data-edit-meal]"
+            )
+            .forEach(
+                function (button) {
+
+                    button.onclick =
+                        function () {
+
+                            const meal =
+                                currentMeals.find(
+                                    item =>
+                                        item.id ===
+                                        button.dataset
+                                            .editMeal
+                                );
+
+
+                            if (meal) {
+
+                                openMealEditor(
+                                    meal
+                                );
+
+                            }
+
+                        };
+
+                }
+            );
+
+
+        document
+            .querySelectorAll(
+                "[data-delete-meal]"
+            )
+            .forEach(
+                function (button) {
+
+                    button.onclick =
+                        function () {
+
+                            deleteMeal(
+                                button.dataset
+                                    .deleteMeal
+                            );
+
+                        };
+
+                }
+            );
+
+    }
+
+
+    /* =====================================================
+       NEUES ESSEN
+    ===================================================== */
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            const button =
+                event.target.closest(
+                    "[data-meal-add]"
+                );
+
+
+            if (!button) {
+                return;
+            }
+
+
+            openMealEditor();
+
+        }
+    );
+
+
+    /* =====================================================
+       WOCHEN-NAVIGATION
+    ===================================================== */
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            const previous =
+                event.target.closest(
+                    "[data-meal-prev]"
+                );
+
+
+            const next =
+                event.target.closest(
+                    "[data-meal-next]"
+                );
+
+
+            if (
+                !previous &&
+                !next
+            ) {
+
+                return;
+
+            }
+
+
+            selectedMealDate =
+                new Date(
+                    selectedMealDate
+                );
+
+
+            selectedMealDate.setDate(
+                selectedMealDate.getDate() +
+                (
+                    previous
+                        ? -7
+                        : 7
+                )
+            );
+
+
+            renderWeekDays();
+
+            updateWeekTitle();
+
+            loadMeals();
+
+        }
+    );
+
+
+    /* =====================================================
+       EDITOR STYLE
+    ===================================================== */
+
+    if (
+        !document.getElementById(
+            "misaira-meal-editor-style"
+        )
+    ) {
+
+        const style =
+            document.createElement(
+                "style"
+            );
+
+
+        style.id =
+            "misaira-meal-editor-style";
+
+
+        style.textContent = `
+
+            #misaira-meal-editor{
+                position:fixed;
+                inset:0;
+                z-index:99999;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                padding:18px;
+            }
+
+            .mme-backdrop{
+                position:absolute;
+                inset:0;
+                background:rgba(0,0,18,.84);
+                backdrop-filter:blur(8px);
+            }
+
+            .mme-dialog{
+                position:relative;
+                z-index:2;
+                width:100%;
+                max-width:500px;
+                padding:21px;
+                border:1px solid rgba(0,220,255,.2);
+                border-radius:18px;
+                background:
+                    linear-gradient(
+                        145deg,
+                        rgba(7,20,45,.98),
+                        rgba(11,3,31,.98)
+                    );
+                box-shadow:
+                    0 0 45px
+                    rgba(90,40,255,.25);
+            }
+
+            .mme-header{
+                display:flex;
+                align-items:flex-start;
+                justify-content:space-between;
+                gap:12px;
+                margin-bottom:18px;
+            }
+
+            .mme-header small{
+                color:#00eaff;
+                font-size:8px;
+                letter-spacing:.15em;
+            }
+
+            .mme-header h2{
+                margin:5px 0 0;
+                color:#fff;
+                font-size:21px;
+            }
+
+            .mme-close{
+                width:36px;
+                height:36px;
+                border:1px solid rgba(255,255,255,.12);
+                border-radius:50%;
+                color:#fff;
+                background:rgba(255,255,255,.04);
+                font-size:21px;
+            }
+
+            .mme-field{
+                display:block;
+                margin-top:12px;
+            }
+
+            .mme-field span{
+                display:block;
+                margin-bottom:6px;
+                color:#00eaff;
+                font-size:9px;
+            }
+
+            .mme-field input,
+            .mme-field textarea,
+            .mme-field select{
+                box-sizing:border-box;
+                width:100%;
+                padding:11px 12px;
+                border:1px solid rgba(0,210,255,.15);
+                border-radius:9px;
+                outline:none;
+                color:#edf4ff;
+                background:#040c1d;
+                font:inherit;
+            }
+
+            .mme-field textarea{
+                min-height:85px;
+                resize:vertical;
+            }
+
+            .mme-field input:focus,
+            .mme-field textarea:focus,
+            .mme-field select:focus{
+                border-color:#00eaff;
+                box-shadow:
+                    0 0 15px
+                    rgba(0,234,255,.08);
+            }
+
+            .mme-actions{
+                display:flex;
+                gap:9px;
+                margin-top:20px;
+            }
+
+            .mme-cancel,
+            .mme-save{
+                flex:1;
+                min-height:44px;
+                border-radius:9px;
+                cursor:pointer;
+                font:inherit;
+            }
+
+            .mme-cancel{
+                border:1px solid rgba(255,255,255,.12);
+                color:#c7d0df;
+                background:rgba(255,255,255,.04);
+            }
+
+            .mme-save{
+                border:0;
+                color:#fff;
+                background:
+                    linear-gradient(
+                        90deg,
+                        #00bff5,
+                        #5b3bff,
+                        #df20ff
+                    );
+                box-shadow:
+                    0 0 18px
+                    rgba(100,50,255,.22);
+            }
+
+        `;
+
+
+        document.head.appendChild(
+            style
+        );
+
+    }
+
+
+    /* =====================================================
+       START
+    ===================================================== */
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            const button =
+                event.target.closest(
+                    "[data-settings-page]"
+                );
+
+
+            if (!button) {
+                return;
+            }
+
+
+            if (
+                button.dataset.settingsPage !==
+                "mealplan"
+            ) {
+                return;
+            }
+
+
+            setTimeout(
+                function () {
+
+                    selectedMealDate =
+                        new Date();
+
+                    renderWeekDays();
+
+                    updateWeekTitle();
+
+                    loadMeals();
+
+                },
+                0
+            );
+
+        }
+    );
+
+
+})();
