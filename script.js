@@ -3490,12 +3490,14 @@ function renderPage(pageName) {
             renderShopping();
 
             break;
+          
 
           case "mealplan":
 
     renderMisairaMealPlan();
 
     break;
+          
 
         case "finances":
 
