@@ -16367,3 +16367,114 @@ function renderMisairaMealPlan() {
     }
 
 }
+
+/* =========================================================
+   MISAIRA FIX – ESSENSPLAN NAVIGATION
+   Ganz unten in script.js einfügen
+========================================================= */
+
+(function () {
+
+    function fixMealPlanNavigation() {
+
+        if (
+            typeof window.renderMisairaMealPlan !==
+            "function"
+        ) {
+
+            console.warn(
+                "MISAIRA FIX: renderMisairaMealPlan() noch nicht verfügbar."
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Alten Klick nicht ersetzen.
+         * Wir fangen den Essensplan-Button
+         * zusätzlich ab.
+         */
+
+        document.addEventListener(
+            "click",
+            function (event) {
+
+                const button =
+                    event.target.closest(
+                        '[data-page="mealplan"]'
+                    );
+
+
+                if (!button) {
+
+                    return;
+
+                }
+
+
+                event.preventDefault();
+
+                event.stopImmediatePropagation();
+
+
+                /*
+                 * Essensplan-Seite wird durch
+                 * die vorhandene Funktion erzeugt.
+                 */
+
+                window.renderMisairaMealPlan();
+
+
+                /*
+                 * Sidebar schließen.
+                 */
+
+                if (
+                    typeof closeSidebar ===
+                    "function"
+                ) {
+
+                    closeSidebar();
+
+                }
+
+            },
+            true
+        );
+
+
+        console.log(
+            "MISAIRA FIX: Essensplan-Navigation aktiv."
+        );
+
+    }
+
+
+    /*
+     * Warten, bis die komplette script.js
+     * geladen wurde.
+     */
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            fixMealPlanNavigation,
+            {
+                once: true
+            }
+        );
+
+    }
+    else {
+
+        fixMealPlanNavigation();
+
+    }
+
+})();
