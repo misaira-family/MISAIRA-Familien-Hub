@@ -16539,33 +16539,3 @@ function renderMisairaMealPlan() {
     );
 
 })();
-
-/* =========================================================
-   MISAIRA FIX – NUR SELBST ERSTELLTE ESSEN ANZEIGEN
-========================================================= */
-
-(function () {
-
-    const originalLoadMisairaMeals =
-        window.MISAIRA5?.loadMisairaMeals;
-
-
-    /*
-     * Wir verändern keine vorhandenen Daten.
-     * Es werden lediglich Einträge ausgeblendet,
-     * die nicht vom aktuellen Benutzer erstellt wurden.
-     */
-
-    window.MISAIRA5 =
-        window.MISAIRA5 || {};
-
-
-    window.MISAIRA5.onlyOwnMeals =
-        true;
-
-
-    console.log(
-        "MISAIRA: Essensplan zeigt nur eigene Einträge."
-    );
-
-})();
