@@ -3494,7 +3494,7 @@ function renderPage(pageName) {
 
           case "mealplan":
 
-    renderMisairaMealPlan();
+    window.renderMisairaMealPlan();
 
     break;
           
