@@ -16136,3 +16136,234 @@ if ("serviceWorker" in navigator) {
     );
 
 })();
+
+/* =========================================================
+   MISAIRA ESSENSPLAN – RENDER FUNKTION
+========================================================= */
+
+function renderMisairaMealPlan() {
+
+    const mealplanPage =
+        document.getElementById(
+            "mealplanPage"
+        );
+
+    const mealplanContent =
+        document.getElementById(
+            "mealplanContent"
+        );
+
+
+    if (!mealplanPage) {
+
+        console.error(
+            "MISAIRA: #mealplanPage wurde nicht gefunden."
+        );
+
+        return;
+
+    }
+
+
+    if (!mealplanContent) {
+
+        console.error(
+            "MISAIRA: #mealplanContent wurde nicht gefunden."
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Alle anderen Seiten ausblenden.
+     * Wir verwenden dabei die bestehende
+     * MISAIRA-Seitenstruktur.
+     */
+
+    document
+        .querySelectorAll(
+            ".app-main > .page"
+        )
+        .forEach(
+            function (page) {
+
+                page.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    /*
+     * Essensplan anzeigen.
+     */
+
+    mealplanPage.classList.add(
+        "active"
+    );
+
+
+    /*
+     * Essensplan-Inhalt.
+     */
+
+    mealplanContent.innerHTML = `
+
+        <div class="misaira-mealplan">
+
+            <div
+                class="misaira-mealplan-header"
+            >
+
+                <div
+                    class="misaira-mealplan-heading"
+                >
+
+                    <div
+                        class="misaira-mealplan-icon"
+                    >
+                        🍽️
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Essensplan
+                        </h2>
+
+                        <p>
+                            Euer Familienplan
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="misaira-mealplan-add"
+                    data-meal-add
+                >
+                    ＋ Essen hinzufügen
+                </button>
+
+            </div>
+
+
+            <div
+                class="misaira-mealplan-week"
+            >
+
+                <button
+                    type="button"
+                    class="misaira-mealplan-week-button"
+                    data-meal-prev
+                >
+                    ‹
+                </button>
+
+
+                <div
+                    class="misaira-mealplan-week-title"
+                >
+
+                    <strong>
+                        Diese Woche
+                    </strong>
+
+                    <span>
+                        Familien-Essensplan
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="misaira-mealplan-week-button"
+                    data-meal-next
+                >
+                    ›
+                </button>
+
+            </div>
+
+
+            <div
+                class="misaira-mealplan-days"
+                data-meal-days
+            >
+
+                <button
+                    type="button"
+                    class="misaira-mealplan-day active"
+                >
+                    <span
+                        class="misaira-mealplan-day-name"
+                    >
+                        HEUTE
+                    </span>
+
+                    <span
+                        class="misaira-mealplan-day-number"
+                    >
+                        🍽️
+                    </span>
+                </button>
+
+            </div>
+
+
+            <div
+                class="misaira-mealplan-content"
+                data-meal-content
+            >
+
+                <div
+                    class="misaira-mealplan-empty"
+                >
+
+                    <div
+                        class="misaira-mealplan-empty-icon"
+                    >
+                        🍽️
+                    </div>
+
+                    <strong>
+                        Euer Essensplan
+                    </strong>
+
+                    <span>
+                        Hier könnt ihr die Mahlzeiten
+                        für eure Familie planen.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    /*
+     * Falls die bereits vorhandene
+     * Ladefunktion existiert, wird sie
+     * anschließend verwendet.
+     */
+
+    if (
+        typeof loadMeals ===
+        "function"
+    ) {
+
+        loadMeals();
+
+    }
+
+}
