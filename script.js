@@ -2375,24 +2375,20 @@ async function handleForgotPassword() {
    FAMILY CODE LOGIN
 ========================================================= */
 
-async function handleFamilyCodeLogin(event) {
+async function handleFamilyCodeLogin() {
 
-    event.preventDefault();
-
+    const input =
+        document.getElementById("familyCodeInput");
 
     const code =
-        $("#familyCode")
-            ?.value
-            .trim()
-            .toUpperCase();
-
+        input
+            ? input.value.trim().toUpperCase()
+            : "";
 
     if (!code) {
 
-        showMessage(
-            "#familyCodeMessage",
-            "Bitte Familien-Code eingeben.",
-            "error"
+        alert(
+            "Bitte gib deinen Familien-Code ein."
         );
 
         return;
@@ -2400,21 +2396,272 @@ async function handleFamilyCodeLogin(event) {
     }
 
 
-    /*
-     * Für den Familien-Code brauchen wir
-     * zuerst einen normalen Supabase-Login.
-     *
-     * Der Familien-Code wird danach zur
-     * Verknüpfung weiterer Benutzer verwendet.
-     */
+    if (code.length < 6) {
 
-    showMessage(
-        "#familyCodeMessage",
-        "Die Familien-Code-Anmeldung wird mit Supabase verbunden.",
-        "info"
-    );
+        alert(
+            "Der Familien-Code muss mindestens 6 Zeichen haben."
+        );
 
-}
+        return;
+
+    }
+
+
+    try {
+
+        /* =========================================
+           AKTUELL ANGEMELDETEN BENUTZER PRÜFEN
+        ========================================== */
+
+        const {
+            data: {
+                user
+            },
+            error:
+                sessionError
+        } =
+            await supabaseClient
+                .auth
+                .getUser();
+
+
+        if (
+            sessionError ||
+            !user
+        ) {
+
+            alert(
+                "Bitte melde dich zuerst mit deinem Konto an."
+            );
+
+            return;
+
+        }
+
+
+        /* =========================================
+           FAMILIEN-CODE PRÜFEN
+        ========================================== */
+
+        const {
+            data:
+                family,
+            error:
+                joinError
+        } =
+            await supabaseClient
+                .rpc(
+                    "join_family_by_code",
+                    {
+                        p_family_code:
+                            code
+                    }
+                );
+
+
+        if (joinError) {
+
+            console.error(
+                "MISAIRA Familien-Code:",
+                joinError
+            );
+
+
+            const message =
+                String(
+                    joinError.message ||
+                    ""
+                );
+
+
+            if (
+                message.includes(
+                    "FAMILY_NOT_FOUND"
+                )
+            ) {
+
+                alert(
+                    "Dieser Familien-Code wurde nicht gefunden."
+                );
+
+            }
+            else if (
+                message.includes(
+                    "ALREADY_IN_FAMILY"
+                )
+            ) {
+
+                alert(
+                    "Du bist bereits mit einer anderen Familie verbunden."
+                );
+
+            }
+            else {
+
+                alert(
+                    "Der Familien-Code konnte nicht verarbeitet werden."
+                );
+
+            }
+
+            return;
+
+        }
+
+
+        if (!family) {
+
+            alert(
+                "Die Familie konnte nicht gefunden werden."
+            );
+
+            return;
+
+        }
+
+
+        /* =========================================
+           LOKALEN STATUS AKTUALISIEREN
+        ========================================== */
+
+        if (
+            typeof state !==
+            "undefined"
+        ) {
+
+            state.family =
+                family;
+
+            state.user =
+                state.user || {};
+
+            state.user.family_id =
+                family.id;
+
+        }
+
+
+        /* =========================================
+           FAMILIE ERFOLGREICH VERBUNDEN
+        ========================================== */
+
+        alert(
+            "Familien-Code erfolgreich bestätigt!\n\n" +
+            "Du bist jetzt mit " +
+            (
+                family.name ||
+                "deiner Familie"
+            ) +
+            " verbunden."
+        );
+
+
+        /* =========================================
+           FAMILIEN-DATEN NEU LADEN
+        ========================================== */
+
+        try {
+
+            if (
+                typeof loadFamilyData ===
+                "function"
+            ) {
+
+                await loadFamilyData();
+
+            }
+
+        }
+        catch (
+            familyLoadError
+        ) {
+
+            console.warn(
+                "MISAIRA: Familien-Daten konnten nicht sofort neu geladen werden.",
+                familyLoadError
+            );
+
+        }
+
+
+        /* =========================================
+           LOGIN / FAMILIEN-CODE-BEREICH SCHLIESSEN
+        ========================================== */
+
+        const familyCodeScreen =
+            document.getElementById(
+                "familyCodeScreen"
+            );
+
+
+        if (
+            familyCodeScreen
+        ) {
+
+            familyCodeScreen.classList.add(
+                "hidden"
+            );
+
+        }
+
+
+        const loginScreen =
+            document.getElementById(
+                "loginScreen"
+            );
+
+
+        if (
+            loginScreen
+        ) {
+
+            loginScreen.classList.add(
+                "hidden"
+            );
+
+        }
+
+
+        const app =
+            document.getElementById(
+                "app"
+            );
+
+
+        if (
+            app
+        ) {
+
+            app.classList.remove(
+                "hidden"
+            );
+
+        }
+
+
+        console.log(
+            "MISAIRA: Familie erfolgreich verbunden.",
+            family
+        );
+
+    }
+    catch (
+        error
+    ) {
+
+        console.error(
+            "MISAIRA Familien-Code Fehler:",
+            error
+        );
+
+
+        alert(
+            "Beim Verbinden mit der Familie ist ein Fehler aufgetreten."
+        );
+
+    }
+
+               }
 
 
 /* =========================================================
