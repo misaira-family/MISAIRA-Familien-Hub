@@ -11217,8 +11217,8 @@ if ("serviceWorker" in navigator) {
                             '<h2>Familienprofile</h2>' +
 
                             '<div class="misaira-familyprofiles-subtitle">' +
-                                '14. Familienprofile integrieren' +
-                            '</div>' +
+    '' +
+'</div>' +
 
                         '</div>' +
 
