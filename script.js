@@ -16478,3 +16478,64 @@ function renderMisairaMealPlan() {
     }
 
 })();
+
+/* =========================================================
+   MISAIRA FIX – ESSENSPLAN
+   Erstellt die Seite vor dem normalen showPage-Check
+========================================================= */
+
+(function () {
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            const button =
+                event.target.closest(
+                    '[data-page="mealplan"]'
+                );
+
+            if (!button) {
+                return;
+            }
+
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
+            console.log(
+                "MISAIRA: Essensplan wurde angeklickt."
+            );
+
+            if (
+                typeof window.renderMisairaMealPlan ===
+                "function"
+            ) {
+
+                window.renderMisairaMealPlan();
+
+                console.log(
+                    "MISAIRA: Essensplan geöffnet."
+                );
+
+            } else {
+
+                console.error(
+                    "MISAIRA FEHLER: renderMisairaMealPlan() nicht gefunden."
+                );
+
+            }
+
+            if (
+                typeof closeSidebar ===
+                "function"
+            ) {
+
+                closeSidebar();
+
+            }
+
+        },
+        true
+    );
+
+})();
