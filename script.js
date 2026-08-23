@@ -14709,12 +14709,10 @@ if ("serviceWorker" in navigator) {
 
 
             if (
-                button.dataset.settingsPage !==
-                "mealplan"
-            ) {
-
-                return;
-
+    button.dataset.settingsPage !== "mealplan" &&
+    button.dataset.page !== "mealplan"
+) {
+    return;
             }
 
 
