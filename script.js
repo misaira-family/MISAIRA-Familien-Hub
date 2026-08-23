@@ -9655,3 +9655,3536 @@ if ("serviceWorker" in navigator) {
 
 
 })();
+
+/* =========================================================
+   MISAIRA PUNKT 14
+   FAMILIENPROFILE – TEIL 1
+   EIGENER STYLE
+========================================================= */
+
+(function () {
+
+    "use strict";
+
+    const STYLE_ID =
+        "misaira-familyprofiles-point14-style";
+
+
+    if (
+        document.getElementById(
+            STYLE_ID
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const style =
+        document.createElement(
+            "style"
+        );
+
+
+    style.id =
+        STYLE_ID;
+
+
+    style.textContent = `
+
+/* =========================================================
+   FAMILIENPROFILE
+========================================================= */
+
+.misaira-familyprofiles {
+
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+
+    color: #edf3ff;
+
+}
+
+
+/* HEADER */
+
+.misaira-familyprofiles-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.misaira-familyprofiles-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.misaira-familyprofiles-icon {
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    color: #d59cff;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(125,35,220,.35),
+            rgba(0,190,255,.12)
+        );
+
+    border:
+        1px solid
+        rgba(170,70,255,.65);
+
+    box-shadow:
+        0 0 25px
+        rgba(150,50,255,.25);
+
+    font-size: 23px;
+
+}
+
+
+.misaira-familyprofiles-title h2 {
+
+    margin: 0;
+
+    color: #f4f7ff;
+
+    font-size: 24px;
+
+}
+
+
+.misaira-familyprofiles-subtitle {
+
+    margin-top: 3px;
+
+    color: #9ba8bd;
+
+    font-size: 10px;
+
+}
+
+
+/* ADD BUTTON */
+
+.misaira-familyprofiles-add {
+
+    min-height: 40px;
+
+    padding:
+        0 16px;
+
+    border:
+        1px solid
+        rgba(165,65,255,.65);
+
+    border-radius: 9px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(90,25,180,.65),
+            rgba(165,35,235,.70)
+        );
+
+    box-shadow:
+        0 0 20px
+        rgba(150,40,255,.18);
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+}
+
+
+/* DESCRIPTION */
+
+.misaira-familyprofiles-description {
+
+    margin:
+        0 0 18px;
+
+    color: #d3dced;
+
+    font-size: 11px;
+
+    line-height: 1.65;
+
+}
+
+
+/* PROFILE LIST */
+
+.misaira-familyprofiles-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+}
+
+
+/* PROFILE CARD */
+
+.misaira-familyprofile-card {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    min-height: 126px;
+
+    padding:
+        12px 14px 12px 18px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(80,145,205,.15);
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(5,22,43,.88),
+            rgba(2,10,27,.94)
+        );
+
+    box-shadow:
+        inset 0 0 25px
+        rgba(0,150,255,.025);
+
+}
+
+
+.misaira-familyprofile-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+
+    width: 4px;
+
+    border-radius:
+        0 5px 5px 0;
+
+    background:
+        var(--profile-accent);
+
+    box-shadow:
+        0 0 15px
+        var(--profile-accent);
+
+}
+
+
+/* AVATAR */
+
+.misaira-familyprofile-avatar {
+
+    position: relative;
+
+    width: 88px;
+    height: 88px;
+
+    flex: 0 0 88px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        3px solid
+        var(--profile-accent);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(25,50,85,.9),
+            rgba(3,10,26,.98)
+        );
+
+    box-shadow:
+        0 0 18px
+        color-mix(
+            in srgb,
+            var(--profile-accent) 65%,
+            transparent
+        );
+
+    overflow: visible;
+
+}
+
+
+.misaira-familyprofile-avatar img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+}
+
+
+.misaira-familyprofile-initial {
+
+    color: white;
+
+    font-size: 32px;
+
+    text-shadow:
+        0 0 15px
+        var(--profile-accent);
+
+}
+
+
+/* CAMERA */
+
+.misaira-familyprofile-camera {
+
+    position: absolute;
+
+    right: -7px;
+    bottom: -3px;
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(20,31,53,.96);
+
+    border:
+        1px solid
+        rgba(150,170,210,.3);
+
+    box-shadow:
+        0 0 12px
+        rgba(0,0,0,.4);
+
+    font-size: 15px;
+
+}
+
+
+/* INFORMATION */
+
+.misaira-familyprofile-info {
+
+    flex: 1;
+
+    min-width: 0;
+
+}
+
+
+.misaira-familyprofile-name {
+
+    margin-bottom: 5px;
+
+    color: #f3f6ff;
+
+    font-size: 20px;
+
+    font-weight: 600;
+
+}
+
+
+.misaira-familyprofile-role {
+
+    display: inline-block;
+
+    margin-bottom: 7px;
+
+    padding:
+        3px 8px;
+
+    border-radius: 5px;
+
+    color: var(--profile-accent);
+
+    background:
+        color-mix(
+            in srgb,
+            var(--profile-accent) 18%,
+            transparent
+        );
+
+    font-size: 9px;
+
+}
+
+
+.misaira-familyprofile-detail {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 5px;
+
+    color: #d0d9e8;
+
+    font-size: 9px;
+
+}
+
+
+.misaira-familyprofile-detail-icon {
+
+    width: 15px;
+
+    color: #aab8cd;
+
+    text-align: center;
+
+}
+
+
+/* ACTIONS */
+
+.misaira-familyprofile-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+}
+
+
+.misaira-familyprofile-edit {
+
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--profile-accent) 45%,
+            transparent
+        );
+
+    border-radius: 50%;
+
+    color: var(--profile-accent);
+
+    background:
+        rgba(2,13,30,.55);
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+}
+
+
+.misaira-familyprofile-arrow {
+
+    color: #e2e8f5;
+
+    font-size: 28px;
+
+}
+
+
+/* BOTTOM INFO */
+
+.misaira-familyprofiles-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-top: 9px;
+
+    padding:
+        12px 15px;
+
+    border:
+        1px solid
+        rgba(120,70,220,.25);
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(70,25,150,.22),
+            rgba(0,120,190,.08)
+        );
+
+}
+
+
+.misaira-familyprofiles-info-icon {
+
+    color: #d85cff;
+
+    font-size: 29px;
+
+    text-shadow:
+        0 0 15px
+        #d85cff;
+
+}
+
+
+.misaira-familyprofiles-info-text {
+
+    flex: 1;
+
+    color: #e4eaf7;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+}
+
+
+.misaira-familyprofiles-info-arrow {
+
+    color: #28dfff;
+
+    font-size: 28px;
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .misaira-familyprofiles-header {
+
+        align-items:
+            flex-start;
+
+    }
+
+
+    .misaira-familyprofiles-add {
+
+        padding:
+            0 11px;
+
+        font-size: 9px;
+
+    }
+
+
+    .misaira-familyprofile-card {
+
+        min-height: 112px;
+
+        gap: 11px;
+
+        padding:
+            10px 10px 10px 14px;
+
+    }
+
+
+    .misaira-familyprofile-avatar {
+
+        width: 72px;
+        height: 72px;
+
+        flex-basis: 72px;
+
+    }
+
+
+    .misaira-familyprofile-name {
+
+        font-size: 17px;
+
+    }
+
+
+    .misaira-familyprofile-detail {
+
+        font-size: 8px;
+
+    }
+
+
+    .misaira-familyprofile-edit {
+
+        width: 40px;
+        height: 40px;
+
+        font-size: 17px;
+
+    }
+
+
+    .misaira-familyprofile-arrow {
+
+        font-size: 23px;
+
+    }
+
+}
+
+`;
+
+    document.head.appendChild(
+        style
+    );
+
+})();
+
+/* =========================================================
+   MISAIRA PUNKT 14
+   FAMILIENPROFILE – TEIL 2
+   STRUKTUR + ANZEIGE
+========================================================= */
+
+(function () {
+
+    "use strict";
+
+
+    function renderMisairaFamilyProfiles() {
+
+        const content =
+            document.getElementById(
+                "settingsDetailContent"
+            );
+
+        const main =
+            document.getElementById(
+                "settingsMain"
+            );
+
+        const sub =
+            document.getElementById(
+                "settingsSubPage"
+            );
+
+
+        if (
+            !content ||
+            !main ||
+            !sub
+        ) {
+
+            console.error(
+                "MISAIRA: Familienprofil-Container nicht gefunden."
+            );
+
+            return;
+
+        }
+
+
+        main.classList.add(
+            "hidden"
+        );
+
+        sub.classList.remove(
+            "hidden"
+        );
+
+
+        /*
+         * Vorhandene Familienmitglieder verwenden.
+         * Falls noch keine Daten geladen wurden,
+         * werden die bereits bekannten Beispielprofile
+         * als visuelle Vorlage angezeigt.
+         */
+
+        const members =
+            Array.isArray(
+                window.familyMembers
+            )
+                ? window.familyMembers
+                : [];
+
+
+        const demoProfiles = [
+
+            {
+                name: "Mailo",
+                role: "Ich",
+                color: "#00eaff",
+                birthday: "23.03.2015",
+                age: "9 Jahre",
+                hobbies:
+                    "Fußball, Gaming, Lesen",
+                avatar: ""
+            },
+
+            {
+                name: "Saphira",
+                role: "Meine Schwester",
+                color: "#b65cff",
+                birthday: "12.07.2012",
+                age: "11 Jahre",
+                hobbies:
+                    "Reiten, Malen, Musik",
+                avatar: ""
+            },
+
+            {
+                name: "Michelle",
+                role: "Meine Schwester",
+                color: "#ff4fc8",
+                birthday: "27.01.1996",
+                age: "28 Jahre",
+                hobbies:
+                    "Fitness, Kochen, Reisen",
+                avatar: ""
+            },
+
+            {
+                name: "Michel",
+                role: "Mein Bruder",
+                color: "#587dff",
+                birthday: "15.09.1993",
+                age: "30 Jahre",
+                hobbies:
+                    "Technik, Autos, Wandern",
+                avatar: ""
+            },
+
+            {
+                name: "Mama",
+                role: "Unsere Mama",
+                color: "#e74fc3",
+                birthday: "04.04.1978",
+                age: "46 Jahre",
+                hobbies:
+                    "Garten, Backen, Familie",
+                avatar: ""
+            },
+
+            {
+                name: "Papa",
+                role: "Unser Papa",
+                color: "#16d9d9",
+                birthday: "10.11.1976",
+                age: "47 Jahre",
+                hobbies:
+                    "Sport, Grillen, Heimwerken",
+                avatar: ""
+            }
+
+        ];
+
+
+        /*
+         * Wenn echte Mitglieder vorhanden sind,
+         * diese zuerst verwenden.
+         */
+
+        const profiles =
+            members.length
+                ? members.map(
+                    function (member, index) {
+
+                        return {
+
+                            name:
+                                member.name ||
+                                "Familienmitglied",
+
+                            role:
+                                member.role ||
+                                "Familienmitglied",
+
+                            color:
+                                member.color ||
+                                demoProfiles[
+                                    index %
+                                    demoProfiles.length
+                                ].color,
+
+                            birthday:
+                                member.birthday ||
+                                "",
+
+                            age:
+                                member.age ||
+                                "",
+
+                            hobbies:
+                                member.hobbies ||
+                                "",
+
+                            avatar:
+                                member.avatar_url ||
+                                ""
+
+                        };
+
+                    }
+                )
+                : demoProfiles;
+
+
+        const version =
+            typeof MISAIRA_CONFIG !==
+            "undefined"
+                ? MISAIRA_CONFIG.version
+                : "5.0.0";
+
+
+        content.innerHTML = `
+
+<div class="misaira-familyprofiles">
+
+
+    <!-- =========================================
+         KOPF
+    ========================================== -->
+
+    <div
+        class="
+            misaira-familyprofiles-header
+        "
+    >
+
+        <div
+            class="
+                misaira-familyprofiles-title
+            "
+        >
+
+            <div
+                class="
+                    misaira-familyprofiles-icon
+                "
+            >
+                👨‍👩‍👧‍👦
+            </div>
+
+            <div>
+
+                <h2>
+                    Familienprofile
+                </h2>
+
+                <div
+                    class="
+                        misaira-familyprofiles-subtitle
+                    "
+                >
+                    14. Familienprofile integrieren
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="
+                misaira-familyprofiles-add
+            "
+            data-familyprofile-add
+        >
+            ＋ Profil hinzufügen
+        </button>
+
+    </div>
+
+
+    <!-- =========================================
+         BESCHREIBUNG
+    ========================================== -->
+
+    <p
+        class="
+            misaira-familyprofiles-description
+        "
+    >
+        Verwalte die Profile deiner Familienmitglieder.<br>
+        Jedes Profil hat eigene Informationen, Farben
+        und Einstellungen.
+    </p>
+
+
+    <!-- =========================================
+         PROFILE
+    ========================================== -->
+
+    <div
+        class="
+            misaira-familyprofiles-list
+        "
+    >
+
+        ${profiles.map(
+            function (profile, index) {
+
+                const safeName =
+                    String(
+                        profile.name ||
+                        "Familienmitglied"
+                    )
+                    .replace(
+                        /"/g,
+                        "&quot;"
+                    );
+
+
+                const initial =
+                    safeName
+                        .charAt(0)
+                        .toUpperCase();
+
+
+                return `
+
+                <article
+                    class="
+                        misaira-familyprofile-card
+                    "
+                    style="
+                        --profile-accent:
+                        ${profile.color};
+                    "
+                    data-family-profile-index="${index}"
+                >
+
+
+                    <!-- PROFILBILD -->
+
+                    <div
+                        class="
+                            misaira-familyprofile-avatar
+                        "
+                    >
+
+                        ${
+                            profile.avatar
+                                ? `
+                                <img
+                                    src="${profile.avatar}"
+                                    alt="${safeName}"
+                                >
+                                `
+                                : `
+                                <span
+                                    class="
+                                        misaira-familyprofile-initial
+                                    "
+                                >
+                                    ${initial}
+                                </span>
+                                `
+                        }
+
+
+                        <button
+                            type="button"
+                            class="
+                                misaira-familyprofile-camera
+                            "
+                            title="Profilbild ändern"
+                            data-profile-camera="${index}"
+                        >
+                            📷
+                        </button>
+
+                    </div>
+
+
+                    <!-- INFORMATIONEN -->
+
+                    <div
+                        class="
+                            misaira-familyprofile-info
+                        "
+                    >
+
+                        <div
+                            class="
+                                misaira-familyprofile-name
+                            "
+                        >
+                            ${safeName}
+                        </div>
+
+
+                        <div
+                            class="
+                                misaira-familyprofile-role
+                            "
+                        >
+                            ${profile.role}
+                        </div>
+
+
+                        ${
+                            profile.birthday
+                                ? `
+                                <div
+                                    class="
+                                        misaira-familyprofile-detail
+                                    "
+                                >
+
+                                    <span
+                                        class="
+                                            misaira-familyprofile-detail-icon
+                                        "
+                                    >
+                                        ▣
+                                    </span>
+
+                                    <span>
+                                        ${profile.birthday}
+                                        ${
+                                            profile.age
+                                                ? ` (${profile.age})`
+                                                : ""
+                                        }
+                                    </span>
+
+                                </div>
+                                `
+                                : ""
+                        }
+
+
+                        ${
+                            profile.color
+                                ? `
+                                <div
+                                    class="
+                                        misaira-familyprofile-detail
+                                    "
+                                >
+
+                                    <span
+                                        class="
+                                            misaira-familyprofile-detail-icon
+                                        "
+                                    >
+                                        ◉
+                                    </span>
+
+                                    <span>
+                                        Farbe:
+                                        ${profile.color}
+                                    </span>
+
+                                </div>
+                                `
+                                : ""
+                        }
+
+
+                        ${
+                            profile.hobbies
+                                ? `
+                                <div
+                                    class="
+                                        misaira-familyprofile-detail
+                                    "
+                                >
+
+                                    <span
+                                        class="
+                                            misaira-familyprofile-detail-icon
+                                        "
+                                    >
+                                        ☆
+                                    </span>
+
+                                    <span>
+                                        Hobbys:
+                                        ${profile.hobbies}
+                                    </span>
+
+                                </div>
+                                `
+                                : ""
+                        }
+
+                    </div>
+
+
+                    <!-- AKTIONEN -->
+
+                    <div
+                        class="
+                            misaira-familyprofile-actions
+                        "
+                    >
+
+                        <button
+                            type="button"
+                            class="
+                                misaira-familyprofile-edit
+                            "
+                            title="Profil bearbeiten"
+                            data-profile-edit="${index}"
+                        >
+                            ✎
+                        </button>
+
+                        <span
+                            class="
+                                misaira-familyprofile-arrow
+                            "
+                        >
+                            ›
+                        </span>
+
+                    </div>
+
+                </article>
+
+                `;
+
+            }
+        ).join("")}
+
+    </div>
+
+
+    <!-- =========================================
+         HINWEIS
+    ========================================== -->
+
+    <div
+        class="
+            misaira-familyprofiles-info
+        "
+    >
+
+        <div
+            class="
+                misaira-familyprofiles-info-icon
+            "
+        >
+            ♡
+        </div>
+
+        <div
+            class="
+                misaira-familyprofiles-info-text
+            "
+        >
+
+            <strong>
+                Jedes Familienprofil kann individuell
+                angepasst werden.
+            </strong>
+
+            <br>
+
+            Profilbild, Farbe, Geburtstag,
+            Hobbys und mehr.
+
+        </div>
+
+        <div
+            class="
+                misaira-familyprofiles-info-arrow
+            "
+        >
+            ›
+        </div>
+
+    </div>
+
+</div>
+
+`;
+
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+
+        /*
+         * Profil hinzufügen
+         */
+
+        const addButton =
+            content.querySelector(
+                "[data-familyprofile-add]"
+            );
+
+
+        if (addButton) {
+
+            addButton.addEventListener(
+                "click",
+                function () {
+
+                    alert(
+                        "Profil hinzufügen wird als nächster Schritt mit der Familien-Datenbank verbunden."
+                    );
+
+                }
+            );
+
+        }
+
+
+        /*
+         * Bearbeiten
+         */
+
+        content
+            .querySelectorAll(
+                "[data-profile-edit]"
+            )
+            .forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const index =
+                                Number(
+                                    button.dataset
+                                        .profileEdit
+                                );
+
+
+                            const profile =
+                                profiles[index];
+
+
+                            alert(
+                                "Profil bearbeiten: " +
+                                profile.name
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+        /*
+         * Profilbild
+         */
+
+        content
+            .querySelectorAll(
+                "[data-profile-camera]"
+            )
+            .forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const index =
+                                Number(
+                                    button.dataset
+                                        .profileCamera
+                                );
+
+
+                            const profile =
+                                profiles[index];
+
+
+                            alert(
+                                "Profilbild für " +
+                                profile.name +
+                                " ändern."
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+    }
+
+
+    /* =====================================================
+       FAMILIENPROFILE ÖFFNEN
+    ===================================================== */
+
+    document.addEventListener(
+
+        "click",
+
+        function (event) {
+
+            const button =
+                event.target.closest(
+                    "[data-settings-page]"
+                );
+
+
+            if (!button) {
+
+                return;
+
+            }
+
+
+            if (
+                button.dataset.settingsPage !==
+                "family"
+            ) {
+
+                return;
+
+            }
+
+
+            event.preventDefault();
+
+            event.stopImmediatePropagation();
+
+
+            renderMisairaFamilyProfiles();
+
+        },
+
+        true
+
+    );
+
+
+})();
+
+/* =========================================================
+   MISAIRA PUNKT 14
+   FAMILIENPROFILE – TEIL 2
+========================================================= */
+
+(function () {
+
+    "use strict";
+
+    function renderMisairaFamilyProfiles() {
+
+        const content = document.getElementById(
+            "settingsDetailContent"
+        );
+
+        const main = document.getElementById(
+            "settingsMain"
+        );
+
+        const sub = document.getElementById(
+            "settingsSubPage"
+        );
+
+        if (!content || !main || !sub) {
+            console.error(
+                "MISAIRA: Familienprofil-Container nicht gefunden."
+            );
+            return;
+        }
+
+        main.classList.add("hidden");
+        sub.classList.remove("hidden");
+
+        const profiles = [
+            {
+                name: "Mailo",
+                role: "Ich",
+                birthday: "23.03.2015",
+                age: "9 Jahre",
+                color: "Cyan",
+                hobbies: "Fußball, Gaming, Lesen",
+                accent: "#00eaff"
+            },
+            {
+                name: "Saphira",
+                role: "Meine Schwester",
+                birthday: "12.07.2012",
+                age: "11 Jahre",
+                color: "Lila",
+                hobbies: "Reiten, Malen, Musik",
+                accent: "#b65cff"
+            },
+            {
+                name: "Michelle",
+                role: "Meine Schwester",
+                birthday: "27.01.1996",
+                age: "28 Jahre",
+                color: "Pink",
+                hobbies: "Fitness, Kochen, Reisen",
+                accent: "#ff4fc8"
+            },
+            {
+                name: "Michel",
+                role: "Mein Bruder",
+                birthday: "15.09.1993",
+                age: "30 Jahre",
+                color: "Blau",
+                hobbies: "Technik, Autos, Wandern",
+                accent: "#587dff"
+            },
+            {
+                name: "Mama",
+                role: "Unsere Mama",
+                birthday: "04.04.1978",
+                age: "46 Jahre",
+                color: "Magenta",
+                hobbies: "Garten, Backen, Familie",
+                accent: "#e74fc3"
+            },
+            {
+                name: "Papa",
+                role: "Unser Papa",
+                birthday: "10.11.1976",
+                age: "47 Jahre",
+                color: "Türkis",
+                hobbies: "Sport, Grillen, Heimwerken",
+                accent: "#16d9d9"
+            }
+        ];
+
+        let cards = "";
+
+        profiles.forEach(function (profile, index) {
+
+            cards +=
+                '<article class="misaira-familyprofile-card" ' +
+                'style="--profile-accent:' +
+                profile.accent +
+                ';">' +
+
+                    '<div class="misaira-familyprofile-avatar">' +
+
+                        '<span class="misaira-familyprofile-initial">' +
+                            profile.name.charAt(0) +
+                        '</span>' +
+
+                        '<button type="button" ' +
+                            'class="misaira-familyprofile-camera" ' +
+                            'data-profile-camera="' +
+                            index +
+                            '">' +
+                            '📷' +
+                        '</button>' +
+
+                    '</div>' +
+
+                    '<div class="misaira-familyprofile-info">' +
+
+                        '<div class="misaira-familyprofile-name">' +
+                            profile.name +
+                        '</div>' +
+
+                        '<div class="misaira-familyprofile-role">' +
+                            profile.role +
+                        '</div>' +
+
+                        '<div class="misaira-familyprofile-detail">' +
+                            '<span class="misaira-familyprofile-detail-icon">▣</span>' +
+                            '<span>' +
+                                profile.birthday +
+                                " (" +
+                                profile.age +
+                                ")" +
+                            '</span>' +
+                        '</div>' +
+
+                        '<div class="misaira-familyprofile-detail">' +
+                            '<span class="misaira-familyprofile-detail-icon">◉</span>' +
+                            '<span>Farbe: ' +
+                                profile.color +
+                            '</span>' +
+                        '</div>' +
+
+                        '<div class="misaira-familyprofile-detail">' +
+                            '<span class="misaira-familyprofile-detail-icon">☆</span>' +
+                            '<span>Hobbys: ' +
+                                profile.hobbies +
+                            '</span>' +
+                        '</div>' +
+
+                    '</div>' +
+
+                    '<div class="misaira-familyprofile-actions">' +
+
+                        '<button type="button" ' +
+                            'class="misaira-familyprofile-edit" ' +
+                            'data-profile-edit="' +
+                            index +
+                            '">' +
+                            '✎' +
+                        '</button>' +
+
+                        '<span class="misaira-familyprofile-arrow">›</span>' +
+
+                    '</div>' +
+
+                '</article>';
+
+        });
+
+
+        content.innerHTML =
+            '<div class="misaira-familyprofiles">' +
+
+                '<div class="misaira-familyprofiles-header">' +
+
+                    '<div class="misaira-familyprofiles-title">' +
+
+                        '<div class="misaira-familyprofiles-icon">' +
+                            '👨‍👩‍👧‍👦' +
+                        '</div>' +
+
+                        '<div>' +
+
+                            '<h2>Familienprofile</h2>' +
+
+                            '<div class="misaira-familyprofiles-subtitle">' +
+                                '14. Familienprofile integrieren' +
+                            '</div>' +
+
+                        '</div>' +
+
+                    '</div>' +
+
+                    '<button type="button" ' +
+                        'class="misaira-familyprofiles-add" ' +
+                        'data-familyprofile-add>' +
+                        '＋ Profil hinzufügen' +
+                    '</button>' +
+
+                '</div>' +
+
+                '<p class="misaira-familyprofiles-description">' +
+                    'Verwalte die Profile deiner Familienmitglieder.<br>' +
+                    'Jedes Profil hat eigene Informationen, Farben und Einstellungen.' +
+                '</p>' +
+
+                '<div class="misaira-familyprofiles-list">' +
+                    cards +
+                '</div>' +
+
+                '<div class="misaira-familyprofiles-info">' +
+
+                    '<div class="misaira-familyprofiles-info-icon">' +
+                        '♡' +
+                    '</div>' +
+
+                    '<div class="misaira-familyprofiles-info-text">' +
+                        '<strong>' +
+                            'Jedes Familienprofil kann individuell angepasst werden.' +
+                        '</strong>' +
+                        '<br>' +
+                        'Profilbild, Farbe, Geburtstag, Hobbys und mehr.' +
+                    '</div>' +
+
+                    '<div class="misaira-familyprofiles-info-arrow">' +
+                        '›' +
+                    '</div>' +
+
+                '</div>' +
+
+            '</div>';
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+
+        content
+            .querySelectorAll("[data-profile-edit]")
+            .forEach(function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const index =
+                            Number(
+                                button.dataset.profileEdit
+                            );
+
+                        alert(
+                            "Profil bearbeiten: " +
+                            profiles[index].name
+                        );
+
+                    }
+                );
+
+            });
+
+
+        content
+            .querySelectorAll("[data-profile-camera]")
+            .forEach(function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const index =
+                            Number(
+                                button.dataset.profileCamera
+                            );
+
+                        alert(
+                            "Profilbild für " +
+                            profiles[index].name +
+                            " ändern."
+                        );
+
+                    }
+                );
+
+            });
+
+
+        const addButton =
+            content.querySelector(
+                "[data-familyprofile-add]"
+            );
+
+        if (addButton) {
+
+            addButton.addEventListener(
+                "click",
+                function () {
+
+                    alert(
+                        "Profil hinzufügen"
+                    );
+
+                }
+            );
+
+        }
+
+    }
+
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            const button =
+                event.target.closest(
+                    "[data-settings-page]"
+                );
+
+            if (!button) {
+                return;
+            }
+
+            if (
+                button.dataset.settingsPage !==
+                "family"
+            ) {
+                return;
+            }
+
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
+            renderMisairaFamilyProfiles();
+
+        },
+        true
+    );
+
+})();
+
+/* =========================================================
+   MISAIRA PUNKT 14
+   FAMILIENPROFILE – TEIL 3
+   BEARBEITEN + HINZUFÜGEN + DAUERHAFT SPEICHERN
+========================================================= */
+
+(function () {
+
+    "use strict";
+
+
+    const BUCKET =
+        "family-profile-images";
+
+
+    let observerBusy = false;
+
+
+    /* =====================================================
+       HILFSFUNKTIONEN
+    ===================================================== */
+
+    function familyId() {
+
+        return (
+            state &&
+            state.user &&
+            state.user.family_id
+        ) || "";
+
+    }
+
+
+    function escape(value) {
+
+        if (
+            typeof escapeHTML ===
+            "function"
+        ) {
+
+            return escapeHTML(
+                value || ""
+            );
+
+        }
+
+        return String(
+            value || ""
+        )
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+    }
+
+
+    function calculateAge(
+        date
+    ) {
+
+        if (!date) {
+
+            return "";
+
+        }
+
+        const birth =
+            new Date(
+                date +
+                "T00:00:00"
+            );
+
+        if (
+            Number.isNaN(
+                birth.getTime()
+            )
+        ) {
+
+            return "";
+
+        }
+
+        const now =
+            new Date();
+
+        let age =
+            now.getFullYear() -
+            birth.getFullYear();
+
+        const month =
+            now.getMonth() -
+            birth.getMonth();
+
+        if (
+            month < 0 ||
+            (
+                month === 0 &&
+                now.getDate() <
+                birth.getDate()
+            )
+        ) {
+
+            age--;
+
+        }
+
+        return age >= 0
+            ? age + " Jahre"
+            : "";
+
+    }
+
+
+    function formatBirthday(
+        date
+    ) {
+
+        if (!date) {
+
+            return "";
+
+        }
+
+        const parts =
+            date.split("-");
+
+        if (
+            parts.length !== 3
+        ) {
+
+            return date;
+
+        }
+
+        return (
+            parts[2] +
+            "." +
+            parts[1] +
+            "." +
+            parts[0]
+        );
+
+    }
+
+
+    /* =====================================================
+       DEMO-PROFILE EINMALIG ANLEGEN
+       Damit die sechs Profile aus unserer Vorlage
+       dauerhaft in Supabase vorhanden sind.
+    ===================================================== */
+
+    async function ensureFamilyProfiles() {
+
+        const id =
+            familyId();
+
+        if (!id) {
+
+            return [];
+
+        }
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from(
+                    "family_profiles"
+                )
+                .select("*")
+                .eq(
+                    "family_id",
+                    id
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: true
+                    }
+                );
+
+
+        if (error) {
+
+            console.error(
+                "MISAIRA Familienprofile laden:",
+                error
+            );
+
+            return [];
+
+        }
+
+
+        if (
+            data &&
+            data.length
+        ) {
+
+            return data;
+
+        }
+
+
+        const defaults = [
+
+            {
+                family_id: id,
+                display_name: "Mailo",
+                family_role: "Ich",
+                birth_date: "2015-03-23",
+                favorite_color: "Cyan",
+                hobbies:
+                    "Fußball, Gaming, Lesen"
+            },
+
+            {
+                family_id: id,
+                display_name: "Saphira",
+                family_role: "Meine Schwester",
+                birth_date: "2012-07-12",
+                favorite_color: "Lila",
+                hobbies:
+                    "Reiten, Malen, Musik"
+            },
+
+            {
+                family_id: id,
+                display_name: "Michelle",
+                family_role: "Meine Schwester",
+                birth_date: "1996-01-27",
+                favorite_color: "Pink",
+                hobbies:
+                    "Fitness, Kochen, Reisen"
+            },
+
+            {
+                family_id: id,
+                display_name: "Michel",
+                family_role: "Mein Bruder",
+                birth_date: "1993-09-15",
+                favorite_color: "Blau",
+                hobbies:
+                    "Technik, Autos, Wandern"
+            },
+
+            {
+                family_id: id,
+                display_name: "Mama",
+                family_role: "Unsere Mama",
+                birth_date: "1978-04-04",
+                favorite_color: "Magenta",
+                hobbies:
+                    "Garten, Backen, Familie"
+            },
+
+            {
+                family_id: id,
+                display_name: "Papa",
+                family_role: "Unser Papa",
+                birth_date: "1976-11-10",
+                favorite_color: "Türkis",
+                hobbies:
+                    "Sport, Grillen, Heimwerken"
+            }
+
+        ];
+
+
+        const {
+            data: created,
+            error: createError
+        } =
+            await supabaseClient
+                .from(
+                    "family_profiles"
+                )
+                .insert(
+                    defaults
+                )
+                .select();
+
+
+        if (createError) {
+
+            console.error(
+                "MISAIRA Familienprofile erstellen:",
+                createError
+            );
+
+            return [];
+
+        }
+
+
+        return created || [];
+
+    }
+
+
+    /* =====================================================
+       PROFILBILD URL
+    ===================================================== */
+
+    async function getAvatarUrl(
+        path
+    ) {
+
+        if (!path) {
+
+            return "";
+
+        }
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .storage
+                .from(
+                    BUCKET
+                )
+                .createSignedUrl(
+                    path,
+                    86400
+                );
+
+
+        if (error) {
+
+            console.error(
+                "MISAIRA Profilbild URL:",
+                error
+            );
+
+            return "";
+
+        }
+
+
+        return (
+            data &&
+            data.signedUrl
+        ) || "";
+
+    }
+
+
+    /* =====================================================
+       AKZENTFARBE
+    ===================================================== */
+
+    function getAccent(
+        color
+    ) {
+
+        const colors = {
+
+            Cyan:
+                "#00eaff",
+
+            Lila:
+                "#b65cff",
+
+            Pink:
+                "#ff4fc8",
+
+            Blau:
+                "#587dff",
+
+            Magenta:
+                "#e74fc3",
+
+            Türkis:
+                "#16d9d9"
+
+        };
+
+
+        return (
+            colors[color] ||
+            "#00eaff"
+        );
+
+    }
+
+
+    /* =====================================================
+       PROFILBEARBEITUNG
+    ===================================================== */
+
+    function openFamilyProfileEditor(
+        profile
+    ) {
+
+        closeFamilyProfileEditor();
+
+
+        const overlay =
+            document.createElement(
+                "div"
+            );
+
+
+        overlay.id =
+            "misaira-family-profile-editor";
+
+
+        overlay.innerHTML = `
+
+            <div
+                class="mfpe-backdrop"
+                data-mfpe-close
+            ></div>
+
+            <div
+                class="mfpe-dialog"
+                role="dialog"
+                aria-modal="true"
+            >
+
+                <div
+                    class="mfpe-header"
+                >
+
+                    <div>
+
+                        <div
+                            class="mfpe-label"
+                        >
+                            FAMILIENPROFIL
+                        </div>
+
+                        <h2>
+                            ${
+                                profile.id
+                                    ? "Profil bearbeiten"
+                                    : "Profil hinzufügen"
+                            }
+                        </h2>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="mfpe-close"
+                        data-mfpe-close
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="mfpe-avatar-preview"
+                    id="mfpeAvatarPreview"
+                >
+
+                    ${
+                        profile.avatarPreview
+                            ? `
+                                <img
+                                    src="${escape(
+                                        profile.avatarPreview
+                                    )}"
+                                    alt=""
+                                >
+                              `
+                            : `
+                                <span>
+                                    ${
+                                        escape(
+                                            (
+                                                profile.display_name ||
+                                                "F"
+                                            ).charAt(0)
+                                        )
+                                    }
+                                </span>
+                              `
+                    }
+
+                </div>
+
+
+                <label
+                    class="mfpe-upload"
+                >
+
+                    📷 Profilbild auswählen
+
+                    <input
+                        type="file"
+                        id="mfpeAvatar"
+                        accept="image/jpeg,image/png,image/webp,image/gif"
+                        hidden
+                    >
+
+                </label>
+
+
+                <label
+                    class="mfpe-field"
+                >
+
+                    <span>
+                        Name
+                    </span>
+
+                    <input
+                        id="mfpeName"
+                        type="text"
+                        value="${escape(
+                            profile.display_name
+                        )}"
+                        placeholder="Name"
+                    >
+
+                </label>
+
+
+                <label
+                    class="mfpe-field"
+                >
+
+                    <span>
+                        Familienrolle
+                    </span>
+
+                    <input
+                        id="mfpeRole"
+                        type="text"
+                        value="${escape(
+                            profile.family_role
+                        )}"
+                        placeholder="z. B. Mama, Papa, Ich"
+                    >
+
+                </label>
+
+
+                <label
+                    class="mfpe-field"
+                >
+
+                    <span>
+                        Geburtstag
+                    </span>
+
+                    <input
+                        id="mfpeBirthday"
+                        type="date"
+                        value="${escape(
+                            profile.birth_date ||
+                            ""
+                        )}"
+                    >
+
+                </label>
+
+
+                <label
+                    class="mfpe-field"
+                >
+
+                    <span>
+                        Farbe
+                    </span>
+
+                    <select
+                        id="mfpeColor"
+                    >
+
+                        <option
+                            value="Cyan"
+                            ${
+                                profile.favorite_color ===
+                                "Cyan"
+                                    ? "selected"
+                                    : ""
+                            }
+                        >
+                            Cyan
+                        </option>
+
+                        <option
+                            value="Lila"
+                            ${
+                                profile.favorite_color ===
+                                "Lila"
+                                    ? "selected"
+                                    : ""
+                            }
+                        >
+                            Lila
+                        </option>
+
+                        <option
+                            value="Pink"
+                            ${
+                                profile.favorite_color ===
+                                "Pink"
+                                    ? "selected"
+                                    : ""
+                            }
+                        >
+                            Pink
+                        </option>
+
+                        <option
+                            value="Blau"
+                            ${
+                                profile.favorite_color ===
+                                "Blau"
+                                    ? "selected"
+                                    : ""
+                            }
+                        >
+                            Blau
+                        </option>
+
+                        <option
+                            value="Magenta"
+                            ${
+                                profile.favorite_color ===
+                                "Magenta"
+                                    ? "selected"
+                                    : ""
+                            }
+                        >
+                            Magenta
+                        </option>
+
+                        <option
+                            value="Türkis"
+                            ${
+                                profile.favorite_color ===
+                                "Türkis"
+                                    ? "selected"
+                                    : ""
+                            }
+                        >
+                            Türkis
+                        </option>
+
+                    </select>
+
+                </label>
+
+
+                <label
+                    class="mfpe-field"
+                >
+
+                    <span>
+                        Hobbys
+                    </span>
+
+                    <input
+                        id="mfpeHobbies"
+                        type="text"
+                        value="${escape(
+                            profile.hobbies
+                        )}"
+                        placeholder="z. B. Fußball, Gaming, Lesen"
+                    >
+
+                </label>
+
+
+                <div
+                    class="mfpe-actions"
+                >
+
+                    <button
+                        type="button"
+                        class="mfpe-cancel"
+                        data-mfpe-close
+                    >
+                        Abbrechen
+                    </button>
+
+                    <button
+                        type="button"
+                        class="mfpe-save"
+                        id="mfpeSave"
+                    >
+                        PROFIL SPEICHERN
+                    </button>
+
+                </div>
+
+            </div>
+        `;
+
+
+        document.body.appendChild(
+            overlay
+        );
+
+
+        const fileInput =
+            overlay.querySelector(
+                "#mfpeAvatar"
+            );
+
+
+        let selectedFile =
+            null;
+
+
+        fileInput.addEventListener(
+            "change",
+            function () {
+
+                selectedFile =
+                    fileInput.files &&
+                    fileInput.files[0]
+                        ? fileInput.files[0]
+                        : null;
+
+
+                if (!selectedFile) {
+
+                    return;
+
+                }
+
+
+                const reader =
+                    new FileReader();
+
+
+                reader.onload =
+                    function () {
+
+                        const preview =
+                            overlay.querySelector(
+                                "#mfpeAvatarPreview"
+                            );
+
+
+                        preview.innerHTML =
+                            `
+                                <img
+                                    src="${reader.result}"
+                                    alt=""
+                                >
+                            `;
+
+                    };
+
+
+                reader.readAsDataURL(
+                    selectedFile
+                );
+
+            }
+        );
+
+
+        overlay
+            .querySelectorAll(
+                "[data-mfpe-close]"
+            )
+            .forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        closeFamilyProfileEditor
+                    );
+
+                }
+            );
+
+
+        overlay
+            .querySelector(
+                "#mfpeSave"
+            )
+            .addEventListener(
+                "click",
+                async function () {
+
+                    const saveButton =
+                        overlay.querySelector(
+                            "#mfpeSave"
+                        );
+
+
+                    const name =
+                        overlay
+                            .querySelector(
+                                "#mfpeName"
+                            )
+                            .value
+                            .trim();
+
+
+                    const role =
+                        overlay
+                            .querySelector(
+                                "#mfpeRole"
+                            )
+                            .value
+                            .trim();
+
+
+                    const birthday =
+                        overlay
+                            .querySelector(
+                                "#mfpeBirthday"
+                            )
+                            .value;
+
+
+                    const color =
+                        overlay
+                            .querySelector(
+                                "#mfpeColor"
+                            )
+                            .value;
+
+
+                    const hobbies =
+                        overlay
+                            .querySelector(
+                                "#mfpeHobbies"
+                            )
+                            .value
+                            .trim();
+
+
+                    if (!name) {
+
+                        alert(
+                            "Bitte einen Namen eingeben."
+                        );
+
+                        return;
+
+                    }
+
+
+                    saveButton.disabled =
+                        true;
+
+                    saveButton.textContent =
+                        "SPEICHERE...";
+
+
+                    try {
+
+                        let record = {
+
+                            ...profile,
+
+                            display_name:
+                                name,
+
+                            family_role:
+                                role ||
+                                "Familienmitglied",
+
+                            birth_date:
+                                birthday ||
+                                null,
+
+                            favorite_color:
+                                color,
+
+                            hobbies:
+                                hobbies ||
+                                null,
+
+                            updated_at:
+                                new Date()
+                                    .toISOString()
+
+                        };
+
+
+                        /*
+                         * Neues Profil
+                         */
+
+                        if (!record.id) {
+
+                            const {
+                                data,
+                                error
+                            } =
+                                await supabaseClient
+                                    .from(
+                                        "family_profiles"
+                                    )
+                                    .insert({
+
+                                        family_id:
+                                            familyId(),
+
+                                        display_name:
+                                            record.display_name,
+
+                                        family_role:
+                                            record.family_role,
+
+                                        birth_date:
+                                            record.birth_date,
+
+                                        favorite_color:
+                                            record.favorite_color,
+
+                                        hobbies:
+                                            record.hobbies
+
+                                    })
+                                    .select()
+                                    .single();
+
+
+                            if (error) {
+
+                                throw error;
+
+                            }
+
+
+                            record =
+                                data;
+
+                        }
+
+
+                        /*
+                         * Profilbild hochladen
+                         */
+
+                        if (
+                            selectedFile
+                        ) {
+
+                            const extension =
+                                (
+                                    selectedFile.name
+                                        .split(".")
+                                        .pop() ||
+                                    "jpg"
+                                )
+                                .toLowerCase();
+
+
+                            const path =
+                                familyId() +
+                                "/" +
+                                record.id +
+                                "." +
+                                extension;
+
+
+                            const {
+                                error:
+                                    uploadError
+                            } =
+                                await supabaseClient
+                                    .storage
+                                    .from(
+                                        BUCKET
+                                    )
+                                    .upload(
+                                        path,
+                                        selectedFile,
+                                        {
+                                            cacheControl:
+                                                "3600",
+                                            upsert:
+                                                true,
+                                            contentType:
+                                                selectedFile.type
+                                        }
+                                    );
+
+
+                            if (
+                                uploadError
+                            ) {
+
+                                throw uploadError;
+
+                            }
+
+
+                            record.avatar_path =
+                                path;
+
+                        }
+
+
+                        /*
+                         * Profil dauerhaft speichern
+                         */
+
+                        const {
+                            error:
+                                updateError
+                        } =
+                            await supabaseClient
+                                .from(
+                                    "family_profiles"
+                                )
+                                .update({
+
+                                    display_name:
+                                        record.display_name,
+
+                                    family_role:
+                                        record.family_role,
+
+                                    birth_date:
+                                        record.birth_date,
+
+                                    favorite_color:
+                                        record.favorite_color,
+
+                                    hobbies:
+                                        record.hobbies,
+
+                                    avatar_path:
+                                        record.avatar_path ||
+                                        null,
+
+                                    updated_at:
+                                        new Date()
+                                            .toISOString()
+
+                                })
+                                .eq(
+                                    "id",
+                                    record.id
+                                );
+
+
+                        if (
+                            updateError
+                        ) {
+
+                            throw updateError;
+
+                        }
+
+
+                        closeFamilyProfileEditor();
+
+
+                        await renderSavedFamilyProfiles();
+
+                    }
+                    catch (error) {
+
+                        console.error(
+                            "MISAIRA Profil speichern:",
+                            error
+                        );
+
+
+                        alert(
+                            "Das Profil konnte nicht gespeichert werden."
+                        );
+
+
+                        saveButton.disabled =
+                            false;
+
+                        saveButton.textContent =
+                            "PROFIL SPEICHERN";
+
+                    }
+
+                }
+            );
+
+    }
+
+
+    function closeFamilyProfileEditor() {
+
+        const editor =
+            document.getElementById(
+                "misaira-family-profile-editor"
+            );
+
+
+        if (editor) {
+
+            editor.remove();
+
+        }
+
+    }
+
+
+    /* =====================================================
+       GESPEICHERTE PROFILE RENDERN
+    ===================================================== */
+
+    async function renderSavedFamilyProfiles() {
+
+        if (observerBusy) {
+
+            return;
+
+        }
+
+
+        const container =
+            document.querySelector(
+                ".misaira-familyprofiles"
+            );
+
+
+        if (!container) {
+
+            return;
+
+        }
+
+
+        observerBusy =
+            true;
+
+
+        try {
+
+            const profiles =
+                await ensureFamilyProfiles();
+
+
+            const cards =
+                container.querySelector(
+                    ".misaira-familyprofiles-list"
+                );
+
+
+            if (!cards) {
+
+                return;
+
+            }
+
+
+            let html =
+                "";
+
+
+            for (
+                const profile of profiles
+            ) {
+
+                const avatarUrl =
+                    await getAvatarUrl(
+                        profile.avatar_path
+                    );
+
+
+                const accent =
+                    getAccent(
+                        profile.favorite_color
+                    );
+
+
+                const age =
+                    calculateAge(
+                        profile.birth_date
+                    );
+
+
+                html += `
+
+                    <article
+                        class="misaira-familyprofile-card"
+                        style="
+                            --profile-accent:${accent};
+                        "
+                        data-family-profile-id="${profile.id}"
+                    >
+
+                        <div
+                            class="misaira-familyprofile-avatar"
+                        >
+
+                            ${
+                                avatarUrl
+                                    ? `
+                                        <img
+                                            src="${escape(
+                                                avatarUrl
+                                            )}"
+                                            alt=""
+                                        >
+                                      `
+                                    : `
+                                        <span
+                                            class="misaira-familyprofile-initial"
+                                        >
+                                            ${escape(
+                                                (
+                                                    profile.display_name ||
+                                                    "F"
+                                                ).charAt(0)
+                                            )}
+                                        </span>
+                                      `
+                            }
+
+                            <button
+                                type="button"
+                                class="misaira-familyprofile-camera"
+                                data-family-profile-camera="${profile.id}"
+                            >
+                                📷
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            class="misaira-familyprofile-info"
+                        >
+
+                            <div
+                                class="misaira-familyprofile-name"
+                            >
+                                ${escape(
+                                    profile.display_name
+                                )}
+                            </div>
+
+
+                            <div
+                                class="misaira-familyprofile-role"
+                            >
+                                ${escape(
+                                    profile.family_role
+                                )}
+                            </div>
+
+
+                            ${
+                                profile.birth_date
+                                    ? `
+                                        <div
+                                            class="misaira-familyprofile-detail"
+                                        >
+                                            <span
+                                                class="misaira-familyprofile-detail-icon"
+                                            >
+                                                ▣
+                                            </span>
+
+                                            <span>
+                                                ${formatBirthday(
+                                                    profile.birth_date
+                                                )}
+                                                ${
+                                                    age
+                                                        ? ` (${age})`
+                                                        : ""
+                                                }
+                                            </span>
+                                        </div>
+                                      `
+                                    : ""
+                            }
+
+
+                            <div
+                                class="misaira-familyprofile-detail"
+                            >
+
+                                <span
+                                    class="misaira-familyprofile-detail-icon"
+                                >
+                                    ◉
+                                </span>
+
+                                <span>
+                                    Farbe:
+                                    ${escape(
+                                        profile.favorite_color
+                                    )}
+                                </span>
+
+                            </div>
+
+
+                            ${
+                                profile.hobbies
+                                    ? `
+                                        <div
+                                            class="misaira-familyprofile-detail"
+                                        >
+
+                                            <span
+                                                class="misaira-familyprofile-detail-icon"
+                                            >
+                                                ☆
+                                            </span>
+
+                                            <span>
+                                                Hobbys:
+                                                ${escape(
+                                                    profile.hobbies
+                                                )}
+                                            </span>
+
+                                        </div>
+                                      `
+                                    : ""
+                            }
+
+                        </div>
+
+
+                        <div
+                            class="misaira-familyprofile-actions"
+                        >
+
+                            <button
+                                type="button"
+                                class="misaira-familyprofile-edit"
+                                data-family-profile-edit="${profile.id}"
+                                title="Profil bearbeiten"
+                            >
+                                ✎
+                            </button>
+
+                            <span
+                                class="misaira-familyprofile-arrow"
+                            >
+                                ›
+                            </span>
+
+                        </div>
+
+                    </article>
+
+                `;
+
+            }
+
+
+            cards.innerHTML =
+                html;
+
+
+            bindFamilyProfileButtons(
+                profiles
+            );
+
+        }
+        finally {
+
+            observerBusy =
+                false;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       BUTTONS
+    ===================================================== */
+
+    function bindFamilyProfileButtons(
+        profiles
+    ) {
+
+        document
+            .querySelectorAll(
+                "[data-family-profile-edit]"
+            )
+            .forEach(
+                function (button) {
+
+                    button.onclick =
+                        function () {
+
+                            const id =
+                                button.dataset
+                                    .familyProfileEdit;
+
+
+                            const profile =
+                                profiles.find(
+                                    item =>
+                                        item.id ===
+                                        id
+                                );
+
+
+                            if (profile) {
+
+                                openFamilyProfileEditor(
+                                    profile
+                                );
+
+                            }
+
+                        };
+
+                }
+            );
+
+
+        document
+            .querySelectorAll(
+                "[data-family-profile-camera]"
+            )
+            .forEach(
+                function (button) {
+
+                    button.onclick =
+                        function () {
+
+                            const id =
+                                button.dataset
+                                    .familyProfileCamera;
+
+
+                            const profile =
+                                profiles.find(
+                                    item =>
+                                        item.id ===
+                                        id
+                                );
+
+
+                            if (profile) {
+
+                                openFamilyProfileEditor(
+                                    profile
+                                );
+
+                            }
+
+                        };
+
+                }
+            );
+
+    }
+
+
+    /* =====================================================
+       PROFIL HINZUFÜGEN
+    ===================================================== */
+
+    function bindAddButton() {
+
+        const button =
+            document.querySelector(
+                "[data-familyprofile-add]"
+            );
+
+
+        if (!button) {
+
+            return;
+
+        }
+
+
+        button.onclick =
+            function () {
+
+                openFamilyProfileEditor({
+
+                    id: "",
+
+                    display_name: "",
+
+                    family_role:
+                        "Familienmitglied",
+
+                    birth_date: "",
+
+                    favorite_color:
+                        "Cyan",
+
+                    hobbies: "",
+
+                    avatar_path: ""
+
+                });
+
+            };
+
+    }
+
+
+    /* =====================================================
+       STYLE FÜR EDITOR
+    ===================================================== */
+
+    function addEditorStyle() {
+
+        if (
+            document.getElementById(
+                "misaira-family-profile-editor-style"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        const style =
+            document.createElement(
+                "style"
+            );
+
+
+        style.id =
+            "misaira-family-profile-editor-style";
+
+
+        style.textContent = `
+
+            #misaira-family-profile-editor{
+                position:fixed;
+                inset:0;
+                z-index:99999;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                padding:20px;
+            }
+
+            .mfpe-backdrop{
+                position:absolute;
+                inset:0;
+                background:rgba(0,0,15,.82);
+                backdrop-filter:blur(8px);
+            }
+
+            .mfpe-dialog{
+                position:relative;
+                z-index:2;
+                width:100%;
+                max-width:520px;
+                max-height:90vh;
+                overflow:auto;
+                padding:22px;
+                border:1px solid rgba(0,220,255,.22);
+                border-radius:20px;
+                background:
+                    linear-gradient(
+                        145deg,
+                        rgba(7,20,45,.98),
+                        rgba(9,3,30,.98)
+                    );
+                box-shadow:
+                    0 0 50px rgba(80,20,255,.25);
+            }
+
+            .mfpe-header{
+                display:flex;
+                align-items:center;
+                justify-content:space-between;
+                gap:15px;
+                margin-bottom:18px;
+            }
+
+            .mfpe-label{
+                color:#00eaff;
+                font-size:9px;
+                letter-spacing:.16em;
+            }
+
+            .mfpe-header h2{
+                margin:5px 0 0;
+                color:#fff;
+                font-size:23px;
+            }
+
+            .mfpe-close{
+                width:38px;
+                height:38px;
+                border:1px solid rgba(255,255,255,.15);
+                border-radius:50%;
+                color:#fff;
+                background:rgba(255,255,255,.05);
+                font-size:22px;
+            }
+
+            .mfpe-avatar-preview{
+                width:105px;
+                height:105px;
+                margin:4px auto 12px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                overflow:hidden;
+                border:3px solid #00eaff;
+                border-radius:50%;
+                background:#061126;
+                color:#fff;
+                font-size:38px;
+                box-shadow:
+                    0 0 25px rgba(0,234,255,.35);
+            }
+
+            .mfpe-avatar-preview img{
+                width:100%;
+                height:100%;
+                object-fit:cover;
+            }
+
+            .mfpe-upload{
+                display:block;
+                width:max-content;
+                max-width:100%;
+                margin:0 auto 18px;
+                padding:9px 14px;
+                border:1px solid rgba(190,70,255,.45);
+                border-radius:9px;
+                color:#e8d5ff;
+                background:rgba(130,40,220,.12);
+                font-size:10px;
+                cursor:pointer;
+            }
+
+            .mfpe-field{
+                display:block;
+                margin-top:12px;
+            }
+
+            .mfpe-field span{
+                display:block;
+                margin-bottom:6px;
+                color:#00eaff;
+                font-size:9px;
+                letter-spacing:.1em;
+            }
+
+            .mfpe-field input,
+            .mfpe-field select{
+                width:100%;
+                min-height:44px;
+                padding:0 12px;
+                border:1px solid rgba(0,200,255,.15);
+                border-radius:10px;
+                outline:none;
+                color:#edf4ff;
+                background:#050d1e;
+                font:inherit;
+            }
+
+            .mfpe-field input:focus,
+            .mfpe-field select:focus{
+                border-color:#00eaff;
+                box-shadow:0 0 15px rgba(0,234,255,.08);
+            }
+
+            .mfpe-actions{
+                display:flex;
+                gap:10px;
+                margin-top:20px;
+            }
+
+            .mfpe-cancel,
+            .mfpe-save{
+                flex:1;
+                min-height:46px;
+                border-radius:10px;
+                font:inherit;
+                cursor:pointer;
+            }
+
+            .mfpe-cancel{
+                border:1px solid rgba(255,255,255,.12);
+                color:#c7d0df;
+                background:rgba(255,255,255,.04);
+            }
+
+            .mfpe-save{
+                border:0;
+                color:#fff;
+                background:
+                    linear-gradient(
+                        90deg,
+                        #00bff5,
+                        #5c38ff,
+                        #e11cff
+                    );
+                box-shadow:
+                    0 0 20px rgba(120,50,255,.22);
+            }
+
+            @media(max-width:560px){
+                .mfpe-dialog{
+                    padding:17px;
+                    border-radius:16px;
+                }
+
+                .mfpe-header h2{
+                    font-size:20px;
+                }
+            }
+
+        `;
+
+
+        document.head.appendChild(
+            style
+        );
+
+    }
+
+
+    /* =====================================================
+       ÜBERWACHEN
+       Der vorhandene Punkt-14-Renderer bleibt bestehen.
+       Sobald er die Familienprofilseite erzeugt,
+       ersetzen wir nur die Demo-Karten durch die
+       dauerhaft gespeicherten Daten.
+    ===================================================== */
+
+    function startObserver() {
+
+        const target =
+            document.getElementById(
+                "settingsDetailContent"
+            );
+
+
+        if (!target) {
+
+            return;
+
+        }
+
+
+        const observer =
+            new MutationObserver(
+                function () {
+
+                    const page =
+                        document.querySelector(
+                            ".misaira-familyprofiles"
+                        );
+
+
+                    if (!page) {
+
+                        return;
+
+                    }
+
+
+                    if (
+                        page.dataset
+                            .point14Hydrated ===
+                        "yes"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    page.dataset
+                        .point14Hydrated =
+                        "yes";
+
+
+                    bindAddButton();
+
+                    renderSavedFamilyProfiles();
+
+                }
+            );
+
+
+        observer.observe(
+            target,
+            {
+                childList: true,
+                subtree: true
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       START
+    ===================================================== */
+
+    addEditorStyle();
+
+    startObserver();
+
+})();
+
