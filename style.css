@@ -8259,5 +8259,729 @@ body {
 }
 
 /* =========================================================
+   MISAIRA PUNKT 1
+   ESSENSPLAN – TEIL 1
+   STYLE
+========================================================= */
+
+(function () {
+
+    "use strict";
+
+    if (
+        document.getElementById(
+            "misaira-mealplan-style"
+        )
+    ) {
+        return;
+    }
+
+
+    const style =
+        document.createElement("style");
+
+
+    style.id =
+        "misaira-mealplan-style";
+
+
+    style.textContent = `
+
+/* =========================================================
+   ESSENSPLAN
+========================================================= */
+
+.misaira-mealplan {
+
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+
+    color: #edf4ff;
+
+}
+
+
+/* HEADER */
+
+.misaira-mealplan-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.misaira-mealplan-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.misaira-mealplan-icon {
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    color: #00eaff;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,234,255,.18),
+            rgba(130,40,255,.25)
+        );
+
+    border:
+        1px solid
+        rgba(0,234,255,.45);
+
+    box-shadow:
+        0 0 25px
+        rgba(0,234,255,.16);
+
+    font-size: 24px;
+
+}
+
+
+.misaira-mealplan-heading h2 {
+
+    margin: 0;
+
+    color: #f5f8ff;
+
+    font-size: 24px;
+
+}
+
+
+.misaira-mealplan-heading p {
+
+    margin: 4px 0 0;
+
+    color: #91a0b7;
+
+    font-size: 10px;
+
+}
+
+
+/* ADD BUTTON */
+
+.misaira-mealplan-add {
+
+    min-height: 42px;
+
+    padding:
+        0 15px;
+
+    border:
+        1px solid
+        rgba(170,70,255,.6);
+
+    border-radius: 10px;
+
+    color: #fff;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(70,35,180,.8),
+            rgba(170,40,235,.78)
+        );
+
+    box-shadow:
+        0 0 20px
+        rgba(150,40,255,.18);
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+}
+
+
+/* WEEK NAVIGATION */
+
+.misaira-mealplan-week {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.misaira-mealplan-week-button {
+
+    width: 40px;
+    height: 40px;
+
+    flex: 0 0 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(0,220,255,.18);
+
+    border-radius: 10px;
+
+    color: #00eaff;
+
+    background:
+        rgba(0,160,220,.06);
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+}
+
+
+.misaira-mealplan-week-title {
+
+    flex: 1;
+
+    text-align: center;
+
+}
+
+
+.misaira-mealplan-week-title strong {
+
+    display: block;
+
+    color: #fff;
+
+    font-size: 14px;
+
+}
+
+
+.misaira-mealplan-week-title span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #8391a8;
+
+    font-size: 9px;
+
+}
+
+
+/* DAY SELECTOR */
+
+.misaira-mealplan-days {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, 1fr);
+
+    gap: 5px;
+
+    margin-bottom: 14px;
+
+}
+
+
+.misaira-mealplan-day {
+
+    min-height: 58px;
+
+    padding: 7px 3px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(100,150,210,.13);
+
+    border-radius: 10px;
+
+    color: #8d9ab0;
+
+    background:
+        rgba(7,18,38,.62);
+
+    cursor: pointer;
+
+}
+
+
+.misaira-mealplan-day-name {
+
+    font-size: 8px;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.misaira-mealplan-day-number {
+
+    margin-top: 5px;
+
+    color: #e7edf7;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+}
+
+
+.misaira-mealplan-day.active {
+
+    border-color:
+        rgba(0,234,255,.7);
+
+    color: #00eaff;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,180,220,.18),
+            rgba(110,35,230,.18)
+        );
+
+    box-shadow:
+        0 0 18px
+        rgba(0,210,255,.12);
+
+}
+
+
+.misaira-mealplan-day.active
+.misaira-mealplan-day-number {
+
+    color: #fff;
+
+    text-shadow:
+        0 0 12px
+        rgba(0,234,255,.6);
+
+}
+
+
+/* MEAL AREA */
+
+.misaira-mealplan-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+}
+
+
+/* MEAL CARD */
+
+.misaira-meal-card {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    min-height: 92px;
+
+    padding: 12px 14px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(90,150,210,.14);
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(5,22,43,.9),
+            rgba(3,10,27,.96)
+        );
+
+}
+
+
+.misaira-meal-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+
+    width: 3px;
+
+    border-radius:
+        0 4px 4px 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #00eaff,
+            #9b35ff
+        );
+
+    box-shadow:
+        0 0 13px
+        rgba(0,234,255,.5);
+
+}
+
+
+/* FOOD ICON */
+
+.misaira-meal-icon {
+
+    width: 56px;
+    height: 56px;
+
+    flex: 0 0 56px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,210,255,.12),
+            rgba(140,40,255,.16)
+        );
+
+    border:
+        1px solid
+        rgba(0,220,255,.16);
+
+    font-size: 27px;
+
+}
+
+
+/* MEAL INFORMATION */
+
+.misaira-meal-info {
+
+    flex: 1;
+
+    min-width: 0;
+
+}
+
+
+.misaira-meal-name {
+
+    color: #f5f8ff;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+}
+
+
+.misaira-meal-note {
+
+    margin-top: 5px;
+
+    color: #8e9bb0;
+
+    font-size: 9px;
+
+    line-height: 1.45;
+
+}
+
+
+.misaira-meal-family {
+
+    display: inline-block;
+
+    margin-top: 7px;
+
+    padding:
+        3px 7px;
+
+    border-radius: 5px;
+
+    color: #00eaff;
+
+    background:
+        rgba(0,234,255,.08);
+
+    font-size: 8px;
+
+}
+
+
+/* ACTIONS */
+
+.misaira-meal-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+}
+
+
+.misaira-meal-action {
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(130,170,220,.14);
+
+    border-radius: 50%;
+
+    color: #aebbd0;
+
+    background:
+        rgba(255,255,255,.025);
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+}
+
+
+.misaira-meal-action:hover {
+
+    color: #00eaff;
+
+    border-color:
+        rgba(0,234,255,.45);
+
+}
+
+
+/* EMPTY STATE */
+
+.misaira-mealplan-empty {
+
+    min-height: 190px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    border:
+        1px dashed
+        rgba(0,210,255,.18);
+
+    border-radius: 14px;
+
+    color: #8c9ab0;
+
+    background:
+        rgba(4,14,30,.55);
+
+    text-align: center;
+
+}
+
+
+.misaira-mealplan-empty-icon {
+
+    margin-bottom: 10px;
+
+    color: #00eaff;
+
+    font-size: 38px;
+
+    text-shadow:
+        0 0 20px
+        rgba(0,234,255,.45);
+
+}
+
+
+.misaira-mealplan-empty strong {
+
+    color: #e8eef8;
+
+    font-size: 13px;
+
+}
+
+
+.misaira-mealplan-empty span {
+
+    max-width: 300px;
+
+    margin-top: 6px;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .misaira-mealplan-header {
+
+        align-items:
+            flex-start;
+
+    }
+
+
+    .misaira-mealplan-heading h2 {
+
+        font-size: 20px;
+
+    }
+
+
+    .misaira-mealplan-add {
+
+        padding:
+            0 10px;
+
+        font-size: 9px;
+
+    }
+
+
+    .misaira-mealplan-days {
+
+        gap: 3px;
+
+    }
+
+
+    .misaira-mealplan-day {
+
+        min-height: 52px;
+
+    }
+
+
+    .misaira-meal-card {
+
+        min-height: 82px;
+
+        gap: 10px;
+
+        padding:
+            10px;
+
+    }
+
+
+    .misaira-meal-icon {
+
+        width: 48px;
+        height: 48px;
+
+        flex-basis: 48px;
+
+        font-size: 22px;
+
+    }
+
+
+    .misaira-meal-name {
+
+        font-size: 13px;
+
+    }
+
+
+    .misaira-meal-note {
+
+        font-size: 8px;
+
+    }
+
+
+    .misaira-meal-action {
+
+        width: 34px;
+        height: 34px;
+
+    }
+
+}
+
+`;
+
+    document.head.appendChild(
+        style
+    );
+
+})();
+/* =========================================================
    ENDE – CSS ONLY
 ========================================================= */
