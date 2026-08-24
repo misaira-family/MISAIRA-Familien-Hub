@@ -18897,6 +18897,765 @@ function renderMisairaMealPlan() {
         100
     );
 
+})();
+
+/* =========================================================
+   MISAIRA PUNKT 7
+   FAMILIENCHAT – FINAL FIX
+   Nur Text | gemeinsame Familie | Uhrzeit | Löschen
+========================================================= */
+
+(function () {
+
+    let chatRefreshTimer = null;
+
+
+    /* =====================================================
+       CHAT ÖFFNEN / RENDERN
+    ===================================================== */
+
+    async function renderFamilyChat() {
+
+        const container =
+            document.getElementById(
+                "chatContent"
+            );
+
+        if (!container) {
+            return;
+        }
+
+
+        container.innerHTML = `
+
+            <div class="misaira-family-chat">
+
+                <div class="misaira-chat-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            FAMILIE
+                        </span>
+
+                        <h2>
+                            Familienchat
+                        </h2>
+
+                    </div>
+
+                    <span
+                        class="misaira-chat-status"
+                    >
+                        ● ONLINE
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="misairaFamilyMessages"
+                    class="misaira-family-messages"
+                >
+
+                    <div class="misaira-chat-loading">
+                        Nachrichten werden geladen...
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="misaira-chat-input-area"
+                >
+
+                    <textarea
+                        id="misairaChatInput"
+                        rows="1"
+                        maxlength="2000"
+                        placeholder="Nachricht schreiben..."
+                    ></textarea>
+
+
+                    <button
+                        type="button"
+                        id="misairaChatSend"
+                        class="misaira-chat-send"
+                        aria-label="Nachricht senden"
+                    >
+                        ➤
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        document
+            .getElementById(
+                "misairaChatSend"
+            )
+            ?.addEventListener(
+                "click",
+                sendFamilyMessage
+            );
+
+
+        document
+            .getElementById(
+                "misairaChatInput"
+            )
+            ?.addEventListener(
+                "keydown",
+                event => {
+
+                    /*
+                     * Enter = senden
+                     * Shift + Enter = neue Zeile
+                     */
+
+                    if (
+                        event.key === "Enter" &&
+                        !event.shiftKey
+                    ) {
+
+                        event.preventDefault();
+
+                        sendFamilyMessage();
+
+                    }
+
+                }
+            );
+
+
+        await loadFamilyMessages();
+
+    }
+
+
+    /* =====================================================
+       NACHRICHTEN LADEN
+    ===================================================== */
+
+    async function loadFamilyMessages(
+        keepPosition = false
+    ) {
+
+        const messages =
+            document.getElementById(
+                "misairaFamilyMessages"
+            );
+
+
+        if (!messages) {
+            return;
+        }
+
+
+        if (
+            !state?.user?.family_id
+        ) {
+
+            messages.innerHTML = `
+
+                <div class="misaira-chat-empty">
+                    Keine Familie verbunden.
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from(
+                    "chat_messages"
+                )
+                .select(
+                    "*"
+                )
+                .eq(
+                    "family_id",
+                    state.user.family_id
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: true
+                    }
+                );
+
+
+        if (error) {
+
+            console.error(
+                "Familienchat laden:",
+                error
+            );
+
+
+            messages.innerHTML = `
+
+                <div class="misaira-chat-empty">
+                    Chat konnte nicht geladen werden.
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        if (
+            !data ||
+            !data.length
+        ) {
+
+            messages.innerHTML = `
+
+                <div class="misaira-chat-empty">
+                    Noch keine Nachrichten.
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        messages.innerHTML =
+            data
+                .map(
+                    message =>
+                        createFamilyMessage(
+                            message
+                        )
+                )
+                .join("");
+
+
+        /*
+         * Löschen eigener Nachrichten.
+         */
+
+        messages
+            .querySelectorAll(
+                "[data-chat-delete]"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            deleteFamilyMessage(
+                                button.dataset
+                                    .chatDelete
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+        /*
+         * Nur automatisch nach unten scrollen,
+         * wenn der Benutzer nicht gerade
+         * weiter oben liest.
+         */
+
+        if (!keepPosition) {
+
+            messages.scrollTop =
+                messages.scrollHeight;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       NACHRICHT DARSTELLEN
+    ===================================================== */
+
+    function createFamilyMessage(
+        message
+    ) {
+
+        const own =
+            String(
+                message.user_id
+            ) ===
+            String(
+                state.user.id
+            );
+
+
+        const text =
+            escapeChatText(
+                message.message ||
+                message.content ||
+                ""
+            );
+
+
+        const time =
+            message.created_at
+                ? new Date(
+                    message.created_at
+                ).toLocaleTimeString(
+                    "de-DE",
+                    {
+                        hour:
+                            "2-digit",
+
+                        minute:
+                            "2-digit"
+                    }
+                )
+                : "";
+
+
+        /*
+         * Bis Punkt "Profilname" umgesetzt wird,
+         * bleibt der Fremdname Familienmitglied.
+         * Eigene Nachricht = eigener Profilname.
+         */
+
+        const sender =
+            own
+                ? (
+                    state.user.name ||
+                    "Du"
+                )
+                : "Familienmitglied";
+
+
+        return `
+
+            <div
+                class="
+                    misaira-chat-row
+                    ${own ? "own" : "other"}
+                "
+            >
+
+                <div
+                    class="misaira-chat-bubble"
+                >
+
+                    <div
+                        class="misaira-chat-sender"
+                    >
+                        ${escapeChatText(
+                            sender
+                        )}
+                    </div>
+
+
+                    <div
+                        class="misaira-chat-text"
+                    >
+                        ${text}
+                    </div>
+
+
+                    <div
+                        class="misaira-chat-meta"
+                    >
+
+                        <span>
+                            ${time}
+                        </span>
+
+                        ${
+                            own
+                                ? `
+                                    <button
+                                        type="button"
+                                        class="misaira-chat-delete"
+                                        data-chat-delete="${message.id}"
+                                        title="Nachricht löschen"
+                                    >
+                                        ×
+                                    </button>
+                                  `
+                                : ""
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       NACHRICHT SENDEN
+    ===================================================== */
+
+    async function sendFamilyMessage() {
+
+        const input =
+            document.getElementById(
+                "misairaChatInput"
+            );
+
+
+        if (!input) {
+            return;
+        }
+
+
+        const text =
+            input.value.trim();
+
+
+        if (!text) {
+            return;
+        }
+
+
+        if (
+            !state?.user?.id ||
+            !state?.user?.family_id
+        ) {
+
+            return;
+
+        }
+
+
+        input.disabled =
+            true;
+
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from(
+                    "chat_messages"
+                )
+                .insert({
+
+                    family_id:
+                        state.user.family_id,
+
+                    user_id:
+                        state.user.id,
+
+                    message:
+                        text
+
+                });
+
+
+        input.disabled =
+            false;
+
+
+        if (error) {
+
+            console.error(
+                "Familienchat senden:",
+                error
+            );
+
+
+            alert(
+                "Nachricht konnte nicht gesendet werden."
+            );
+
+            return;
+
+        }
+
+
+        input.value = "";
+
+
+        await loadFamilyMessages();
+
+    }
+
+
+    /* =====================================================
+       EIGENE NACHRICHT LÖSCHEN
+    ===================================================== */
+
+    async function deleteFamilyMessage(
+        messageId
+    ) {
+
+        if (!messageId) {
+            return;
+        }
+
+
+        if (
+            !confirm(
+                "Nachricht löschen?"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from(
+                    "chat_messages"
+                )
+                .delete()
+                .eq(
+                    "id",
+                    messageId
+                )
+                .eq(
+                    "user_id",
+                    state.user.id
+                );
+
+
+        if (error) {
+
+            console.error(
+                "Familienchat löschen:",
+                error
+            );
+
+            return;
+
+        }
+
+
+        await loadFamilyMessages();
+
+    }
+
+
+    /* =====================================================
+       TEXT SICHER AUSGEBEN
+    ===================================================== */
+
+    function escapeChatText(
+        value
+    ) {
+
+        return String(
+            value || ""
+        )
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            )
+            .replace(
+                /\n/g,
+                "<br>"
+            );
+
+    }
+
+
+    /* =====================================================
+       AUTOMATISCHE AKTUALISIERUNG
+    ===================================================== */
+
+    function startFamilyChatRefresh() {
+
+        if (
+            chatRefreshTimer
+        ) {
+
+            clearInterval(
+                chatRefreshTimer
+            );
+
+        }
+
+
+        chatRefreshTimer =
+            setInterval(
+                async () => {
+
+                    const chat =
+                        document.getElementById(
+                            "misairaFamilyMessages"
+                        );
+
+
+                    if (!chat) {
+                        return;
+                    }
+
+
+                    await loadFamilyMessages(
+                        true
+                    );
+
+                },
+                3000
+            );
+
+    }
+
+
+    /* =====================================================
+       CHAT ÖFFNEN ERKENNEN
+    ===================================================== */
+
+    function watchFamilyChat() {
+
+        const observer =
+            new MutationObserver(
+                () => {
+
+                    const content =
+                        document.getElementById(
+                            "chatContent"
+                        );
+
+
+                    if (
+                        content &&
+                        !content.dataset
+                            .misairaFamilyChat
+                    ) {
+
+                        content.dataset
+                            .misairaFamilyChat =
+                            "true";
+
+
+                        renderFamilyChat();
+
+                        startFamilyChatRefresh();
+
+                    }
+
+                }
+            );
+
+
+        observer.observe(
+            document.body,
+            {
+                childList: true,
+                subtree: true
+            }
+        );
+
+
+        /*
+         * Falls Chat bereits geöffnet ist.
+         */
+
+        const existing =
+            document.getElementById(
+                "chatContent"
+            );
+
+
+        if (
+            existing &&
+            !existing.dataset
+                .misairaFamilyChat
+        ) {
+
+            existing.dataset
+                .misairaFamilyChat =
+                "true";
+
+
+            renderFamilyChat();
+
+            startFamilyChatRefresh();
+
+        }
+
+    }
+
+
+    /* =====================================================
+       START
+    ===================================================== */
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            watchFamilyChat,
+            {
+                once: true
+            }
+        );
+
+    }
+    else {
+
+        watchFamilyChat();
+
+    }
+
+
+    /*
+     * Globale Funktion für späteren Zugriff.
+     */
+
+    window.MISAIRAFamilyChat = {
+
+        open:
+            renderFamilyChat,
+
+        reload:
+            loadFamilyMessages,
+
+        send:
+            sendFamilyMessage
+
+    };
 
 })();
 
