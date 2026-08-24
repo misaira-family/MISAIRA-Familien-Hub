@@ -16539,3 +16539,619 @@ function renderMisairaMealPlan() {
     );
 
 })();
+
+/* =========================================================
+   MISAIRA PUNKT 8
+   EIGENE FARBEN – DARSTELLUNG
+   Bestehende Darstellung bleibt unverändert.
+========================================================= */
+
+(function () {
+
+    const COLORS = {
+
+        cyan: {
+            name: "Cyan",
+            main: "#00eaff",
+            glow: "rgba(0,234,255,.55)"
+        },
+
+        purple: {
+            name: "Purple",
+            main: "#8a2cff",
+            glow: "rgba(138,44,255,.55)"
+        },
+
+        pink: {
+            name: "Pink",
+            main: "#ff2ca8",
+            glow: "rgba(255,44,168,.55)"
+        },
+
+        blue: {
+            name: "Blau",
+            main: "#3d7cff",
+            glow: "rgba(61,124,255,.55)"
+        },
+
+        green: {
+            name: "Grün",
+            main: "#00e6a7",
+            glow: "rgba(0,230,167,.55)"
+        },
+
+        orange: {
+            name: "Orange",
+            main: "#ff8a2c",
+            glow: "rgba(255,138,44,.55)"
+        },
+
+        yellow: {
+            name: "Gelb",
+            main: "#ffd32c",
+            glow: "rgba(255,211,44,.55)"
+        },
+
+        red: {
+            name: "Rot",
+            main: "#ff3d5a",
+            glow: "rgba(255,61,90,.55)"
+        }
+
+    };
+
+
+    let currentColor =
+        "cyan";
+
+
+    /* =====================================================
+       FARBSTIL ANWENDEN
+    ===================================================== */
+
+    function applyOwnAnimationColor(
+        colorName
+    ) {
+
+        const color =
+            COLORS[colorName] ||
+            COLORS.cyan;
+
+
+        currentColor =
+            colorName in COLORS
+                ? colorName
+                : "cyan";
+
+
+        document.documentElement
+            .style
+            .setProperty(
+                "--misaira-personal-color",
+                color.main
+            );
+
+
+        document.documentElement
+            .style
+            .setProperty(
+                "--misaira-personal-glow",
+                color.glow
+            );
+
+
+        /*
+         * Persönliche Farbe als
+         * data-Attribut verfügbar machen.
+         */
+
+        document.documentElement
+            .dataset
+            .misairaColor =
+            currentColor;
+
+
+        /*
+         * Nur die vorhandenen MISAIRA
+         * Glow-/Animationsbereiche bekommen
+         * die persönliche Akzentfarbe.
+         */
+
+        document
+            .querySelectorAll(
+                ".welcome-core, .core-glow, .core-orbit, .core-letter, .misaira-core, .nova-core"
+            )
+            .forEach(
+                element => {
+
+                    element.style
+                        .setProperty(
+                            "--personal-color",
+                            color.main
+                        );
+
+                }
+            );
+
+    }
+
+
+    /* =====================================================
+       SUPABASE LADEN
+    ===================================================== */
+
+    async function loadOwnAnimationColor() {
+
+        if (
+            !state ||
+            !state.user ||
+            !state.user.id
+        ) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                    .from("profiles")
+                    .select(
+                        "animation_color"
+                    )
+                    .eq(
+                        "id",
+                        state.user.id
+                    )
+                    .maybeSingle();
+
+
+            if (error) {
+
+                console.error(
+                    "MISAIRA Farbe laden:",
+                    error
+                );
+
+                return;
+
+            }
+
+
+            currentColor =
+                data?.animation_color ||
+                "cyan";
+
+
+            applyOwnAnimationColor(
+                currentColor
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "MISAIRA Farbfehler:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SUPABASE SPEICHERN
+    ===================================================== */
+
+    async function saveOwnAnimationColor(
+        colorName
+    ) {
+
+        if (
+            !COLORS[colorName]
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            !state ||
+            !state.user ||
+            !state.user.id
+        ) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const {
+                error
+            } =
+                await supabaseClient
+                    .from("profiles")
+                    .update({
+
+                        animation_color:
+                            colorName,
+
+                        updated_at:
+                            new Date()
+                                .toISOString()
+
+                    })
+                    .eq(
+                        "id",
+                        state.user.id
+                    );
+
+
+            if (error) {
+
+                console.error(
+                    "MISAIRA Farbe speichern:",
+                    error
+                );
+
+                return;
+
+            }
+
+
+            currentColor =
+                colorName;
+
+
+            applyOwnAnimationColor(
+                colorName
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "MISAIRA Farbe speichern:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       EIGENE FARBEN BEREICH
+    ===================================================== */
+
+    function renderOwnColors() {
+
+        const appearance =
+            document.querySelector(
+                '[data-settings-content="appearance"]'
+            );
+
+
+        if (!appearance) {
+
+            return;
+
+        }
+
+
+        /*
+         * Nicht doppelt erzeugen.
+         */
+
+        if (
+            appearance.querySelector(
+                "#misairaOwnColors"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        const wrapper =
+            document.createElement(
+                "div"
+            );
+
+
+        wrapper.id =
+            "misairaOwnColors";
+
+
+        wrapper.innerHTML = `
+
+            <div
+                class="misaira-own-colors"
+            >
+
+                <div
+                    class="misaira-own-colors-header"
+                >
+
+                    <span
+                        class="eyebrow"
+                    >
+                        PERSONALISIERUNG
+                    </span>
+
+                    <h3>
+                        Eigene Farben
+                    </h3>
+
+                    <p>
+                        Deine Farbe verändert
+                        persönlich die MISAIRA
+                        Glow- und Animationseffekte.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="misaira-color-grid"
+                >
+
+                    ${
+                        Object.entries(
+                            COLORS
+                        )
+                        .map(
+                            ([key, color]) => `
+
+                                <button
+                                    type="button"
+                                    class="
+                                        misaira-color-option
+                                        ${
+                                            key ===
+                                            currentColor
+                                                ? "active"
+                                                : ""
+                                        }
+                                    "
+                                    data-misaira-color="${key}"
+                                    style="
+                                        --color:
+                                            ${color.main};
+                                        --color-glow:
+                                            ${color.glow};
+                                    "
+                                >
+
+                                    <span
+                                        class="misaira-color-dot"
+                                    ></span>
+
+                                    <span
+                                        class="misaira-color-name"
+                                    >
+                                        ${color.name}
+                                    </span>
+
+                                    ${
+                                        key ===
+                                        currentColor
+                                            ? `
+                                                <span
+                                                    class="misaira-color-check"
+                                                >
+                                                    ✓
+                                                </span>
+                                              `
+                                            : ""
+                                    }
+
+                                </button>
+
+                            `
+                        )
+                        .join("")
+                    }
+
+                </div>
+
+
+                <div
+                    class="misaira-color-preview"
+                >
+
+                    <span
+                        class="misaira-preview-core"
+                    >
+                        M
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Live-Vorschau
+                        </strong>
+
+                        <small>
+                            Nur du siehst deine
+                            persönliche Farbe.
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        appearance.appendChild(
+            wrapper
+        );
+
+
+        wrapper
+            .querySelectorAll(
+                "[data-misaira-color]"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        async () => {
+
+                            const color =
+                                button.dataset
+                                    .misairaColor;
+
+
+                            applyOwnAnimationColor(
+                                color
+                            );
+
+
+                            wrapper
+                                .querySelectorAll(
+                                    "[data-misaira-color]"
+                                )
+                                .forEach(
+                                    item => {
+
+                                        item.classList
+                                            .toggle(
+                                                "active",
+                                                item ===
+                                                    button
+                                            );
+
+                                    }
+                                );
+
+
+                            await saveOwnAnimationColor(
+                                color
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+    }
+
+
+    /* =====================================================
+       DARSTELLUNG ÖFFNEN
+    ===================================================== */
+
+    function checkAppearancePage() {
+
+        const appearance =
+            document.querySelector(
+                '[data-settings-content="appearance"]'
+            );
+
+
+        if (!appearance) {
+
+            return;
+
+        }
+
+
+        renderOwnColors();
+
+    }
+
+
+    /* =====================================================
+       NAVIGATION ÜBERWACHEN
+    ===================================================== */
+
+    document.addEventListener(
+        "click",
+        event => {
+
+            const button =
+                event.target.closest(
+                    '[data-settings-page="appearance"]'
+                );
+
+
+            if (!button) {
+
+                return;
+
+            }
+
+
+            setTimeout(
+                checkAppearancePage,
+                50
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       START
+    ===================================================== */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        () => {
+
+            setTimeout(
+                loadOwnAnimationColor,
+                500
+            );
+
+        }
+    );
+
+
+    /*
+     * Falls script.js bereits geladen ist.
+     */
+
+    if (
+        document.readyState !==
+        "loading"
+    ) {
+
+        setTimeout(
+            loadOwnAnimationColor,
+            500
+        );
+
+    }
+
+
+    window.MISAIRAOwnColors = {
+
+        apply:
+            applyOwnAnimationColor,
+
+        load:
+            loadOwnAnimationColor,
+
+        save:
+            saveOwnAnimationColor
+
+    };
+
+})();
