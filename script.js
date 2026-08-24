@@ -18018,3 +18018,885 @@ function renderMisairaMealPlan() {
 
 })();
 
+/* =========================================================
+   MISAIRA EINKAUFSLISTE – KATEGORIEN + BEARBEITEN
+   Bestehende Einträge bleiben erhalten.
+========================================================= */
+
+(function () {
+
+    const SHOPPING_CATEGORIES = [
+        {
+            id: "obst_gemuese",
+            name: "Obst & Gemüse",
+            icon: "🥦"
+        },
+        {
+            id: "fleisch_wurst",
+            name: "Fleisch & Wurst",
+            icon: "🥩"
+        },
+        {
+            id: "kuehlung",
+            name: "Kühlung & Milchprodukte",
+            icon: "🥛"
+        },
+        {
+            id: "brot_backwaren",
+            name: "Brot & Backwaren",
+            icon: "🥖"
+        },
+        {
+            id: "konserven_vorraete",
+            name: "Konserven & Vorräte",
+            icon: "🥫"
+        },
+        {
+            id: "nudeln_reis",
+            name: "Nudeln, Reis & Beilagen",
+            icon: "🍝"
+        },
+        {
+            id: "tiefkuehl",
+            name: "Tiefkühl",
+            icon: "🧊"
+        },
+        {
+            id: "getraenke",
+            name: "Getränke",
+            icon: "🥤"
+        },
+        {
+            id: "suesses_snacks",
+            name: "Süßes & Snacks",
+            icon: "🍫"
+        },
+        {
+            id: "drogerie_haushalt",
+            name: "Drogerie & Haushalt",
+            icon: "🧴"
+        },
+        {
+            id: "tierbedarf",
+            name: "Tierbedarf",
+            icon: "🐶"
+        },
+        {
+            id: "sonstiges",
+            name: "Sonstiges",
+            icon: "📦"
+        }
+    ];
+
+
+    function getCategory(
+        category
+    ) {
+
+        return SHOPPING_CATEGORIES.find(
+            item =>
+                item.id === category
+        ) || SHOPPING_CATEGORIES[
+            SHOPPING_CATEGORIES.length - 1
+        ];
+
+    }
+
+
+    function categoryOptions(
+        selected
+    ) {
+
+        return SHOPPING_CATEGORIES
+            .map(
+                category => `
+
+                    <option
+                        value="${category.id}"
+                        ${
+                            category.id ===
+                            selected
+                                ? "selected"
+                                : ""
+                        }
+                    >
+                        ${category.icon}
+                        ${category.name}
+                    </option>
+
+                `
+            )
+            .join("");
+
+    }
+
+
+    /* =====================================================
+       EINKAUFSLISTE NEU RENDERN
+    ===================================================== */
+
+    window.renderShopping =
+        function () {
+
+            const container =
+                document.getElementById(
+                    "shoppingContent"
+                );
+
+
+            if (!container) {
+                return;
+            }
+
+
+            container.innerHTML = `
+
+                <div class="glass-card">
+
+                    <div class="module-toolbar">
+
+                        <input
+                            id="shoppingInput"
+                            type="text"
+                            placeholder="Artikel hinzufügen..."
+                        >
+
+                        <select
+                            id="shoppingCategory"
+                            class="shopping-category-select"
+                        >
+                            ${categoryOptions(
+                                "sonstiges"
+                            )}
+                        </select>
+
+                        <button
+                            id="addShopping"
+                            class="action-button"
+                            type="button"
+                        >
+                            + Hinzufügen
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="shoppingList"
+                        class="module-list"
+                    ></div>
+
+                </div>
+
+            `;
+
+
+            document
+                .getElementById(
+                    "addShopping"
+                )
+                ?.addEventListener(
+                    "click",
+                    window.addShoppingItem
+                );
+
+
+            drawCategorizedShopping();
+
+    };
+
+
+    /* =====================================================
+       ARTIKEL HINZUFÜGEN
+    ===================================================== */
+
+    window.addShoppingItem =
+        async function () {
+
+            const input =
+                document.getElementById(
+                    "shoppingInput"
+                );
+
+
+            const categorySelect =
+                document.getElementById(
+                    "shoppingCategory"
+                );
+
+
+            const name =
+                input?.value.trim();
+
+
+            const category =
+                categorySelect?.value ||
+                "sonstiges";
+
+
+            if (!name) {
+
+                input?.focus();
+
+                return;
+
+            }
+
+
+            const {
+                error
+            } =
+                await supabaseClient
+                    .from(
+                        "shopping_items"
+                    )
+                    .insert({
+
+                        family_id:
+                            state.user.family_id,
+
+                        created_by:
+                            state.user.id,
+
+                        name:
+                            name,
+
+                        completed:
+                            false,
+
+                        category:
+                            category
+
+                    });
+
+
+            if (error) {
+
+                console.error(
+                    "Einkauf hinzufügen:",
+                    error
+                );
+
+                alert(
+                    "Artikel konnte nicht hinzugefügt werden."
+                );
+
+                return;
+
+            }
+
+
+            input.value = "";
+
+
+            await loadShopping();
+
+
+            window.renderShopping();
+
+
+            updateUserInterface();
+
+    };
+
+
+    /* =====================================================
+       NACH KATEGORIEN SORTIEREN
+    ===================================================== */
+
+    function drawCategorizedShopping() {
+
+        const list =
+            document.getElementById(
+                "shoppingList"
+            );
+
+
+        if (!list) {
+            return;
+        }
+
+
+        if (
+            !state.shopping ||
+            !state.shopping.length
+        ) {
+
+            list.innerHTML = `
+
+                <div class="module-item">
+                    Eure Einkaufsliste ist leer.
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /*
+         * Kategorie-Reihenfolge wie oben definiert.
+         */
+
+        const sorted =
+            [...state.shopping]
+                .sort(
+                    (a, b) => {
+
+                        const categoryA =
+                            SHOPPING_CATEGORIES
+                                .findIndex(
+                                    category =>
+                                        category.id ===
+                                        a.category
+                                );
+
+                        const categoryB =
+                            SHOPPING_CATEGORIES
+                                .findIndex(
+                                    category =>
+                                        category.id ===
+                                        b.category
+                                );
+
+
+                        const orderA =
+                            categoryA === -1
+                                ? 999
+                                : categoryA;
+
+                        const orderB =
+                            categoryB === -1
+                                ? 999
+                                : categoryB;
+
+
+                        if (
+                            orderA !==
+                            orderB
+                        ) {
+
+                            return (
+                                orderA -
+                                orderB
+                            );
+
+                        }
+
+
+                        return (
+                            (a.title || a.name || "")
+                                .localeCompare(
+                                    b.title || b.name || "",
+                                    "de"
+                                )
+                        );
+
+                    }
+                );
+
+
+        let html = "";
+
+
+        let currentCategory =
+            null;
+
+
+        sorted.forEach(
+            item => {
+
+                const category =
+                    getCategory(
+                        item.category
+                    );
+
+
+                if (
+                    currentCategory !==
+                    category.id
+                ) {
+
+                    currentCategory =
+                        category.id;
+
+
+                    html += `
+
+                        <div
+                            class="
+                                shopping-category-header
+                            "
+                        >
+
+                            <span>
+                                ${category.icon}
+                            </span>
+
+                            <strong>
+                                ${category.name}
+                            </strong>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                html += `
+
+                    <div
+                        class="
+                            module-item
+                            shopping-item-row
+                        "
+                    >
+
+                        <input
+                            type="checkbox"
+                            ${
+                                item.done ||
+                                item.completed
+                                    ? "checked"
+                                    : ""
+                            }
+                            data-shopping-check="${item.id}"
+                        >
+
+
+                        <div
+                            class="module-item-main"
+                        >
+
+                            <strong
+                                style="${
+                                    item.done ||
+                                    item.completed
+                                        ? "text-decoration:line-through;opacity:.5;"
+                                        : ""
+                                }"
+                            >
+                                ${escapeHTML(
+                                    item.title ||
+                                    item.name ||
+                                    ""
+                                )}
+                            </strong>
+
+                            <small>
+                                ${category.icon}
+                                ${category.name}
+                            </small>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="shopping-edit-button"
+                            data-shopping-edit="${item.id}"
+                            title="Artikel bearbeiten"
+                        >
+                            ✎
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="icon-button danger"
+                            data-shopping-delete="${item.id}"
+                            title="Artikel löschen"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+
+        list.innerHTML =
+            html;
+
+
+        /* =================================================
+           ERLEDIGT
+        ================================================= */
+
+        list
+            .querySelectorAll(
+                "[data-shopping-check]"
+            )
+            .forEach(
+                checkbox => {
+
+                    checkbox.addEventListener(
+                        "change",
+                        async () => {
+
+                            await supabaseClient
+                                .from(
+                                    "shopping_items"
+                                )
+                                .update({
+
+                                    completed:
+                                        checkbox.checked
+
+                                })
+                                .eq(
+                                    "id",
+                                    checkbox.dataset
+                                        .shoppingCheck
+                                );
+
+
+                            await loadShopping();
+
+                            window.renderShopping();
+
+                            updateUserInterface();
+
+                        }
+                    );
+
+                }
+            );
+
+
+        /* =================================================
+           BEARBEITEN
+        ================================================= */
+
+        list
+            .querySelectorAll(
+                "[data-shopping-edit]"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            editShoppingItem(
+                                button.dataset
+                                    .shoppingEdit
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+        /* =================================================
+           LÖSCHEN
+        ================================================= */
+
+        list
+            .querySelectorAll(
+                "[data-shopping-delete]"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        async () => {
+
+                            if (
+                                !confirm(
+                                    "Diesen Artikel wirklich löschen?"
+                                )
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            await supabaseClient
+                                .from(
+                                    "shopping_items"
+                                )
+                                .delete()
+                                .eq(
+                                    "id",
+                                    button.dataset
+                                        .shoppingDelete
+                                );
+
+
+                            await loadShopping();
+
+                            window.renderShopping();
+
+                            updateUserInterface();
+
+                        }
+                    );
+
+                }
+            );
+
+    }
+
+
+    /* =====================================================
+       EINZELNEN ARTIKEL BEARBEITEN
+    ===================================================== */
+
+    async function editShoppingItem(
+        id
+    ) {
+
+        const item =
+            state.shopping.find(
+                entry =>
+                    String(entry.id) ===
+                    String(id)
+            );
+
+
+        if (!item) {
+            return;
+        }
+
+
+        const currentName =
+            item.title ||
+            item.name ||
+            "";
+
+
+        const currentCategory =
+            item.category ||
+            "sonstiges";
+
+
+        const newName =
+            prompt(
+                "Artikel bearbeiten:",
+                currentName
+            );
+
+
+        if (
+            newName === null
+        ) {
+
+            return;
+
+        }
+
+
+        const cleanName =
+            newName.trim();
+
+
+        if (!cleanName) {
+
+            return;
+
+        }
+
+
+        /*
+         * Kategorie als Auswahl.
+         */
+
+        const categoryText =
+            SHOPPING_CATEGORIES
+                .map(
+                    (
+                        category,
+                        index
+                    ) =>
+                        `${index + 1}. ${category.icon} ${category.name}`
+                )
+                .join("\n");
+
+
+        const currentIndex =
+            Math.max(
+                0,
+                SHOPPING_CATEGORIES
+                    .findIndex(
+                        category =>
+                            category.id ===
+                            currentCategory
+                    )
+            );
+
+
+        const selected =
+            prompt(
+                "Kategorie auswählen:\n\n" +
+                categoryText +
+                "\n\nNummer eingeben:",
+                String(
+                    currentIndex + 1
+                )
+            );
+
+
+        if (
+            selected === null
+        ) {
+
+            return;
+
+        }
+
+
+        const number =
+            Number(
+                selected
+            );
+
+
+        const selectedCategory =
+            SHOPPING_CATEGORIES[
+                number - 1
+            ];
+
+
+        if (!selectedCategory) {
+
+            alert(
+                "Ungültige Kategorie."
+            );
+
+            return;
+
+        }
+
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from(
+                    "shopping_items"
+                )
+                .update({
+
+                    name:
+                        cleanName,
+
+                    category:
+                        selectedCategory.id
+
+                })
+                .eq(
+                    "id",
+                    id
+                );
+
+
+        if (error) {
+
+            console.error(
+                "Einkauf bearbeiten:",
+                error
+            );
+
+            alert(
+                "Artikel konnte nicht geändert werden."
+            );
+
+            return;
+
+        }
+
+
+        await loadShopping();
+
+        window.renderShopping();
+
+        updateUserInterface();
+
+    }
+
+
+    /* =====================================================
+       ENTER-TASTE
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key !==
+                "Enter"
+            ) {
+
+                return;
+
+            }
+
+
+            const input =
+                document.getElementById(
+                    "shoppingInput"
+                );
+
+
+            if (
+                document.activeElement ===
+                input
+            ) {
+
+                event.preventDefault();
+
+                window.addShoppingItem();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       WICHTIG:
+       Bestehende renderShopping()-Aufrufe
+       bekommen unsere neue Version.
+    ===================================================== */
+
+    setTimeout(
+        () => {
+
+            if (
+                typeof state !==
+                "undefined" &&
+                state.shopping
+            ) {
+
+                const content =
+                    document.getElementById(
+                        "shoppingContent"
+                    );
+
+                if (content) {
+
+                    window.renderShopping();
+
+                }
+
+            }
+
+        },
+        100
+    );
+
+
+})();
+
