@@ -8259,5 +8259,316 @@ body {
 }
 
 /* =========================================================
+   MISAIRA PUNKT 8
+   EIGENE FARBEN
+========================================================= */
+
+.misaira-own-colors {
+
+    margin-top:
+        18px;
+
+    padding:
+        20px;
+
+    border:
+        1px solid rgba(100,150,230,.14);
+
+    border-radius:
+        14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8,18,42,.68),
+            rgba(3,7,21,.58)
+        );
+
+}
+
+
+.misaira-own-colors-header h3 {
+
+    margin:
+        7px 0 5px;
+
+    color:
+        #e8efff;
+
+    font-size:
+        18px;
+
+    font-weight:
+        400;
+
+}
+
+
+.misaira-own-colors-header p {
+
+    margin:
+        0 0 18px;
+
+    color:
+        #78859d;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.5;
+
+}
+
+
+.misaira-color-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:
+        9px;
+
+}
+
+
+.misaira-color-option {
+
+    position:
+        relative;
+
+    min-height:
+        48px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+    padding:
+        8px 10px;
+
+    border:
+        1px solid
+        rgba(100,150,230,.13);
+
+    border-radius:
+        10px;
+
+    color:
+        #9aa7bd;
+
+    background:
+        rgba(255,255,255,.025);
+
+    cursor:
+        pointer;
+
+    transition:
+        .2s ease;
+
+}
+
+
+.misaira-color-option:hover {
+
+    border-color:
+        var(--color);
+
+    box-shadow:
+        0 0 14px
+        var(--color-glow);
+
+}
+
+
+.misaira-color-option.active {
+
+    border-color:
+        var(--color);
+
+    color:
+        white;
+
+    box-shadow:
+        0 0 18px
+        var(--color-glow);
+
+}
+
+
+.misaira-color-dot {
+
+    width:
+        18px;
+
+    height:
+        18px;
+
+    flex:
+        0 0 18px;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--color);
+
+    box-shadow:
+        0 0 12px
+        var(--color-glow);
+
+}
+
+
+.misaira-color-name {
+
+    font-size:
+        10px;
+
+}
+
+
+.misaira-color-check {
+
+    margin-left:
+        auto;
+
+    color:
+        var(--color);
+
+    font-size:
+        13px;
+
+}
+
+
+.misaira-color-preview {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        13px;
+
+    margin-top:
+        18px;
+
+    padding:
+        13px;
+
+    border:
+        1px solid
+        rgba(100,150,230,.10);
+
+    border-radius:
+        11px;
+
+    background:
+        rgba(0,0,0,.12);
+
+}
+
+
+.misaira-preview-core {
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border:
+        1px solid
+        var(--misaira-personal-color);
+
+    border-radius:
+        50%;
+
+    color:
+        var(--misaira-personal-color);
+
+    font-size:
+        18px;
+
+    box-shadow:
+        0 0 20px
+        var(--misaira-personal-glow);
+
+    text-shadow:
+        0 0 12px
+        var(--misaira-personal-color);
+
+}
+
+
+.misaira-color-preview strong {
+
+    display:
+        block;
+
+    color:
+        #dce5f6;
+
+    font-size:
+        10px;
+
+}
+
+
+.misaira-color-preview small {
+
+    display:
+        block;
+
+    margin-top:
+        4px;
+
+    color:
+        #64718a;
+
+    font-size:
+        8px;
+
+}
+
+
+@media (max-width: 480px) {
+
+    .misaira-own-colors {
+
+        padding:
+            15px;
+
+    }
+
+    .misaira-color-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+   }
+/* =========================================================
    ENDE – CSS ONLY
 ========================================================= */
