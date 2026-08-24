@@ -19659,3 +19659,452 @@ function renderMisairaMealPlan() {
 
 })();
 
+/* =========================================================
+   MISAIRA PUNKT 7
+   FAMILIENCHAT – PROFIL-ANZEIGENAME
+========================================================= */
+
+(function () {
+
+    let familyProfileNames = {};
+
+
+    /* =====================================================
+       PROFILNAMEN LADEN
+    ===================================================== */
+
+    async function loadFamilyProfileNames() {
+
+        if (
+            !state?.user?.family_id
+        ) {
+            return;
+        }
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("profiles")
+                .select(
+                    "id,name"
+                )
+                .eq(
+                    "family_id",
+                    state.user.family_id
+                );
+
+
+        if (error) {
+
+            console.error(
+                "Familien-Profilnamen laden:",
+                error
+            );
+
+            return;
+
+        }
+
+
+        familyProfileNames = {};
+
+
+        (data || []).forEach(
+            profile => {
+
+                familyProfileNames[
+                    profile.id
+                ] =
+                    profile.name ||
+                    "Familienmitglied";
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       CHAT-NAMEN ERMITTELN
+    ===================================================== */
+
+    function getFamilyChatName(
+        userId
+    ) {
+
+        return (
+            familyProfileNames[userId] ||
+            "Familienmitglied"
+        );
+
+    }
+
+
+    /* =====================================================
+       ORIGINALEN CHAT-RENDERER ERSETZEN
+    ===================================================== */
+
+    const originalRender =
+        window.MISAIRAFamilyChat?.open;
+
+
+    if (
+        typeof originalRender !==
+        "function"
+    ) {
+        return;
+    }
+
+
+    window.MISAIRAFamilyChat.open =
+        async function () {
+
+            await loadFamilyProfileNames();
+
+            await originalRender();
+
+            updateChatProfileNames();
+
+        };
+
+
+    /* =====================================================
+       NAMEN IM BEREITS GERENDERTEN CHAT ERSETZEN
+    ===================================================== */
+
+    function updateChatProfileNames() {
+
+        const messages =
+            document.getElementById(
+                "misairaFamilyMessages"
+            );
+
+
+        if (!messages) {
+            return;
+        }
+
+
+        messages
+            .querySelectorAll(
+                ".misaira-chat-row"
+            )
+            .forEach(
+                row => {
+
+                    /*
+                     * Wir brauchen die user_id
+                     * der Nachricht.
+                     *
+                     * Diese wird später direkt
+                     * aus dem Message-Datensatz
+                     * gesetzt.
+                     */
+
+                }
+            );
+
+    }
+
+
+    /* =====================================================
+       CHAT-NACHRICHTEN MIT PROFILNAMEN LADEN
+    ===================================================== */
+
+    async function renderMessagesWithNames() {
+
+        const messages =
+            document.getElementById(
+                "misairaFamilyMessages"
+            );
+
+
+        if (!messages) {
+            return;
+        }
+
+
+        if (
+            !state?.user?.family_id
+        ) {
+            return;
+        }
+
+
+        await loadFamilyProfileNames();
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("chat_messages")
+                .select("*")
+                .eq(
+                    "family_id",
+                    state.user.family_id
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: true
+                    }
+                );
+
+
+        if (error) {
+
+            console.error(
+                "Familienchat laden:",
+                error
+            );
+
+            return;
+
+        }
+
+
+        if (
+            !data ||
+            !data.length
+        ) {
+
+            messages.innerHTML = `
+                <div class="misaira-chat-empty">
+                    Noch keine Nachrichten.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        messages.innerHTML =
+            data
+                .map(
+                    message => {
+
+                        const own =
+                            String(
+                                message.user_id
+                            ) ===
+                            String(
+                                state.user.id
+                            );
+
+
+                        const sender =
+                            getFamilyChatName(
+                                message.user_id
+                            );
+
+
+                        const text =
+                            String(
+                                message.message ||
+                                ""
+                            )
+                            .replace(
+                                /&/g,
+                                "&amp;"
+                            )
+                            .replace(
+                                /</g,
+                                "&lt;"
+                            )
+                            .replace(
+                                />/g,
+                                "&gt;"
+                            )
+                            .replace(
+                                /\n/g,
+                                "<br>"
+                            );
+
+
+                        const time =
+                            message.created_at
+                                ? new Date(
+                                    message.created_at
+                                ).toLocaleTimeString(
+                                    "de-DE",
+                                    {
+                                        hour:
+                                            "2-digit",
+                                        minute:
+                                            "2-digit"
+                                    }
+                                )
+                                : "";
+
+
+                        return `
+
+                            <div
+                                class="
+                                    misaira-chat-row
+                                    ${own ? "own" : "other"}
+                                "
+                            >
+
+                                <div
+                                    class="
+                                        misaira-chat-bubble
+                                    "
+                                >
+
+                                    <div
+                                        class="
+                                            misaira-chat-sender
+                                        "
+                                    >
+                                        ${escapeHTML(
+                                            sender
+                                        )}
+                                    </div>
+
+
+                                    <div
+                                        class="
+                                            misaira-chat-text
+                                        "
+                                    >
+                                        ${text}
+                                    </div>
+
+
+                                    <div
+                                        class="
+                                            misaira-chat-meta
+                                        "
+                                    >
+
+                                        <span>
+                                            ${time}
+                                        </span>
+
+                                        ${
+                                            own
+                                                ? `
+                                                    <button
+                                                        type="button"
+                                                        class="misaira-chat-delete"
+                                                        data-chat-delete="${message.id}"
+                                                    >
+                                                        ×
+                                                    </button>
+                                                  `
+                                                : ""
+                                        }
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    }
+                )
+                .join("");
+
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+
+        messages
+            .querySelectorAll(
+                "[data-chat-delete]"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        async () => {
+
+                            if (
+                                !confirm(
+                                    "Nachricht löschen?"
+                                )
+                            ) {
+                                return;
+                            }
+
+
+                            await supabaseClient
+                                .from(
+                                    "chat_messages"
+                                )
+                                .delete()
+                                .eq(
+                                    "id",
+                                    button.dataset
+                                        .chatDelete
+                                )
+                                .eq(
+                                    "user_id",
+                                    state.user.id
+                                );
+
+
+                            renderMessagesWithNames();
+
+                        }
+                    );
+
+                }
+            );
+
+    }
+
+
+    /* =====================================================
+       PROFILNAMEN AUCH BEIM AUTOMATISCHEN
+       CHAT-REFRESH VERWENDEN
+    ===================================================== */
+
+    setInterval(
+        async () => {
+
+            const messages =
+                document.getElementById(
+                    "misairaFamilyMessages"
+                );
+
+
+            if (!messages) {
+                return;
+            }
+
+
+            await renderMessagesWithNames();
+
+        },
+        3000
+    );
+
+
+    /*
+     * Extern verfügbar.
+     */
+
+    window.MISAIRAFamilyChatNames = {
+
+        load:
+            loadFamilyProfileNames,
+
+        render:
+            renderMessagesWithNames
+
+    };
+
+})();
+
