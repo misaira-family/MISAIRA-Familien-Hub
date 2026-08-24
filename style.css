@@ -8724,5 +8724,354 @@ body {
 }
 
 /* =========================================================
+   MISAIRA PUNKT 8 – EIGENE FARBEN
+========================================================= */
+
+.misaira-personal-colors {
+
+    margin-top: 20px;
+
+    padding: 20px;
+
+    border:
+        1px solid
+        rgba(0,234,255,.12);
+
+    border-radius: 14px;
+
+    background:
+        rgba(3,10,25,.62);
+
+}
+
+
+.misaira-personal-colors-head h3 {
+
+    margin:
+        7px 0 6px;
+
+    color:
+        #eaf1ff;
+
+    font-size:
+        19px;
+
+    font-weight:
+        400;
+
+}
+
+
+.misaira-personal-colors-head p {
+
+    margin:
+        0 0 18px;
+
+    color:
+        #8995aa;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.5;
+
+}
+
+
+.misaira-personal-color-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:
+        9px;
+
+}
+
+
+.misaira-personal-color-button {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    min-height:
+        48px;
+
+    padding:
+        9px 11px;
+
+    border:
+        1px solid
+        rgba(120,160,220,.14);
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    color:
+        #9aa7bd;
+
+    font-size:
+        11px;
+
+    transition:
+        .2s ease;
+
+}
+
+
+.misaira-personal-color-button:hover {
+
+    border-color:
+        var(--personal-color);
+
+    box-shadow:
+        0 0 16px
+        var(--personal-color);
+
+}
+
+
+.misaira-personal-color-button.active {
+
+    border-color:
+        var(--personal-color);
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        0 0 18px
+        var(--personal-color);
+
+}
+
+
+.misaira-personal-color-dot {
+
+    width:
+        19px;
+
+    height:
+        19px;
+
+    flex:
+        0 0 19px;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--personal-color);
+
+    box-shadow:
+        0 0 12px
+        var(--personal-color);
+
+}
+
+
+.misaira-personal-color-current {
+
+    margin-top:
+        17px;
+
+    padding-top:
+        13px;
+
+    border-top:
+        1px solid
+        rgba(120,160,220,.10);
+
+    color:
+        #78859c;
+
+    font-size:
+        10px;
+
+}
+
+
+.misaira-personal-color-current strong {
+
+    color:
+        var(--misaira-personal-color);
+
+}
+
+
+.misaira-personal-color-preview {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        13px;
+
+    margin-top:
+        15px;
+
+    padding:
+        13px;
+
+    border:
+        1px solid
+        rgba(120,160,220,.10);
+
+    border-radius:
+        11px;
+
+    background:
+        rgba(0,0,0,.14);
+
+}
+
+
+.misaira-personal-preview-core {
+
+    width:
+        46px;
+
+    height:
+        46px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border:
+        1px solid
+        var(--misaira-personal-color);
+
+    border-radius:
+        50%;
+
+    color:
+        var(--misaira-personal-color);
+
+    font-size:
+        19px;
+
+    box-shadow:
+        0 0 20px
+        var(--misaira-personal-glow);
+
+    text-shadow:
+        0 0 12px
+        var(--misaira-personal-color);
+
+}
+
+
+.misaira-personal-color-preview strong {
+
+    display:
+        block;
+
+    color:
+        #dce5f6;
+
+    font-size:
+        11px;
+
+}
+
+
+.misaira-personal-color-preview small {
+
+    display:
+        block;
+
+    margin-top:
+        4px;
+
+    color:
+        #69758b;
+
+    font-size:
+        9px;
+
+}
+
+
+.misaira-personal-color-actions {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        10px;
+
+    margin-top:
+        16px;
+
+}
+
+
+.misaira-personal-color-actions
+.primary-button,
+.misaira-personal-color-actions
+.secondary-button {
+
+    min-height:
+        44px;
+
+}
+
+
+.misaira-personal-color-actions
+.secondary-button {
+
+    border:
+        1px solid
+        rgba(120,160,220,.18);
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    color:
+        #8d9ab0;
+
+}
+
+
+.misaira-personal-color-actions
+.secondary-button:hover {
+
+    border-color:
+        #00eaff;
+
+    color:
+        #ffffff;
+
+}
+
+/* =========================================================
    ENDE – CSS ONLY
 ========================================================= */
