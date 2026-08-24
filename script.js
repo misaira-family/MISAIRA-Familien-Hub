@@ -17155,3 +17155,423 @@ function renderMisairaMealPlan() {
     };
 
 })();
+
+/* =========================================================
+   MISAIRA PUNKT 8 – EIGENE FARBEN
+   FIX FÜR AKTUELLE SETTINGS-STRUKTUR
+========================================================= */
+
+(function () {
+
+    const colors = {
+        cyan: {
+            name: "Cyan",
+            value: "#00eaff"
+        },
+        purple: {
+            name: "Purple",
+            value: "#8a2cff"
+        },
+        pink: {
+            name: "Pink",
+            value: "#ff2ca8"
+        },
+        blue: {
+            name: "Blau",
+            value: "#3d7cff"
+        },
+        green: {
+            name: "Grün",
+            value: "#00e6a7"
+        },
+        orange: {
+            name: "Orange",
+            value: "#ff8a2c"
+        },
+        yellow: {
+            name: "Gelb",
+            value: "#ffd32c"
+        },
+        red: {
+            name: "Rot",
+            value: "#ff3d5a"
+        }
+    };
+
+
+    function addOwnColors() {
+
+        const content =
+            document.getElementById(
+                "settingsDetailContent"
+            );
+
+
+        if (!content) {
+            return;
+        }
+
+
+        /*
+         * Nur auf der Darstellung-Seite.
+         */
+
+        const title =
+            content.querySelector(
+                "h2"
+            );
+
+
+        if (
+            !title ||
+            title.textContent.trim() !==
+                "Darstellung"
+        ) {
+            return;
+        }
+
+
+        /*
+         * Nicht doppelt einfügen.
+         */
+
+        if (
+            document.getElementById(
+                "misairaOwnColors"
+            )
+        ) {
+            return;
+        }
+
+
+        const box =
+            document.createElement(
+                "div"
+            );
+
+
+        box.id =
+            "misairaOwnColors";
+
+
+        box.className =
+            "misaira-own-colors";
+
+
+        box.innerHTML = `
+
+            <div class="misaira-own-colors-title">
+                EIGENE FARBEN
+            </div>
+
+            <div class="misaira-own-colors-text">
+                Wähle deine persönliche
+                MISAIRA-Animationsfarbe.
+            </div>
+
+            <div class="misaira-color-list">
+
+                ${Object.entries(colors)
+                    .map(
+                        ([key, color]) => `
+
+                            <button
+                                type="button"
+                                class="misaira-color-button"
+                                data-misaira-color="${key}"
+                            >
+
+                                <span
+                                    class="misaira-color-circle"
+                                    style="
+                                        background:${color.value};
+                                        box-shadow:
+                                            0 0 14px
+                                            ${color.value};
+                                    "
+                                ></span>
+
+                                <span>
+                                    ${color.name}
+                                </span>
+
+                            </button>
+
+                        `
+                    )
+                    .join("")}
+
+            </div>
+
+            <div class="misaira-color-status">
+                Persönliche Farbe:
+                <strong id="misairaCurrentColor">
+                    Cyan
+                </strong>
+            </div>
+
+        `;
+
+
+        /*
+         * Direkt unter dem bestehenden
+         * Darstellung-Inhalt einfügen.
+         */
+
+        content.appendChild(
+            box
+        );
+
+
+        /*
+         * Farbbuttons verbinden.
+         */
+
+        box
+            .querySelectorAll(
+                "[data-misaira-color]"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            const color =
+                                button.dataset
+                                    .misairaColor;
+
+                            selectOwnColor(
+                                color
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+        loadOwnColor();
+
+    }
+
+
+    async function loadOwnColor() {
+
+        if (
+            !window.state?.user?.id ||
+            !window.supabaseClient
+        ) {
+            return;
+        }
+
+
+        const {
+            data,
+            error
+        } =
+            await window.supabaseClient
+                .from("profiles")
+                .select(
+                    "animation_color"
+                )
+                .eq(
+                    "id",
+                    window.state.user.id
+                )
+                .maybeSingle();
+
+
+        if (error) {
+
+            console.error(
+                "MISAIRA Farbe laden:",
+                error
+            );
+
+            return;
+
+        }
+
+
+        selectOwnColor(
+            data?.animation_color ||
+            "cyan",
+            false
+        );
+
+    }
+
+
+    async function selectOwnColor(
+        color,
+        save = true
+    ) {
+
+        if (
+            !colors[color]
+        ) {
+            color = "cyan";
+        }
+
+
+        const info =
+            colors[color];
+
+
+        document.documentElement
+            .style
+            .setProperty(
+                "--misaira-personal-color",
+                info.value
+            );
+
+
+        document.documentElement
+            .style
+            .setProperty(
+                "--misaira-personal-glow",
+                info.value
+            );
+
+
+        const status =
+            document.getElementById(
+                "misairaCurrentColor"
+            );
+
+
+        if (status) {
+
+            status.textContent =
+                info.name;
+
+            status.style.color =
+                info.value;
+
+        }
+
+
+        document
+            .querySelectorAll(
+                ".misaira-color-button"
+            )
+            .forEach(
+                button => {
+
+                    button.classList.toggle(
+                        "active",
+                        button.dataset
+                            .misairaColor ===
+                            color
+                    );
+
+                }
+            );
+
+
+        if (
+            !save ||
+            !window.state?.user?.id ||
+            !window.supabaseClient
+        ) {
+            return;
+        }
+
+
+        const {
+            error
+        } =
+            await window.supabaseClient
+                .from("profiles")
+                .update({
+                    animation_color:
+                        color,
+                    updated_at:
+                        new Date()
+                            .toISOString()
+                })
+                .eq(
+                    "id",
+                    window.state.user.id
+                );
+
+
+        if (error) {
+
+            console.error(
+                "MISAIRA Farbe speichern:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /*
+     * WICHTIG:
+     * Wir hängen uns direkt an die bestehende
+     * openSettingsSubPage-Funktion.
+     */
+
+    const originalOpen =
+        window.openSettingsSubPage ||
+        openSettingsSubPage;
+
+
+    window.openSettingsSubPage =
+        function (name) {
+
+            originalOpen(
+                name
+            );
+
+
+            if (
+                name ===
+                "appearance"
+            ) {
+
+                setTimeout(
+                    addOwnColors,
+                    30
+                );
+
+            }
+
+        };
+
+
+    /*
+     * Falls die Funktion bereits über
+     * den globalen Handler aufgerufen wird.
+     */
+
+    document.addEventListener(
+        "click",
+        event => {
+
+            const button =
+                event.target.closest(
+                    '[data-settings-page="appearance"]'
+                );
+
+
+            if (!button) {
+                return;
+            }
+
+
+            setTimeout(
+                addOwnColors,
+                50
+            );
+
+        },
+        true
+    );
+
+})();
