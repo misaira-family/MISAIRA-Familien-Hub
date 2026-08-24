@@ -18792,36 +18792,5 @@ function renderMisairaMealPlan() {
             }
         );
 
-    }
-    else {
-
-        observeAppearance();
-
-    }
-
-   appearance: `
-
-    <span class="eyebrow">
-        DESIGN
-    </span>
-
-    <h2>
-        Darstellung
-    </h2>
-
-    ${settingSwitch(
-        "glow",
-        "Glow-Effekte",
-        "Neon-Glow aktivieren."
-    )}
-
-    ${settingSwitch(
-        "animations",
-        "Animationen",
-        "Animationen aktivieren."
-    )}
-
-`,
-
 })();
 
