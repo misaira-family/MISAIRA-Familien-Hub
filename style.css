@@ -8569,6 +8569,160 @@ body {
     }
 
    }
+
+/* =========================================================
+   MISAIRA PUNKT 8 – EIGENE FARBEN
+========================================================= */
+
+.misaira-own-colors {
+
+    margin-top: 20px;
+
+    padding: 20px;
+
+    border:
+        1px solid
+        rgba(0,234,255,.12);
+
+    border-radius: 14px;
+
+    background:
+        rgba(3,10,25,.65);
+
+}
+
+
+.misaira-own-colors-title {
+
+    color: #00eaff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 6px;
+
+}
+
+
+.misaira-own-colors-text {
+
+    color: #8c98ae;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    margin-bottom: 16px;
+
+}
+
+
+.misaira-color-list {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 9px;
+
+}
+
+
+.misaira-color-button {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-height: 48px;
+
+    padding: 8px 10px;
+
+    border:
+        1px solid
+        rgba(120,160,220,.12);
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    color: #9aa7bd;
+
+    font-size: 11px;
+
+}
+
+
+.misaira-color-button.active {
+
+    border-color:
+        var(--misaira-personal-color);
+
+    color: #fff;
+
+    box-shadow:
+        0 0 16px
+        var(--misaira-personal-glow);
+
+}
+
+
+.misaira-color-circle {
+
+    width: 18px;
+
+    height: 18px;
+
+    border-radius: 50%;
+
+    flex: 0 0 18px;
+
+}
+
+
+.misaira-color-status {
+
+    margin-top: 16px;
+
+    padding-top: 12px;
+
+    border-top:
+        1px solid
+        rgba(120,160,220,.08);
+
+    color: #78859d;
+
+    font-size: 10px;
+
+}
+
+
+.misaira-color-status strong {
+
+    color:
+        var(--misaira-personal-color);
+
+}
+
+
+@media (max-width: 480px) {
+
+    .misaira-color-list {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+}
+
 /* =========================================================
    ENDE – CSS ONLY
 ========================================================= */
