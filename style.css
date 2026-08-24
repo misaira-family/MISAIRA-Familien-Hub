@@ -8259,5 +8259,171 @@ body {
 }
 
 /* =========================================================
+   EINKAUFSLISTE – KATEGORIEN
+========================================================= */
+
+.shopping-category-select {
+
+    min-width: 190px;
+
+    padding:
+        10px 12px;
+
+    border:
+        1px solid
+        rgba(100,150,230,.18);
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(5,12,30,.9);
+
+    color:
+        #aebbd0;
+
+    font-size:
+        11px;
+
+}
+
+
+.shopping-category-header {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+    margin:
+        18px 0 7px;
+
+    padding:
+        8px 10px;
+
+    border-bottom:
+        1px solid
+        rgba(0,234,255,.10);
+
+    color:
+        #dbe7fa;
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        .4px;
+
+}
+
+
+.shopping-category-header span {
+
+    font-size:
+        16px;
+
+}
+
+
+.shopping-item-row {
+
+    position:
+        relative;
+
+}
+
+
+.shopping-item-row small {
+
+    display:
+        block;
+
+    margin-top:
+        4px;
+
+    color:
+        #65738b;
+
+    font-size:
+        8px;
+
+}
+
+
+.shopping-edit-button {
+
+    width:
+        30px;
+
+    height:
+        30px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin-left:
+        auto;
+
+    border:
+        1px solid
+        rgba(100,150,230,.12);
+
+    border-radius:
+        8px;
+
+    background:
+        transparent;
+
+    color:
+        #738199;
+
+    cursor:
+        pointer;
+
+    font-size:
+        13px;
+
+    transition:
+        .2s;
+
+}
+
+
+.shopping-edit-button:hover {
+
+    color:
+        var(--cyan);
+
+    border-color:
+        var(--cyan);
+
+    background:
+        rgba(0,220,255,.06);
+
+}
+
+
+@media (max-width: 600px) {
+
+    .shopping-category-select {
+
+        min-width:
+            150px;
+
+    }
+
+}
+
+/* =========================================================
    ENDE – CSS ONLY
 ========================================================= */
