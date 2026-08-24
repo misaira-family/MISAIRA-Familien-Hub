@@ -17575,3 +17575,445 @@ function renderMisairaMealPlan() {
     );
 
 })();
+
+/* =========================================================
+   MISAIRA PUNKT 8 – EIGENE FARBEN
+   FINALER DOM-FIX
+   Bestehende Darstellung bleibt unverändert.
+========================================================= */
+
+(function () {
+
+    const colors = [
+        ["cyan",   "Cyan",   "#00eaff"],
+        ["purple", "Purple", "#8a2cff"],
+        ["pink",   "Pink",   "#ff2ca8"],
+        ["blue",   "Blau",   "#3d7cff"],
+        ["green",  "Grün",   "#00e6a7"],
+        ["orange", "Orange", "#ff8a2c"],
+        ["yellow", "Gelb",   "#ffd32c"],
+        ["red",    "Rot",    "#ff3d5a"]
+    ];
+
+
+    function addOwnColors() {
+
+        const content =
+            document.getElementById(
+                "settingsDetailContent"
+            );
+
+        if (!content) {
+            return;
+        }
+
+
+        /*
+         * Nur auf Darstellung reagieren.
+         */
+
+        const heading =
+            content.querySelector("h2");
+
+        if (!heading) {
+            return;
+        }
+
+        if (
+            heading.textContent.trim() !==
+            "Darstellung"
+        ) {
+            return;
+        }
+
+
+        /*
+         * Bereits vorhanden?
+         */
+
+        if (
+            document.getElementById(
+                "misairaOwnColors"
+            )
+        ) {
+            return;
+        }
+
+
+        const box =
+            document.createElement("div");
+
+
+        box.id =
+            "misairaOwnColors";
+
+
+        box.innerHTML = `
+
+            <div class="misaira-own-colors-title">
+                EIGENE FARBEN
+            </div>
+
+            <div class="misaira-own-colors-description">
+                Wähle deine persönliche
+                MISAIRA-Farbe.
+            </div>
+
+            <div class="misaira-own-colors-grid">
+
+                ${colors.map(
+                    color => `
+
+                        <button
+                            type="button"
+                            class="misaira-own-color"
+                            data-own-color="${color[0]}"
+                            style="--own-color:${color[2]}"
+                        >
+
+                            <span
+                                class="misaira-own-color-dot"
+                            ></span>
+
+                            <span>
+                                ${color[1]}
+                            </span>
+
+                        </button>
+
+                    `
+                ).join("")}
+
+            </div>
+
+            <div
+                id="misairaOwnColorStatus"
+                class="misaira-own-color-status"
+            >
+                Aktuelle Farbe:
+                <strong>Cyan</strong>
+            </div>
+
+        `;
+
+
+        /*
+         * Direkt UNTER den bestehenden
+         * Glow-/Animations-Bereich.
+         */
+
+        content.appendChild(box);
+
+
+        /*
+         * Farben anklickbar machen.
+         */
+
+        box.querySelectorAll(
+            "[data-own-color]"
+        ).forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const color =
+                            button.dataset
+                                .ownColor;
+
+                        applyOwnColor(
+                            color
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        /*
+         * Gespeicherte Farbe laden.
+         */
+
+        loadSavedOwnColor();
+
+    }
+
+
+    /* =====================================================
+       FARBE ANWENDEN
+    ===================================================== */
+
+    function applyOwnColor(
+        color
+    ) {
+
+        const found =
+            colors.find(
+                item =>
+                    item[0] === color
+            );
+
+
+        if (!found) {
+            return;
+        }
+
+
+        document.documentElement
+            .style
+            .setProperty(
+                "--misaira-personal-color",
+                found[2]
+            );
+
+
+        document.documentElement
+            .style
+            .setProperty(
+                "--misaira-personal-glow",
+                found[2]
+            );
+
+
+        document.documentElement
+            .dataset
+            .misairaColor =
+            color;
+
+
+        document
+            .querySelectorAll(
+                ".misaira-own-color"
+            )
+            .forEach(
+                button => {
+
+                    button.classList.toggle(
+                        "active",
+                        button.dataset
+                            .ownColor ===
+                            color
+                    );
+
+                }
+            );
+
+
+        const status =
+            document.getElementById(
+                "misairaOwnColorStatus"
+            );
+
+
+        if (status) {
+
+            const name =
+                found[1];
+
+            status.innerHTML =
+                `Aktuelle Farbe:
+                 <strong>${name}</strong>`;
+
+        }
+
+
+        /*
+         * Persönliche Farbe direkt auf
+         * vorhandene MISAIRA-Elemente anwenden.
+         */
+
+        document
+            .querySelectorAll(
+                ".welcome-core, .core-glow, .core-orbit, .core-letter, .misaira-core"
+            )
+            .forEach(
+                element => {
+
+                    element.style
+                        .setProperty(
+                            "--personal-color",
+                            found[2]
+                        );
+
+                }
+            );
+
+
+        saveOwnColor(
+            color
+        );
+
+    }
+
+
+    /* =====================================================
+       SPEICHERN
+    ===================================================== */
+
+    async function saveOwnColor(
+        color
+    ) {
+
+        try {
+
+            if (
+                !window.supabaseClient ||
+                !window.state?.user?.id
+            ) {
+                return;
+            }
+
+
+            await window.supabaseClient
+                .from("profiles")
+                .update({
+                    animation_color:
+                        color,
+                    updated_at:
+                        new Date()
+                            .toISOString()
+                })
+                .eq(
+                    "id",
+                    window.state.user.id
+                );
+
+        }
+        catch (error) {
+
+            console.error(
+                "MISAIRA Farbe speichern:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       GESPEICHERTE FARBE LADEN
+    ===================================================== */
+
+    async function loadSavedOwnColor() {
+
+        try {
+
+            if (
+                !window.supabaseClient ||
+                !window.state?.user?.id
+            ) {
+                return;
+            }
+
+
+            const {
+                data
+            } =
+                await window.supabaseClient
+                    .from("profiles")
+                    .select(
+                        "animation_color"
+                    )
+                    .eq(
+                        "id",
+                        window.state.user.id
+                    )
+                    .maybeSingle();
+
+
+            applyOwnColor(
+                data?.animation_color ||
+                "cyan"
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "MISAIRA Farbe laden:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       WICHTIG:
+       SETTINGS-INHALT BEOBACHTEN
+    ===================================================== */
+
+    function startObserver() {
+
+        const content =
+            document.getElementById(
+                "settingsDetailContent"
+            );
+
+
+        if (!content) {
+
+            setTimeout(
+                startObserver,
+                300
+            );
+
+            return;
+
+        }
+
+
+        const observer =
+            new MutationObserver(
+                () => {
+
+                    addOwnColors();
+
+                }
+            );
+
+
+        observer.observe(
+            content,
+            {
+                childList: true,
+                subtree: true
+            }
+        );
+
+
+        /*
+         * Falls Darstellung bereits offen ist.
+         */
+
+        addOwnColors();
+
+    }
+
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            startObserver,
+            {
+                once: true
+            }
+        );
+
+    }
+    else {
+
+        startObserver();
+
+    }
+
+})();
